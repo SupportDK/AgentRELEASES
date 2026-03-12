@@ -1,0 +1,49 @@
+# Claude Code local configuration
+.claude/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# PHP / WordPress
+wp-config.php
+wp-content/uploads/
+vendor/
+
+# Environment / secrets
+.env
+.env.*
+*.secret
+
+# Build artifacts
+dist/
+build/
+*.min.js
+*.min.css
