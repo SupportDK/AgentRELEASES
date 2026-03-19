@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function wpc_hello_world_admin_notice() {
 	?>
 	<div class="notice notice-success">
-		<p><?php esc_html_e( 'Hello World — WPC Hello World plugin is active.', 'wpc-hello-world' ); ?></p>
+		<p><?php esc_html_e( 'Hello World WP CONNECT', 'wpc-hello-world' ); ?></p>
 	</div>
 	<?php
 }
