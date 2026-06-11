@@ -37,6 +37,8 @@ env/
 wp-config.php
 wp-content/uploads/
 vendor/
+repos/
+dist/
 
 # Environment / secrets
 .env
