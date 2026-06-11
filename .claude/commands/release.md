@@ -28,10 +28,12 @@ Delegate to the **product-owner** agent:
 
 ## Phase 2 — Branch
 
+> ⚠️ **Temporary testing convention:** while the pipeline is being validated, ALL pushes go to `test/<version>` branches — never to `main` or `release/*`. `<version>` = the target version resolved in Phase 0/5 (e.g. `test/2.5.1`). If the version is not yet known at branch time, compute it first (current header version + expected bump).
+
 Inside `repos/<repository>/`:
 
 ```bash
-git checkout -b release/<issue-id>
+git checkout -b test/<version>
 ```
 
 ## Phase 3 — Developer: implementation
@@ -62,10 +64,11 @@ Only after APPROVED:
 
 3. **Push + tag** (inside `repos/<repository>/`):
    ```bash
-   git push -u origin release/<issue-id>
+   git push -u origin test/<version>
    git tag v<X.Y.Z>
    git push origin v<X.Y.Z>
    ```
+   Temporary testing convention: push only to `test/<version>` — never to `main` or `release/*`.
 
 4. **GitHub Release** — create a release on the **target plugin repository** (`wpconnect-co/<repository>`) via the GitHub MCP or `gh release create`, with:
    - tag `v<X.Y.Z>`, title `<plugin-name> v<X.Y.Z>`
@@ -93,7 +96,7 @@ Delegate to the **documentation** agent with the Implementation Summary, commits
 |---|---|
 | Issue | WPC-… |
 | Repository | wpconnect-co/<repository> |
-| Branch | release/<issue-id> |
+| Branch | test/<version> |
 | Commit hash | <hash> |
 | Version | vX.Y.Z |
 | Commits | list |

@@ -21,9 +21,13 @@ Delegate to the **product-owner** agent:
 
 ## Phase 2 — Branch
 
+> ⚠️ Temporary testing convention (same as `/release`): all pushes go to `test/<version>` — never to `main` or `hotfix/*`.
+
 ```bash
-git checkout -b hotfix/<issue-id>
+git checkout -b test/<version>
 ```
+
+`<version>` = current header version + mandatory patch bump (e.g. `test/2.5.2`).
 
 ## Phase 3 — Developer: fix
 

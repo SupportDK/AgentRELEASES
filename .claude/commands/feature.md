@@ -29,10 +29,12 @@ Show the brief to the user, then continue.
 
 ## Phase 2 — Branch
 
+> ⚠️ Temporary testing convention: all pushes go to `test/...` branches — never to `main` or `feature/*`.
+
 Create the working branch from the current default branch:
 
 ```bash
-git checkout -b feature/<issue-id>-<short-slug>
+git checkout -b test/<issue-id>-<short-slug>
 ```
 
 `<short-slug>` = 2–4 kebab-case words from the issue title.
@@ -59,7 +61,7 @@ Delegate to the **product-owner** agent with the Implementation Summary and the 
 Only after APPROVED:
 
 ```bash
-git push -u origin feature/<issue-id>-<short-slug>
+git push -u origin test/<issue-id>-<short-slug>
 ```
 
 Create a PR via the GitHub MCP (or `gh pr create` if available): title = main commit message, body = Implementation Brief summary + acceptance criteria checklist.
@@ -72,7 +74,7 @@ Update the Linear issue: add a comment with the PR link. Set status to "In Revie
 |---|---|
 | Issue | WPC-… |
 | Repository | wpconnect-co/<repository> |
-| Branch | feature/<issue-id>-… |
+| Branch | test/<issue-id>-… |
 | Commit hash | <hash> |
 | Commits | list |
 | Review | APPROVED (criteria X/X) |

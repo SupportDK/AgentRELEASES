@@ -48,7 +48,7 @@ When a workflow command targets a plugin repository:
    `git clone git@github.com:wpconnect-co/<repository>.git repos/<repository>`
    (HTTPS fallback: `https://github.com/wpconnect-co/<repository>.git`)
 4. If already present: `git fetch` and ensure a clean working tree before starting.
-5. Checkout the appropriate branch (default branch unless the workflow defines one, e.g. `release/WPC-123`).
+5. Checkout the appropriate branch. **Temporary testing convention: all workflow pushes go to `test/...` branches** (`test/<version>` for /release and /hotfix, `test/<issue-id>-<slug>` for /feature) — never to `main`, `release/*` or `feature/*` until the pipeline is validated.
 6. Analyze the codebase before making changes.
 7. Implement, commit (project convention `feature|fix|improvement|compatibility:`), push per the workflow's rules.
 8. Generate a testable ZIP package when required (into this workspace's `dist/`).
