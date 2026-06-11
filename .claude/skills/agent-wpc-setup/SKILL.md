@@ -142,10 +142,9 @@ Verify:
 
 ### GitHub SSH issues
 
-Verify SSH identities:
+Verify the SSH identity:
 
 ```bash
-ssh -T git@github-crimaco
 ssh -T git@github-supportdk
 ```
 
@@ -155,12 +154,13 @@ Verify remotes:
 git remote -v
 ```
 
-Expected:
+Expected — **origin is the only required remote**:
 
 ```text
-origin      git@github-crimaco:crimaco197/agent-wpc-dev-doc.git
-supportdk   git@github-supportdk:SupportDK/AgentRELEASES.git
+origin   git@github-supportdk:SupportDK/AgentRELEASES.git
 ```
+
+This workspace (`SupportDK/AgentRELEASES`) is the orchestration layer. WordPress plugin repositories (`wpconnect-co/<plugin-repo>`) are execution targets — workflows access them via GitHub MCP / `gh` and clone them on demand into the git-ignored `repos/` directory. **Never add plugin repos as remotes of this workspace.**
 
 ## Important constraints
 

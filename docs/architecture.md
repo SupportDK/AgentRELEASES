@@ -123,14 +123,18 @@ Rules:
 
 ---
 
-## GitHub remotes
+## Repository architecture
 
-| Remote | Repository | Purpose |
-|--------|-----------|---------|
-| `origin` | `crimaco197/agent-wpc-dev-doc` | Main development repository |
-| `supportdk` | `SupportDK/AgentRELEASES` | Release artifact distribution (GitHub Releases with plugin ZIPs) |
+| | Agent workspace (this repo) | Plugin repositories |
+|---|---|---|
+| Location | `SupportDK/AgentRELEASES` | `wpconnect-co/<plugin-repo>` |
+| Contains | Agents, skills, commands, scripts, MCP config, docs, release automation logic | Plugin source, feature branches, PRs, releases, ZIPs, changelogs |
+| Role | Orchestration layer | Execution targets |
+| Git remote here | `origin` (the only required remote) | **Never** — accessed via GitHub MCP / `gh` at workflow runtime, cloned on demand into the git-ignored `repos/` directory |
 
-Git rules: agents only commit locally. Push, tags, and releases are main-session actions performed by the workflow commands.
+Plugin name → repository mapping lives in the root `CLAUDE.md` (Repository Resolution Rules).
+
+Git rules: agents only commit locally. Push, tags, and releases are main-session actions performed by the workflow commands — always against the target plugin repository, never against this workspace.
 
 ---
 

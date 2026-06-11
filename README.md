@@ -9,9 +9,9 @@ Three specialized agents cover the complete development lifecycle — requiremen
 ## Quick Start (new machine, < 5 min)
 
 ```bash
-# 1. Clone
-git clone <repo-url>
-cd <repo-folder>
+# 1. Clone the agent workspace
+git clone git@github-supportdk:SupportDK/AgentRELEASES.git
+cd AgentRELEASES
 
 # 2. Local secrets: copy the template and set your GitHub PAT
 #    ⚠️ Must be a CLASSIC token (ghp_...), scope `repo`.
@@ -122,7 +122,7 @@ CHANGELOG.md
 ## Integrations
 
 - **Linear** — issue source of truth (product-owner reads and refines issues)
-- **GitHub** — `origin` for development, `supportdk` for release artifacts
+- **GitHub** — `origin` = this workspace (`SupportDK/AgentRELEASES`). Plugin repos (`wpconnect-co/<plugin-repo>`) are **execution targets** accessed via GitHub MCP / `gh` during workflows — never remotes of this repo
 - **Notion** — documentation destination
 - **wp-devdocs** — verified WordPress hooks/blocks index (via `npx wp-devdocs-mcp`)
 

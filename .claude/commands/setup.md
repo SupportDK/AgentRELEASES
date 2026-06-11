@@ -12,7 +12,9 @@ You are the onboarding assistant for the AGENT WPC workspace. Verify the setup o
 ./scripts/verify-setup.sh
 ```
 
-This checks: structure, agents, commands, skills, git remotes, tooling (node >= 20, npx, claude CLI), MCP registration, and secrets hygiene.
+Required checks (FAIL): structure (.mcp.json, .env, .env.example, CLAUDE.md), agents, commands, skills, `origin -> SupportDK/AgentRELEASES`, tooling (node >= 20, npx, claude CLI, GITHUB_PAT classic), MCPs **connected**, secrets hygiene.
+
+Optional checks (WARN only, never fail setup): gh CLI installed, plugin repo mapping in CLAUDE.md, GitHub access to wpconnect-co repositories.
 
 ## Step 2 — Interpret results
 
@@ -26,7 +28,8 @@ For each ❌ failure, apply the matching fix:
 | Agent missing | `.claude/agents/<name>.md` should exist in the repo — `git status` / `git pull` |
 | Command missing | Same — commands are versioned in `.claude/commands/` |
 | MCP not registered | Run `./scripts/setup-mcp.sh` (loads `.env` and registers all four MCPs). Alternative: restart `claude` and accept the project-MCP trust prompt |
-| Remote missing | `git remote add origin git@github-crimaco:crimaco197/agent-wpc-dev-doc.git` and/or `git remote add supportdk git@github-supportdk:SupportDK/AgentRELEASES.git` (requires SSH config for those host aliases) |
+| `origin -> SupportDK/AgentRELEASES` fails | `git remote set-url origin git@github-supportdk:SupportDK/AgentRELEASES.git` (requires the `github-supportdk` SSH host alias). Plugin repos (`wpconnect-co/*`) are execution targets accessed via GitHub MCP / `gh` — never add them as remotes |
+| Optional warnings (gh CLI, wpconnect-co access) | Informative only — they never fail setup. `gh` and wpconnect-co access are needed at workflow runtime (`/release`, `/feature`), not for the workspace |
 | node < 20 | Install Node.js 20+ (required by wp-devdocs MCP) |
 | settings.local.json / `.env` not ignored | Check `.gitignore` contains `.claude/settings.local.json`, `.env` and `!.env.example` |
 

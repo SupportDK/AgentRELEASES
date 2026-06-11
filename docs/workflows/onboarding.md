@@ -7,9 +7,9 @@ Human-readable narrative of the setup flow. The canonical quick guide is [SETUP.
 ## The 6 steps (< 5 minutes)
 
 ```bash
-# 1. Clone
-git clone <repo-url>
-cd <repo-folder>
+# 1. Clone the agent workspace (SupportDK/AgentRELEASES)
+git clone git@github-supportdk:SupportDK/AgentRELEASES.git
+cd AgentRELEASES
 
 # 2. Local secrets file — token must be CLASSIC (ghp_...), scope `repo`
 cp .env.example .env
@@ -48,8 +48,14 @@ What can never be in the repo — and therefore needs the manual steps:
 
 - **`.env` with your real `GITHUB_PAT`** → step 2 (template versioned as `.env.example`)
 - **OAuth tokens** (Linear, Notion) → step 5
-- **SSH keys** for the `github-crimaco` / `github-supportdk` host aliases → machine-level git config
+- **SSH key** for the `github-supportdk` host alias → machine-level git config
 - **Project trust** → Claude Code asks once per machine
+
+## Repository architecture
+
+This workspace (`SupportDK/AgentRELEASES`) is the **orchestration layer**: agents, skills, commands, scripts, MCP config, docs. Its only required remote is `origin`.
+
+WordPress plugin repos (`wpconnect-co/<plugin-repo>`) are **execution targets**: real plugin source, branches, PRs, releases. They are never remotes of this workspace — `/release`, `/feature` and `/hotfix` access them via GitHub MCP / `gh`, cloning on demand into the git-ignored `repos/` directory (mapping in `CLAUDE.md`).
 
 ## GitHub MCP: PAT instead of OAuth
 

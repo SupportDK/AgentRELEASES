@@ -4,12 +4,28 @@ Canonical setup guide for the AGENT WPC workspace. Target: working in under 5 mi
 
 ---
 
+## Repository Architecture
+
+**This repository (`SupportDK/AgentRELEASES`) is the agent orchestration workspace:** Claude agents, skills, workflow commands, setup scripts, MCP configuration, documentation, and release automation logic.
+
+**WordPress plugin source code lives elsewhere**, in `wpconnect-co/<plugin-repo>` (e.g. `wpconnect-co/air-wp-sync`). Those repos hold the actual plugin code, feature branches, PRs, releases, and changelogs.
+
+| | Agent workspace | Plugin repos |
+|---|---|---|
+| Location | `SupportDK/AgentRELEASES` | `wpconnect-co/<plugin-repo>` |
+| Role | Orchestration layer | Execution targets |
+| Git remote of this repo? | `origin` (the only required remote) | **Never** — accessed dynamically via GitHub MCP / `gh` when `/release`, `/feature` or `/hotfix` run |
+
+> **Design rule:** do not add plugin repositories as git remotes of this workspace. Workflows clone them on demand into the git-ignored `repos/` directory (see `CLAUDE.md` — Repository Resolution Rules).
+
+---
+
 ## Setup on a new computer
 
 ```bash
-# 1. Clone
-git clone <repo-url>
-cd <repo-folder>
+# 1. Clone the agent workspace
+git clone git@github-supportdk:SupportDK/AgentRELEASES.git
+cd AgentRELEASES
 
 # 2. Create your local .env from the template
 cp .env.example .env
@@ -114,6 +130,7 @@ Or run the full diagnostic (also used by `/setup`):
 | `GITHUB_PAT is a FINE-GRAINED token` from the script | Generate a **classic** token instead (`ghp_...`, `repo` scope) and replace it in `.env` |
 | `error: missing required argument 'name'` from `claude mcp add` | Outdated script — `git pull` (the `-H` flag is variadic and must come AFTER the server name and URL) |
 | linear/notion missing | They load from `.mcp.json` — restart `claude` in the project and accept the trust prompt |
+| `origin -> SupportDK/AgentRELEASES` check fails | `git remote set-url origin git@github-supportdk:SupportDK/AgentRELEASES.git`. Plugin repos must NOT be remotes of this workspace |
 | `GITHUB_PAT not set` from the script | Edit `.env` and set the token, re-run the script |
 | wp-devdocs missing | Install Node.js >= 20 (`npx` required) |
 

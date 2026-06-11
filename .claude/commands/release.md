@@ -67,10 +67,12 @@ Only after APPROVED:
    git push origin v<X.Y.Z>
    ```
 
-4. **GitHub Release** — create a release on the `supportdk` remote repository (SupportDK/AgentRELEASES) via the GitHub MCP or `gh release create`, with:
+4. **GitHub Release** — create a release on the **target plugin repository** (`wpconnect-co/<repository>`) via the GitHub MCP or `gh release create`, with:
    - tag `v<X.Y.Z>`, title `<plugin-name> v<X.Y.Z>`
    - the ZIP attached as an asset
    - release notes from Phase 6 (create as draft first if notes are not ready, then finalize)
+
+   Never create plugin releases on `SupportDK/AgentRELEASES` — that repo is the orchestration workspace, not a plugin repo.
 
 ## Phase 6 — Documentation
 

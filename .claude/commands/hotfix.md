@@ -44,7 +44,7 @@ Only after APPROVED:
 1. Version bump: **patch is mandatory** (X.Y.Z → X.Y.Z+1).
 2. Package ZIP (per `/package` procedure).
 3. Push branch + tag `vX.Y.Z+1`.
-4. GitHub Release on `supportdk` with the ZIP attached.
+4. GitHub Release on the target plugin repository (`wpconnect-co/<repository>`) with the ZIP attached.
 
 ## Phase 6 — Documentation
 
