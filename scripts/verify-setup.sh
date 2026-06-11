@@ -61,6 +61,7 @@ if command -v node >/dev/null 2>&1; then
 fi
 command -v npx >/dev/null 2>&1; check "npx installed (wp-devdocs MCP)" $?
 command -v claude >/dev/null 2>&1; check "claude CLI installed" $?
+[ -n "$GITHUB_PAT" ]; check "GITHUB_PAT env var set (GitHub MCP auth)" $?
 
 echo ""
 echo "## MCP servers (registration)"

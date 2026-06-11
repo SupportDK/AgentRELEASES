@@ -26,6 +26,7 @@ For each ❌ failure, apply the matching fix:
 | MCP not registered | Restart `claude` inside the project and accept the project-MCP trust prompt. Verify `.claude/settings.json` has `"enableAllProjectMcpServers": true`. Fallback: `./scripts/setup-mcp.sh` |
 | Remote missing | `git remote add origin git@github-crimaco:crimaco197/agent-wpc-dev-doc.git` and/or `git remote add supportdk git@github-supportdk:SupportDK/AgentRELEASES.git` (requires SSH config for those host aliases) |
 | node < 20 | Install Node.js 20+ (required by wp-devdocs MCP) |
+| `GITHUB_PAT` not set | GitHub MCP needs a PAT (its endpoint does not support OAuth dynamic client registration). Create one at github.com/settings/tokens (`repo` scope), add `export GITHUB_PAT="ghp_..."` to `~/.zshrc`, restart `claude` |
 | settings.local.json not ignored | Check `.gitignore` contains `.claude/settings.local.json` |
 
 ## Step 3 — MCP authentication
@@ -34,9 +35,8 @@ The script cannot verify OAuth. Tell the user to run `/mcp` and authenticate:
 
 - Linear
 - Notion
-- GitHub
 
-`wp-devdocs` needs no auth (local npx process).
+**GitHub uses a PAT, not OAuth** (`GITHUB_PAT` env var — see the fix table above). `wp-devdocs` needs no auth (local npx process).
 
 ## Step 4 — Optional: index WordPress hooks
 

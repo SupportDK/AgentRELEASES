@@ -81,7 +81,12 @@ Guide the user through OAuth authentication for:
 
 - Linear
 - Notion
-- GitHub
+
+**GitHub does NOT use OAuth** — its MCP endpoint fails with `SDK auth failed: does not support dynamic client registration`. It authenticates via the `GITHUB_PAT` environment variable referenced in `.mcp.json`:
+
+1. Create a PAT at https://github.com/settings/tokens (classic, `repo` scope).
+2. Add `export GITHUB_PAT="ghp_..."` to the shell profile (`~/.zshrc`).
+3. Restart `claude`.
 
 `wp-devdocs` runs locally via npx and needs no authentication — only Node.js >= 20.
 

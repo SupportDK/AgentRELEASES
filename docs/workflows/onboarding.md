@@ -37,9 +37,23 @@ Everything is versioned in the repository:
 
 What can never be in the repo — and therefore needs the manual steps:
 
-- **OAuth tokens** (Linear, Notion, GitHub) → step 3
+- **OAuth tokens** (Linear, Notion) → step 3
+- **GitHub PAT** → `GITHUB_PAT` environment variable (see below)
 - **SSH keys** for the `github-crimaco` / `github-supportdk` host aliases → machine-level git config
 - **Project trust** → Claude Code asks once per machine
+
+## GitHub MCP: PAT instead of OAuth
+
+The GitHub MCP endpoint does **not** support Claude Code's OAuth flow (`SDK auth failed: does not support dynamic client registration`). It authenticates via a Personal Access Token referenced as `${GITHUB_PAT}` in `.mcp.json`:
+
+1. Create a PAT at <https://github.com/settings/tokens> (classic token with `repo` scope is enough for PRs and releases).
+2. Export it in your shell profile (`~/.zshrc`):
+
+   ```bash
+   export GITHUB_PAT="ghp_..."
+   ```
+
+3. Restart `claude`. The github MCP loads with the token — no `/mcp` authentication needed for it.
 
 ## Prerequisites
 
