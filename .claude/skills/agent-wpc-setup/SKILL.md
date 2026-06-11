@@ -51,25 +51,33 @@ docs/
 scripts/
 ```
 
-### 2. Verify MCP loading
+### 2. Create the local .env
 
-The four MCPs (linear, notion, github, wp-devdocs) are declared in `.mcp.json` and load automatically when Claude Code starts in the project directory.
-
-Validate with:
+Secrets live in a git-ignored `.env` at the project root, created from the versioned template:
 
 ```bash
-claude mcp list
+cp .env.example .env
 ```
 
-If a server is missing, the user likely declined the project-MCP prompt — restart Claude Code in the project directory and accept, or check `.claude/settings.json` contains `"enableAllProjectMcpServers": true`.
+Then the user edits `.env` and sets a **GitHub classic PAT** (`ghp_...`, `repo` scope, from https://github.com/settings/tokens):
 
-Fallback (manual registration):
+```bash
+GITHUB_PAT=ghp_real_token_here
+```
+
+Fine-grained tokens (`github_pat_...`) and placeholders do NOT work (HTTP 400).
+
+### 3. Register MCP servers
+
+Run the setup script — it loads `.env`, validates `GITHUB_PAT` (refusing to continue if missing), and registers the four MCPs:
 
 ```bash
 ./scripts/setup-mcp.sh
 ```
 
-### 3. Authenticate MCP servers
+It registers: linear, notion (HTTP/OAuth), github (HTTP with the PAT in the Authorization header), and wp-devdocs (npx stdio). It never prints the full token.
+
+### 4. Authenticate OAuth MCPs
 
 Inside Claude Code, run:
 
@@ -82,15 +90,11 @@ Guide the user through OAuth authentication for:
 - Linear
 - Notion
 
-**GitHub does NOT use OAuth** — its MCP endpoint fails with `SDK auth failed: does not support dynamic client registration`. It authenticates via the `GITHUB_PAT` environment variable referenced in `.mcp.json`:
-
-1. Create a PAT at https://github.com/settings/tokens (classic, `repo` scope).
-2. Add `export GITHUB_PAT="ghp_..."` to the shell profile (`~/.zshrc`).
-3. Restart `claude`.
+**GitHub needs no `/mcp` authentication** — it is already authenticated via the PAT from `.env`. If GitHub shows `SDK auth failed: does not support dynamic client registration` or `HTTP 400`, the `.env` token is missing or invalid — fix `.env` and re-run `./scripts/setup-mcp.sh`.
 
 `wp-devdocs` runs locally via npx and needs no authentication — only Node.js >= 20.
 
-### 4. Validate the installation
+### 5. Validate the installation
 
 ```bash
 claude mcp list
@@ -101,7 +105,7 @@ claude mcp get github
 
 Expected: `Status: Connected` for all HTTP MCPs.
 
-Then run the project verification script:
+Then run the project verification script (it loads `.env` automatically):
 
 ```bash
 ./scripts/verify-setup.sh
@@ -109,7 +113,7 @@ Then run the project verification script:
 
 Or simply run `/setup` inside Claude Code.
 
-### 5. (Optional) Index WordPress hooks for wp-devdocs
+### 6. (Optional) Index WordPress hooks for wp-devdocs
 
 First time only, to populate the local hooks database:
 
@@ -166,7 +170,8 @@ Do not:
 - Store GitHub Personal Access Tokens inside the repository.
 - Store Linear API keys inside the repository.
 - Store Notion secrets inside the repository.
-- Commit `.env` files or `.claude/settings.local.json`.
+- Commit `.env` (only `.env.example` is versioned) or `.claude/settings.local.json`.
+- Print full tokens in console output (mask them).
 
 Authentication must remain local to each machine.
 
@@ -175,8 +180,9 @@ Authentication must remain local to each machine.
 The objective of this skill is to reduce onboarding time for a new computer to:
 
 1. Clone repository.
-2. Open `claude` and trust the project (MCPs load from `.mcp.json`).
-3. Authenticate MCPs via `/mcp`.
-4. Run `/setup` to verify.
+2. `cp .env.example .env` and set `GITHUB_PAT`.
+3. Run `./scripts/setup-mcp.sh`.
+4. Open `claude`, authenticate Linear/Notion via `/mcp`.
+5. Run `/setup` to verify.
 
 Target setup time: less than 5 minutes.

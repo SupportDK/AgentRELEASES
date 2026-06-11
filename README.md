@@ -10,23 +10,29 @@ Three specialized agents cover the complete development lifecycle — requiremen
 
 ```bash
 # 1. Clone
-git clone git@github-crimaco:crimaco197/agent-wpc-dev-doc.git
-cd agent-wpc-dev-doc
+git clone <repo-url>
+cd <repo-folder>
 
-# 2. Open Claude Code and trust the project
-#    (MCPs load automatically from .mcp.json)
+# 2. Local secrets: copy the template and set your GitHub classic PAT
+cp .env.example .env
+nano .env                    # GITHUB_PAT=ghp_your_real_token
+
+# 3. Register the MCPs (loads .env, validates GITHUB_PAT)
+./scripts/setup-mcp.sh
+
+# 4. Open Claude Code and trust the project
 claude
 ```
 
 ```text
-# 3. Inside Claude Code: authenticate Linear, Notion, GitHub
+# 5. Inside Claude Code: authenticate Linear and Notion (GitHub uses the PAT)
 /mcp
 
-# 4. Verify everything
+# 6. Verify everything
 /setup
 ```
 
-Everything else — agents, skills, commands, settings — is versioned in the repo and loads automatically.
+Everything else — agents, skills, commands, settings — is versioned in the repo and loads automatically. Full guide: [SETUP.md](SETUP.md).
 
 ---
 

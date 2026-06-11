@@ -21,13 +21,14 @@ For each ❌ failure, apply the matching fix:
 | Failure | Fix |
 |---|---|
 | `.mcp.json` / structure missing | Repo incomplete — `git pull` or re-clone |
+| `.env` missing | `cp .env.example .env`, then edit it and set `GITHUB_PAT` |
+| `GITHUB_PAT` not set | GitHub MCP needs a **classic** PAT (its endpoint does not support OAuth). Create one at github.com/settings/tokens (`repo` scope), set `GITHUB_PAT=ghp_...` in `.env`, then re-run `./scripts/setup-mcp.sh` |
 | Agent missing | `.claude/agents/<name>.md` should exist in the repo — `git status` / `git pull` |
 | Command missing | Same — commands are versioned in `.claude/commands/` |
-| MCP not registered | Restart `claude` inside the project and accept the project-MCP trust prompt. Verify `.claude/settings.json` has `"enableAllProjectMcpServers": true`. Fallback: `./scripts/setup-mcp.sh` |
+| MCP not registered | Run `./scripts/setup-mcp.sh` (loads `.env` and registers all four MCPs). Alternative: restart `claude` and accept the project-MCP trust prompt |
 | Remote missing | `git remote add origin git@github-crimaco:crimaco197/agent-wpc-dev-doc.git` and/or `git remote add supportdk git@github-supportdk:SupportDK/AgentRELEASES.git` (requires SSH config for those host aliases) |
 | node < 20 | Install Node.js 20+ (required by wp-devdocs MCP) |
-| `GITHUB_PAT` not set | GitHub MCP needs a PAT (its endpoint does not support OAuth dynamic client registration). Create one at github.com/settings/tokens (`repo` scope), add `export GITHUB_PAT="ghp_..."` to `~/.zshrc`, restart `claude` |
-| settings.local.json not ignored | Check `.gitignore` contains `.claude/settings.local.json` |
+| settings.local.json / `.env` not ignored | Check `.gitignore` contains `.claude/settings.local.json`, `.env` and `!.env.example` |
 
 ## Step 3 — MCP authentication
 
@@ -36,7 +37,17 @@ The script cannot verify OAuth. Tell the user to run `/mcp` and authenticate:
 - Linear
 - Notion
 
-**GitHub uses a PAT, not OAuth** (`GITHUB_PAT` env var — see the fix table above). `wp-devdocs` needs no auth (local npx process).
+**GitHub uses the PAT from `.env`, not OAuth** — no `/mcp` step needed for it. If GitHub fails with HTTP 400, the token in `.env` is empty or invalid. `wp-devdocs` needs no auth (local npx process).
+
+Validation commands:
+
+```bash
+claude mcp get github
+claude mcp get linear
+claude mcp get notion
+```
+
+Expected: `Status: Connected` for each.
 
 ## Step 4 — Optional: index WordPress hooks
 

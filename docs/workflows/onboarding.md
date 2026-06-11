@@ -1,65 +1,80 @@
 # Onboarding a New Machine
 
-Human-readable narrative of the setup flow. The executable checks live in [.claude/commands/setup.md](../../.claude/commands/setup.md) and [scripts/verify-setup.sh](../../scripts/verify-setup.sh).
+Human-readable narrative of the setup flow. The canonical quick guide is [SETUP.md](../../SETUP.md); the executable checks live in [.claude/commands/setup.md](../../.claude/commands/setup.md) and [scripts/verify-setup.sh](../../scripts/verify-setup.sh).
 
 ---
 
-## The 4 steps (< 5 minutes)
+## The 6 steps (< 5 minutes)
 
 ```bash
 # 1. Clone
-git clone git@github-crimaco:crimaco197/agent-wpc-dev-doc.git
-cd agent-wpc-dev-doc
+git clone <repo-url>
+cd <repo-folder>
 
-# 2. Open Claude Code and trust the project
+# 2. Local secrets file
+cp .env.example .env
+nano .env                  # GITHUB_PAT=ghp_your_real_token
+
+# 3. Register MCPs (loads .env, validates GITHUB_PAT)
+./scripts/setup-mcp.sh
+
+# 4. Open Claude Code and trust the project
 claude
 ```
 
 ```text
-# 3. Authenticate the MCPs (inside Claude Code)
+# 5. Authenticate Linear and Notion (inside Claude Code)
 /mcp
 
-# 4. Verify
+# 6. Verify
 /setup
 ```
 
-## Why it's only 4 steps
+## Why it's this short
 
 Everything is versioned in the repository:
 
 | Component | Where | Loads how |
 |---|---|---|
-| MCP servers (linear, notion, github, wp-devdocs) | `.mcp.json` | Automatically when the project is trusted |
+| MCP declarations | `.mcp.json` + `scripts/setup-mcp.sh` | Script registers them with your PAT |
 | Agents | `.claude/agents/*.md` | Automatically |
 | Skills (13 WP + workspace setup) | `.claude/skills/` | Automatically |
 | Commands (/release, /feature, …) | `.claude/commands/` | Automatically |
 | Permissions | `.claude/settings.json` | Automatically (`enableAllProjectMcpServers`) |
+| Secrets template | `.env.example` | You copy it to `.env` (git-ignored) |
 
 What can never be in the repo — and therefore needs the manual steps:
 
-- **OAuth tokens** (Linear, Notion) → step 3
-- **GitHub PAT** → `GITHUB_PAT` environment variable (see below)
+- **`.env` with your real `GITHUB_PAT`** → step 2 (template versioned as `.env.example`)
+- **OAuth tokens** (Linear, Notion) → step 5
 - **SSH keys** for the `github-crimaco` / `github-supportdk` host aliases → machine-level git config
 - **Project trust** → Claude Code asks once per machine
 
 ## GitHub MCP: PAT instead of OAuth
 
-The GitHub MCP endpoint does **not** support Claude Code's OAuth flow (`SDK auth failed: does not support dynamic client registration`). It authenticates via a Personal Access Token referenced as `${GITHUB_PAT}` in `.mcp.json`:
+The GitHub MCP endpoint does **not** support Claude Code's OAuth flow (`SDK auth failed: does not support dynamic client registration`). It authenticates via a Personal Access Token loaded from `.env`:
 
-1. Create a PAT at <https://github.com/settings/tokens> (classic token with `repo` scope is enough for PRs and releases).
-2. Export it in your shell profile (`~/.zshrc`):
+1. Create a **classic** PAT at <https://github.com/settings/tokens> with `repo` scope. Fine-grained tokens (`github_pat_...`) do not work — they cause HTTP 400.
+2. Set it in `.env` (`GITHUB_PAT=ghp_...`).
+3. Run `./scripts/setup-mcp.sh` — it registers the github MCP with the token in the Authorization header. No `/mcp` authentication needed for GitHub.
 
-   ```bash
-   export GITHUB_PAT="ghp_..."
-   ```
-
-3. Restart `claude`. The github MCP loads with the token — no `/mcp` authentication needed for it.
+The script never prints the full token (masked output only). Never commit `.env`.
 
 ## Prerequisites
 
 - Claude Code installed and authenticated
 - Node.js >= 20 (for the wp-devdocs MCP via npx)
 - SSH access configured for both GitHub accounts
+
+## Validation
+
+```bash
+claude mcp get github
+claude mcp get linear
+claude mcp get notion
+```
+
+Expected: `Status: Connected` for each.
 
 ## Optional: WordPress hooks index
 
@@ -71,4 +86,4 @@ npx wp-devdocs-mcp quick-add-all
 
 ## Troubleshooting
 
-See the `agent-wpc-setup` skill (`.claude/skills/agent-wpc-setup/SKILL.md`) — it covers missing MCPs, OAuth failures, and SSH issues. Or just ask Claude: "why are my MCPs missing?"
+See [SETUP.md](../../SETUP.md#troubleshooting) and the `agent-wpc-setup` skill (`.claude/skills/agent-wpc-setup/SKILL.md`). Or just ask Claude: "why are my MCPs missing?"

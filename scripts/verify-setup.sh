@@ -20,12 +20,22 @@ check() {
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT" || exit 1
 
+# Load .env if present (source of GITHUB_PAT and other MCP variables)
+if [ -f ".env" ]; then
+  set -a
+  # shellcheck disable=SC1091
+  . ".env"
+  set +a
+fi
+
 echo "AGENT WPC — Setup Verification"
 echo "Workspace: $ROOT"
 echo ""
 
 echo "## Structure"
 [ -f ".mcp.json" ]; check ".mcp.json present" $?
+[ -f ".env.example" ]; check ".env.example present" $?
+[ -f ".env" ]; check ".env present (copy from .env.example if missing)" $?
 [ -f ".claude/settings.json" ]; check ".claude/settings.json present" $?
 [ -d "docs" ]; check "docs/ present" $?
 [ -d "plugins" ]; check "plugins/ present" $?
@@ -61,7 +71,7 @@ if command -v node >/dev/null 2>&1; then
 fi
 command -v npx >/dev/null 2>&1; check "npx installed (wp-devdocs MCP)" $?
 command -v claude >/dev/null 2>&1; check "claude CLI installed" $?
-[ -n "$GITHUB_PAT" ]; check "GITHUB_PAT env var set (GitHub MCP auth)" $?
+[ -n "$GITHUB_PAT" ]; check "GITHUB_PAT set via .env or environment (GitHub MCP auth)" $?
 
 echo ""
 echo "## MCP servers (registration)"
@@ -79,6 +89,8 @@ fi
 echo ""
 echo "## Secrets hygiene"
 git check-ignore -q .claude/settings.local.json; check ".claude/settings.local.json is git-ignored" $?
+git check-ignore -q .env; check ".env is git-ignored" $?
+! git check-ignore -q .env.example; check ".env.example is NOT git-ignored (versioned)" $?
 
 echo ""
 echo "────────────────────────────────"
