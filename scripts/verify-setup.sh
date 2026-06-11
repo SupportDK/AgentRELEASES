@@ -72,6 +72,13 @@ fi
 command -v npx >/dev/null 2>&1; check "npx installed (wp-devdocs MCP)" $?
 command -v claude >/dev/null 2>&1; check "claude CLI installed" $?
 [ -n "$GITHUB_PAT" ]; check "GITHUB_PAT set via .env or environment (GitHub MCP auth)" $?
+if [ -n "$GITHUB_PAT" ]; then
+  case "$GITHUB_PAT" in
+    ghp_*) true ;;
+    *) false ;;
+  esac
+  check "GITHUB_PAT is a CLASSIC token (ghp_..., not fine-grained)" $?
+fi
 
 echo ""
 echo "## MCP servers (registration)"

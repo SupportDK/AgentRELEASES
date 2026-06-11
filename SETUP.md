@@ -15,7 +15,8 @@ cd <repo-folder>
 cp .env.example .env
 nano .env          # set GITHUB_PAT=ghp_your_real_token
 
-# 3. Register the MCP servers (loads .env automatically)
+# 3. Register the GitHub MCP (loads .env, validates the token)
+#    linear/notion/wp-devdocs load automatically from .mcp.json
 ./scripts/setup-mcp.sh
 
 # 4. Open Claude Code and trust the project
@@ -36,11 +37,14 @@ GitHub does **not** need `/mcp` authentication — it is already authenticated w
 
 ## The GITHUB_PAT token
 
-The GitHub MCP endpoint does not support Claude Code's OAuth flow (`does not support dynamic client registration`). It requires a Personal Access Token:
+The GitHub MCP endpoint does not support Claude Code's OAuth flow (`does not support dynamic client registration`). It requires a Personal Access Token.
+
+> ⚠️ **It MUST be a CLASSIC token (`ghp_...`).**
+> Fine-grained tokens (`github_pat_...`) are **rejected by the endpoint with HTTP 400** — the setup script refuses to register them and exits with instructions.
 
 1. Go to <https://github.com/settings/tokens>
-2. **Generate new token (classic)** — must be classic (`ghp_...`); fine-grained tokens (`github_pat_...`) do not work with this endpoint
-3. Scope: `repo`
+2. **Generate new token (classic)** — not "fine-grained"
+3. Scope: `repo` (only — don't grant more)
 4. Put it in `.env`:
 
 ```bash
@@ -48,6 +52,11 @@ GITHUB_PAT=ghp_your_real_token
 ```
 
 Use your **real token** — placeholders like `ghp_TU_TOKEN` will fail with HTTP 400.
+
+| Token type | Prefix | Works? |
+|---|---|---|
+| Classic PAT | `ghp_...` | ✅ Yes |
+| Fine-grained PAT | `github_pat_...` | ❌ No — HTTP 400 |
 
 ---
 
@@ -78,7 +87,8 @@ Or run the full diagnostic (also used by `/setup`):
 | Component | How it loads |
 |---|---|
 | Agents, skills, commands, settings | Versioned in `.claude/` — automatic |
-| MCP declarations | `.mcp.json` (project) + `setup-mcp.sh` (local registration with your PAT) |
+| linear, notion, wp-devdocs MCPs | `.mcp.json` (versioned) — automatic when the project is trusted |
+| github MCP | `setup-mcp.sh` registers it at **local scope** with your PAT (never at project scope — that would write the token into the versioned `.mcp.json`) |
 | Linear / Notion auth | OAuth via `/mcp` — once per machine |
 | GitHub auth | `GITHUB_PAT` in `.env` — once per machine |
 | wp-devdocs | npx, no auth (needs Node.js >= 20) |
@@ -100,8 +110,10 @@ Or run the full diagnostic (also used by `/setup`):
 | Symptom | Cause / fix |
 |---|---|
 | `SDK auth failed: does not support dynamic client registration` | GitHub MCP can't use OAuth — use the PAT flow above |
-| `HTTP 400 at https://api.githubcopilot.com/mcp/` | Empty or invalid PAT: check `.env` has a real classic token, then re-run `./scripts/setup-mcp.sh` |
-| MCPs missing after cloning | Run `./scripts/setup-mcp.sh`, or restart `claude` and accept the project trust prompt |
+| `HTTP 400 at https://api.githubcopilot.com/mcp/` | Empty, invalid or **fine-grained** PAT: `.env` needs a real **classic** token (`ghp_...`), then re-run `./scripts/setup-mcp.sh` |
+| `GITHUB_PAT is a FINE-GRAINED token` from the script | Generate a **classic** token instead (`ghp_...`, `repo` scope) and replace it in `.env` |
+| `error: missing required argument 'name'` from `claude mcp add` | Outdated script — `git pull` (the `-H` flag is variadic and must come AFTER the server name and URL) |
+| linear/notion missing | They load from `.mcp.json` — restart `claude` in the project and accept the trust prompt |
 | `GITHUB_PAT not set` from the script | Edit `.env` and set the token, re-run the script |
 | wp-devdocs missing | Install Node.js >= 20 (`npx` required) |
 

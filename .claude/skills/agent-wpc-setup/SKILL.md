@@ -65,17 +65,17 @@ Then the user edits `.env` and sets a **GitHub classic PAT** (`ghp_...`, `repo` 
 GITHUB_PAT=ghp_real_token_here
 ```
 
-Fine-grained tokens (`github_pat_...`) and placeholders do NOT work (HTTP 400).
+**Fine-grained tokens (`github_pat_...`) and placeholders do NOT work (HTTP 400)** — the setup script rejects fine-grained tokens with instructions to create a classic one.
 
-### 3. Register MCP servers
+### 3. Register the GitHub MCP
 
-Run the setup script — it loads `.env`, validates `GITHUB_PAT` (refusing to continue if missing), and registers the four MCPs:
+Run the setup script — it loads `.env`, validates `GITHUB_PAT` (hard fail if missing or fine-grained), and registers **only github** at local scope with the PAT in the Authorization header:
 
 ```bash
 ./scripts/setup-mcp.sh
 ```
 
-It registers: linear, notion (HTTP/OAuth), github (HTTP with the PAT in the Authorization header), and wp-devdocs (npx stdio). It never prints the full token.
+linear, notion and wp-devdocs are NOT registered by the script — they load automatically from the versioned `.mcp.json` (the script removes any stale local copies to avoid duplicates). github is never registered at project scope: that would write the real token into the versioned `.mcp.json`. The script never prints the full token.
 
 ### 4. Authenticate OAuth MCPs
 

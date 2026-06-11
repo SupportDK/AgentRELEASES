@@ -13,11 +13,14 @@ Three specialized agents cover the complete development lifecycle — requiremen
 git clone <repo-url>
 cd <repo-folder>
 
-# 2. Local secrets: copy the template and set your GitHub classic PAT
+# 2. Local secrets: copy the template and set your GitHub PAT
+#    ⚠️ Must be a CLASSIC token (ghp_...), scope `repo`.
+#    Fine-grained tokens (github_pat_...) do NOT work (HTTP 400).
 cp .env.example .env
 nano .env                    # GITHUB_PAT=ghp_your_real_token
 
-# 3. Register the MCPs (loads .env, validates GITHUB_PAT)
+# 3. Register the GitHub MCP (loads .env, validates the token;
+#    linear/notion/wp-devdocs load automatically from .mcp.json)
 ./scripts/setup-mcp.sh
 
 # 4. Open Claude Code and trust the project
