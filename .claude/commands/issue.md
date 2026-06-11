@@ -14,9 +14,11 @@ Refine Linear issue **$1** into an Implementation Brief. Do NOT implement anythi
    - If the description lacks clarity, improve it in Linear (Problem Statement, User Story, Scope, Acceptance Criteria, Out of Scope). Never change status, priority, or assignments.
    - Produce a structured Implementation Brief.
 
-2. Present the Implementation Brief to the user verbatim.
+2. Resolve the target repository from the issue (Repository Resolution Rules in the root `CLAUDE.md`: plugin display name → `wpconnect-co/<repository>`) and include it in the brief. Do not clone anything — this command is read-only.
 
-3. Suggest next steps: `/feature $1` to implement without publishing, or `/release $1` for the full pipeline.
+3. Present the Implementation Brief to the user verbatim.
+
+4. Suggest next steps: `/feature $1` to implement without publishing, or `/release $1` for the full pipeline.
 
 ## Constraints
 

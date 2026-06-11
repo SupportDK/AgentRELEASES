@@ -44,6 +44,9 @@ vendor/
 !.env.example
 *.secret
 
+# Cloned plugin repositories (see CLAUDE.md — Repository Acquisition Workflow)
+repos/
+
 # Build artifacts
 dist/
 build/

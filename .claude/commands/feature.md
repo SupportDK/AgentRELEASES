@@ -1,18 +1,28 @@
 ---
 description: Development pipeline for a Linear issue — brief, implement, review, push + PR (no release)
-argument-hint: WPC-123
+argument-hint: WPC-123 | <plugin name>
 ---
 
 # /feature $ARGUMENTS
 
-Run the development pipeline for Linear issue **$1**: brief → implementation → review → push + PR. No version bump, no GitHub Release.
+Run the development pipeline: brief → implementation → review → push + PR. No version bump, no GitHub Release.
 
-You (the main session) are the orchestrator. Agents do their phase; you do branching, push, and PR.
+You (the main session) are the orchestrator. Agents do their phase; you do repo acquisition, branching, push, and PR.
+
+## Phase 0 — Target repository resolution
+
+Parse `$ARGUMENTS` (Linear issue ID or plugin display name) and apply the **Repository Resolution Rules** and **Repository Acquisition Workflow** from the root `CLAUDE.md`:
+
+- Resolve plugin → `wpconnect-co/<repository>` (from the argument or from the Linear issue title/body). Never ask if the mapping resolves it; ask only if there is no match.
+- Clone into `repos/<repository>/` if absent; otherwise fetch + clean working tree. Checkout the default branch.
+- If only a plugin name was given, locate the corresponding Linear issue or ask the user which one to implement.
+
+All git work below happens inside `repos/<repository>/`.
 
 ## Phase 1 — Product Owner: brief
 
 Delegate to the **product-owner** agent:
-- Read issue $1 from Linear; improve its description if unclear (never change status/priority/assignments).
+- Read the resolved Linear issue; improve its description if unclear (never change status/priority/assignments).
 - Produce an Implementation Brief (Problem, User Story, Scope, Acceptance Criteria, Out of Scope, Risks).
 
 Show the brief to the user, then continue.
@@ -22,7 +32,7 @@ Show the brief to the user, then continue.
 Create the working branch from the current default branch:
 
 ```bash
-git checkout -b feature/$1-<short-slug>
+git checkout -b feature/<issue-id>-<short-slug>
 ```
 
 `<short-slug>` = 2–4 kebab-case words from the issue title.
@@ -49,7 +59,7 @@ Delegate to the **product-owner** agent with the Implementation Summary and the 
 Only after APPROVED:
 
 ```bash
-git push -u origin feature/$1-<short-slug>
+git push -u origin feature/<issue-id>-<short-slug>
 ```
 
 Create a PR via the GitHub MCP (or `gh pr create` if available): title = main commit message, body = Implementation Brief summary + acceptance criteria checklist.
@@ -60,8 +70,10 @@ Update the Linear issue: add a comment with the PR link. Set status to "In Revie
 
 | Field | Value |
 |---|---|
-| Issue | $1 |
-| Branch | feature/$1-… |
+| Issue | WPC-… |
+| Repository | wpconnect-co/<repository> |
+| Branch | feature/<issue-id>-… |
+| Commit hash | <hash> |
 | Commits | list |
 | Review | APPROVED (criteria X/X) |
 | PR | URL |

@@ -1,24 +1,28 @@
 ---
 description: Fast-track automated release for a bug — minimal brief, fix, patch bump, publish
-argument-hint: WPC-123
+argument-hint: WPC-123 | <plugin name>
 ---
 
 # /hotfix $ARGUMENTS
 
-Fast-track release pipeline for bug issue **$1**. Fully automatic — invoking this command is the user's approval for push and publication.
+Fast-track release pipeline for a bug. Fully automatic — invoking this command is the user's approval for push and publication.
 
 Same structure as `/release` with these differences:
+
+## Phase 0 — Target repository resolution
+
+Same as `/release`: parse `$ARGUMENTS` (Linear issue ID or plugin display name) and apply the **Repository Resolution Rules** and **Repository Acquisition Workflow** from the root `CLAUDE.md`. Clone/update into `repos/<repository>/`, checkout the default branch. All git work happens inside that directory.
 
 ## Phase 1 — Product Owner: minimal brief
 
 Delegate to the **product-owner** agent:
-- Read issue $1 from Linear. Confirm it describes a **bug** (reproduction, expected vs actual). If it is not a bug, stop and suggest `/release $1` instead.
+- Read the resolved Linear issue. Confirm it describes a **bug** (reproduction, expected vs actual). If it is not a bug, stop and suggest `/release` instead.
 - Extract minimal acceptance criteria: the bug no longer reproduces + no regression in directly related behavior. No full User Story required.
 
 ## Phase 2 — Branch
 
 ```bash
-git checkout -b hotfix/$1
+git checkout -b hotfix/<issue-id>
 ```
 
 ## Phase 3 — Developer: fix
@@ -48,12 +52,12 @@ Delegate to the **documentation** agent: changelog entry (`fix: …`), short rel
 
 ## Phase 7 — Close the loop
 
-Comment + status "Done" on Linear issue $1.
+Comment + status "Done" on the Linear issue.
 
 ## Final report
 
-Same table as `/release`.
+Same table as `/release` (includes repository, branch, commit hash, ZIP location).
 
 ## Failure handling
 
-Same as `/release`, with the stricter limit: 1 failed review cycle → ABORT and recommend `/release $1`.
+Same as `/release`, with the stricter limit: 1 failed review cycle → ABORT and recommend `/release`.
