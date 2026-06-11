@@ -46,9 +46,9 @@ Prepares a version for testing. Example: `/release wpforms-notion 1.4.1`
 | Review | product-owner | Acceptance criteria PASS/FAIL (max 2 fix cycles, then abort) |
 | Package | main session | `wp dist-archive` → renamed `<main-file>.<version>.zip` (e.g. `wpconnect-wpf-notion.1.4.1.zip`) → `dist/` |
 | Push | main session | `test/<version>` to the plugin repo |
-| Linear | main session | Original issues → **For Test** · creates QA issue `Update <Plugin Name> <Version>` (creation **verified** — identifier fetched back, never silently skipped) → **For Test**, ZIP attached via Linear upload + mandatory Testing Package block in the description |
+| Linear | main session | Original issues → **For Test** · creates QA issue `Update <Plugin Name> <Version>` **in the same Linear project as the originals** (creation and project assignment **verified** — identifier fetched back, never silently skipped or left unassigned) → **For Test**, ZIP attached via Linear upload + mandatory Testing Package block in the description |
 | README issue | main session + documentation | If README content changed: append the standardized block to the README issue description (an external automation consumes it) → **For Test** |
-| Release log | main session | Writes `releases/<repo>/<version>/release-log.md` (QA Tracking) + `linear-issues.md` (per-issue status history with timestamps), committed to the workspace |
+| Release log | main session | Writes `release-logs/<plugin-slug>/<version>/release-log.md` (QA Tracking incl. project; links po-stories.md if present) + `linear-issues.md` (per-issue status history with timestamps), committed to the workspace |
 
 **Hard stop.** `/release` never: creates/pushes tags, creates GitHub Releases, merges PRs, deploys to WordPress.org/production, or closes Linear issues.
 
@@ -79,11 +79,16 @@ Open → In Progress → For Test → Complete/Done/Closed
 
 `/tested` is never chained automatically after `/release` — it is always a human decision.
 
+## Phase 0 (optional) — `/stories <plugin> <version>`
+
+Before `/release`, the PO can refine the version's Linear issues into complete user stories (template: User Story / Context / Scope / Acceptance Criteria / Technical Notes / Testing Notes / Dependencies & Open Questions). Rules: never invent requirements (unclear → Open Questions), preserve original text, confirmation required for bulk updates (> 5 issues). Output: `release-logs/<plugin-slug>/<version>/po-stories.md`. `/release` runs a light quality check and recommends `/stories` when issues are too vague.
+
 ## Variants
 
 - **`/hotfix WPC-123`** — fast-track Phase 1 for bugs: minimal brief, mandatory patch bump, 1 fix cycle max. Also stops at the QA gate; finalized with `/tested`.
 - **`/feature WPC-123`** — development + PR, no release lifecycle.
 - **`/issue WPC-123`** — brief only.
+- **`/stories <plugin> <version>`** — PO story refinement, see above.
 
 ## Design principles
 

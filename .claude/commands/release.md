@@ -24,10 +24,11 @@ All git work below happens inside `repos/<repository>/`.
 Delegate to the **product-owner** agent:
 
 - Search Linear for the issues related to this plugin and version (plugin name in title/body/labels, version references, recent open issues for the plugin).
-- Improve issue descriptions if they lack clarity (never change status/priority/assignments — status moves are done by the main session later).
+- **Light story-quality validation**: check each issue for a user story and acceptance criteria. Improve descriptions only when obviously necessary (one-liners, missing criteria). If several issues need deep refinement, recommend running `/stories <plugin> <version>` first instead of doing heavy rewriting inline — but do not block the release on it.
+- Note the **Linear project/release/milestone** each issue belongs to — needed later for the QA issue (Phase 7).
 - Produce a consolidated Implementation Brief covering the issues in scope for this version.
 
-Present the list of issues found and the brief; if no issues match, ask the user which Linear issues belong to this version.
+Present the list of issues found and the brief; if no issues match, ask the user which Linear issues belong to this version. If `release-logs/<plugin-slug>/<version>/po-stories.md` exists, read it as context — the stories were already refined.
 
 ## Phase 1.5 — Mark work started (main session)
 
@@ -89,8 +90,10 @@ Use these exact Linear MCP tools — all of these capabilities are confirmed ava
 1. **Move every original issue in scope to For Test**: `mcp__linear__save_issue` with `id` + `state: "For Test"` (resolve the exact state name via `mcp__linear__list_issue_statuses(team)` if needed). Record each transition.
 
 2. **Create the QA issue** — this step is MANDATORY and must never be silently skipped:
-   - Tool: `mcp__linear__save_issue` with NO `id`, `title: "Update <Plugin Name> <Version>"` (e.g. `Update WPForms Notion 1.4.1`), the `team` of the original issues, and the description from step 4.
-   - **Verify creation**: the tool response must return the new issue identifier. Fetch it back with `mcp__linear__get_issue` and record the identifier. If creation fails (error, permission denial), STOP and report the exact error in the final output — do not continue as if it succeeded.
+   - **Determine the Linear project first**: take the project/release/milestone of the original issues (noted in Phase 1). If the source issues belong to **different projects, STOP and ask the user** which project the QA issue should use.
+   - Tool: `mcp__linear__save_issue` with NO `id`, `title: "Update <Plugin Name> <Version>"` (e.g. `Update WPForms Notion 1.4.1`), the `team` of the original issues, **`project: <same project as the original issues>`** (and `milestone` if the originals use one), and the description from step 4. Project assignment at creation is supported by the MCP.
+   - If creation with `project` fails: create the issue first, then update it (`save_issue` with `id` + `project`) to assign the project.
+   - **Verify creation AND project assignment**: fetch the issue back with `mcp__linear__get_issue`, record the identifier, and confirm it belongs to the expected project. If the project could not be assigned, say so explicitly in the final output with a warning — **never leave the QA issue unassigned silently**.
 
 3. **Move the QA issue to For Test** (same `save_issue` + `state` call, or set `state` at creation).
 
@@ -146,7 +149,7 @@ If the implementation modified `README`/readme-related content of the plugin (an
 
 ## Phase 9 — Release log (main session)
 
-Create/update the release log files in the workspace under `releases/<repository>/<version>/` and commit them to the workspace repo:
+Create/update the release log files in the workspace under `release-logs/<plugin-slug>/<version>/` and commit them to the workspace repo:
 
 **`release-log.md`**:
 
@@ -164,13 +167,20 @@ QA Issue:
 Update <Plugin Name> <Version>
 
 Linear ID:
-<identifier from Phase 7.2>
+<identifier from Phase 7.2>  (<link>)
+
+Linear Project:
+<project assigned in Phase 7.2>
 
 Status:
 For Test
 
 ZIP:
 <zip filename>
+
+## PO Stories
+
+<link to po-stories.md if it exists, with a one-line summary — otherwise "No /stories run for this version">
 
 ## Workflow Status History
 
@@ -221,8 +231,11 @@ Update <Plugin Name> <Version>  (<Linear identifier> — verified created)
 README issue:
 <issue key if applicable>
 
+QA issue project:
+<Linear project assigned — or explicit WARNING if assignment failed>
+
 Release log:
-releases/<repository>/<version>/release-log.md
+release-logs/<plugin-slug>/<version>/release-log.md
 
 Next step after human testing:
 /tested <plugin> <version>

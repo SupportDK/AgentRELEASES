@@ -2,7 +2,7 @@
 
 Step-by-step guide for the **manual** development cycle: from Linear issue to committed code, with human validation at each handoff.
 
-> For the automated pipelines, use the workflow commands instead: `/release <plugin> <version>` (Phase 1 — prepare for QA, stops), `/tested <plugin> <version>` (Phase 2 — finalize after human QA), `/hotfix WPC-123` (fast bug Phase 1), `/feature WPC-123` (dev + PR), `/issue WPC-123` (brief only). See [workflows/release-pipeline.md](workflows/release-pipeline.md).
+> For the automated pipelines, use the workflow commands instead: `/stories <plugin> <version>` (PO refines issues into user stories), `/release <plugin> <version>` (Phase 1 — prepare for QA, stops), `/tested <plugin> <version>` (Phase 2 — finalize after human QA), `/hotfix WPC-123` (fast bug Phase 1), `/feature WPC-123` (dev + PR), `/issue WPC-123` (brief only). See [workflows/release-pipeline.md](workflows/release-pipeline.md).
 
 ---
 

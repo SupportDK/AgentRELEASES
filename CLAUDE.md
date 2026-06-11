@@ -16,7 +16,9 @@ Multi-agent WordPress development workspace. Primary interface: `/release`, `/te
 
 **Linear status lifecycle:** Open → **In Progress** (when /release starts) → **For Test** (when the QA package is ready) → **terminal state** (when /tested succeeds; detect the team's completed-type state via `list_issue_statuses` — may be Complete/Done/Closed). Status moves are always main-session actions via `mcp__linear__save_issue`; the QA issue creation must be verified (fetch back the identifier) and never silently skipped.
 
-**Release logs:** every release writes `releases/<repository>/<version>/release-log.md` (QA Tracking: QA issue + Linear ID + status + ZIP) and `linear-issues.md` (per-issue Workflow Status History with timestamps), committed to this workspace.
+**Release logs:** every release writes `release-logs/<plugin-slug>/<version>/release-log.md` (QA Tracking: QA issue + Linear ID + project + status + ZIP; links po-stories.md if present) and `linear-issues.md` (per-issue Workflow Status History with timestamps); `/stories` writes `po-stories.md` in the same directory. All committed to this workspace.
+
+**QA issue project assignment:** the QA issue `Update <Plugin> <Version>` must be created in the **same Linear project** as the original issues (`save_issue` supports `project` at creation; fallback: create then update). If source issues span multiple projects, stop and ask. Verify the assignment by fetching the issue back — never leave it unassigned silently.
 
 ## Repository Resolution Rules
 

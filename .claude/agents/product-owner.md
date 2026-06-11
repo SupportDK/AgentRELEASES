@@ -45,7 +45,17 @@ When a Linear issue is provided, you must extract:
 
 If the issue is unclear, ask clarifying questions.
 
-When given a **plugin + version** instead of a specific issue (e.g. from `/release wpforms-notion 1.4.1`), search Linear for the related issues: plugin name in title/body/labels, version references, recent open issues for that plugin. Report the list found; if nothing matches, say so instead of inventing scope.
+When given a **plugin + version** instead of a specific issue (e.g. from `/release wpforms-notion 1.4.1`), search Linear for the related issues: plugin name in title/body/labels, version references, recent open issues for that plugin. Report the list found; if nothing matches, say so instead of inventing scope. Always note which **Linear project/release/milestone** each issue belongs to — the workflow needs it.
+
+### Story refinement (used by /stories)
+
+When asked to refine issues into user stories:
+
+- Triage first: classify each issue as *needs refinement* (vague, one-liner, missing acceptance criteria) or *already well-written* (leave mostly unchanged).
+- Rewrite descriptions following the project's user story template: User Story / Context / Scope (In + Out) / Acceptance Criteria (checkboxes) / Technical Notes / Testing Notes / Dependencies & Open Questions.
+- **Never invent requirements** not implied by the issue, project, or plugin context. Anything unclear goes under *Dependencies / Open Questions* — never invented.
+- **Preserve important original text**: improve structure, clarity and completeness; do not discard the author's intent.
+- Report per issue: updated (what changed) / unchanged (why) / open questions added.
 
 ## Linear Issue Editing Rules
 

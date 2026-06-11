@@ -61,7 +61,7 @@ Record each transition with timestamp.
 
 ## Phase 5 — Update release log (main session)
 
-In `releases/<repository>/<version>/`:
+In `release-logs/<plugin-slug>/<version>/`:
 
 - `release-log.md`: update `Status:` in **QA Tracking** to the terminal state, append the final transitions (For Test → <terminal state>) with timestamps to **Workflow Status History**, and add the tag (`v<version>`) and release URL if created.
 - `linear-issues.md`: append the terminal transition to each issue's status history.
@@ -98,7 +98,7 @@ README issue closed:
 <issue key or n/a>
 
 Release log updated:
-releases/<repository>/<version>/release-log.md
+release-logs/<plugin-slug>/<version>/release-log.md
 ```
 
 ## Restrictions

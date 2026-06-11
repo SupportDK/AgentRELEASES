@@ -49,6 +49,7 @@ The primary interface. Each command orchestrates the agents end-to-end:
 | `/tested <plugin> <version>` | **Phase 2** (manual, after QA): tag `v<version>` → push tag → issues to *Closed*. Never runs automatically |
 | `/hotfix WPC-123` | Fast-track Phase 1 for bugs: minimal brief → fix → patch bump → test ZIP → stops for QA |
 | `/feature WPC-123` | Development pipeline without releasing: brief → implement → review → push + PR |
+| `/stories <plugin> <version>` | PO refines the version's Linear issues into complete user stories (acceptance criteria, scope, testing notes) — run before `/release` |
 | `/issue WPC-123` | Refine a Linear issue into an Implementation Brief — no implementation |
 | `/package <plugin> [version]` | Build a distributable plugin ZIP (`wp dist-archive`, named `<main-file>.<version>.zip`) |
 | `/setup` | Verify the workspace setup on this machine |
