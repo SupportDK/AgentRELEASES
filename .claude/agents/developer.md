@@ -157,9 +157,9 @@ Once the feature is implemented:
 3. Create local commits following the project commit convention
 4. Deliver the Implementation Summary
 
-Do not modify documentation yourself.
+Do not modify workspace documentation yourself — that is the **Documentation Agent**'s job.
 
-Documentation will be handled by the **Documentation Agent**.
+**Exception:** the plugin repo's own `readme.txt`/`README.md` and changelog files ARE part of the release deliverable. When a release brief requires it, update them inside the plugin repo (new version entry, changelog lines for the changes you made).
 
 ---
 

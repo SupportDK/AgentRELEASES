@@ -8,39 +8,40 @@ Three specialized agents cover distinct phases of the software development lifec
 
 ---
 
-## Pipeline (what `/release` runs)
+## Release lifecycle (two phases, human QA gate)
 
 ```
-Linear Issue
+/release <plugin> <version>          ← Phase 1
      │
      ▼
-product-owner agent
-  └─ Reads issue → improves requirements → Implementation Brief
+product-owner: finds Linear issues for plugin+version → Implementation Brief
      │
      ▼
-main session: branch release/<issue>
+main session: branch test/<version> in repos/<repository>/
      │
      ▼
-developer agent
-  └─ Implements → self-review → local commits (never pushes)
+developer: implements + plugin readme/changelog + version bump → local commits
      │
      ▼
-product-owner agent
-  └─ Reviews every acceptance criterion → APPROVED / REJECTED
-     │  (REJECTED → back to developer, max 2 cycles, then abort)
-     ▼
-main session
-  └─ Version bump → ZIP → push → tag → GitHub Release (supportdk)
+product-owner: reviews acceptance criteria (max 2 cycles, then abort)
      │
      ▼
-documentation agent
-  └─ CHANGELOG, release notes, docs, Notion page
+main session: ZIP (wp dist-archive → <main-file>.<version>.zip) → push test/<version>
      │
      ▼
-main session: Linear issue → Done, with release link
+main session: Linear → issues to For Test · QA issue "Update <Plugin> <Version>" · README issue block
+     │
+     ▼
+🛑 STOP — Waiting for human QA
+     │
+     ▼  (human tests the ZIP and confirms)
+/tested <plugin> <version>           ← Phase 2, manual trigger only
+     │
+     ▼
+tag v<version> pushed → issues to Closed → release completed
 ```
 
-`/release` and `/hotfix` are **fully automatic** — invoking them is the user's approval. The safety net is the PO review: nothing is pushed or published unless every acceptance criterion passes.
+The QA gate is structural: `/release` never tags, publishes, merges, deploys or closes issues — those actions live exclusively in `/tested`, which requires explicit human confirmation and is never chained automatically.
 
 ---
 
@@ -52,11 +53,12 @@ main session: Linear issue → Done, with release link
 
 | Command | Purpose |
 |---|---|
-| `/release WPC-123` | Full pipeline: brief → implement → review → publish → document → close |
+| `/release <plugin> <version>` | Phase 1: develop → test/<version> → ZIP → Linear For Test → STOP for human QA |
+| `/tested <plugin> <version>` | Phase 2 (manual): tag + push tag → Linear Closed. The QA approval gate |
+| `/hotfix WPC-123` | Fast-track Phase 1 for bugs: minimal brief → fix → patch bump → stops for QA |
 | `/feature WPC-123` | Development only: brief → implement → review → push + PR |
-| `/hotfix WPC-123` | Fast bug release: minimal brief → fix → patch bump → publish |
 | `/issue WPC-123` | Brief only — refine requirements, no implementation |
-| `/package <plugin>` | Build a distributable plugin ZIP in `dist/` |
+| `/package <plugin>` | Distributable ZIP (`wp dist-archive`, `<main-file>.<version>.zip`) in `dist/` |
 | `/setup` | Verify the workspace on this machine |
 
 ---

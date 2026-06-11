@@ -138,7 +138,33 @@ Generate a short documentation section explaining:
 
 ---
 
-### 5. Notion Sync (when Notion MCP is available)
+### 5. README Issue Content (release workflow)
+
+When invoked from `/release` and the plugin's README/readme content changed: prepare the block that the main session appends to the README Linear issue description (an external automation reads it to update documentation). Format:
+
+```markdown
+## README update for <Plugin Name> <Version>
+
+### Summary
+
+<short summary>
+
+### Proposed README changes
+
+<markdown content or changelog/readme section>
+
+### Source branch
+
+test/<version>
+
+### Related release
+
+<plugin> <version>
+```
+
+---
+
+### 6. Notion Sync (when Notion MCP is available)
 
 When invoked from a workflow command that requires it, prepare the documentation content for a Notion page (the main session performs the actual Notion API calls if you lack the tools). Provide:
 

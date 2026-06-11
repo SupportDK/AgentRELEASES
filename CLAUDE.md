@@ -1,6 +1,16 @@
 # AGENT WPC — Workspace Rules
 
-Multi-agent WordPress development workspace. Pipeline: Linear → product-owner → developer → review → publish → documentation. Primary interface: `/release`, `/feature`, `/hotfix`, `/issue`, `/package`, `/setup`.
+Multi-agent WordPress development workspace. Primary interface: `/release`, `/tested`, `/feature`, `/hotfix`, `/issue`, `/package`, `/setup`.
+
+## Release lifecycle (two phases, human QA gate in between)
+
+```
+/release <plugin> <version>   → develop, push test/<version>, ZIP, Linear issues → For Test, QA issue created. STOPS.
+        ↓  (human tests the ZIP)
+/tested <plugin> <version>    → tag v<version>, push tag, issues → Closed. Manually triggered only.
+```
+
+`/release` (and `/hotfix`) must NEVER: create/push tags, create GitHub Releases, merge PRs, deploy, or close Linear issues. Those belong exclusively to `/tested`, which is never chained automatically — it is the human QA approval gate.
 
 ## Repository Resolution Rules
 
@@ -48,10 +58,10 @@ When a workflow command targets a plugin repository:
    `git clone git@github.com:wpconnect-co/<repository>.git repos/<repository>`
    (HTTPS fallback: `https://github.com/wpconnect-co/<repository>.git`)
 4. If already present: `git fetch` and ensure a clean working tree before starting.
-5. Checkout the appropriate branch. **Temporary testing convention: all workflow pushes go to `test/...` branches** (`test/<version>` for /release and /hotfix, `test/<issue-id>-<slug>` for /feature) — never to `main`, `release/*` or `feature/*` until the pipeline is validated.
+5. Checkout the appropriate branch. **All workflow pushes go to `test/...` branches** (`test/<version>` for /release and /hotfix, `test/<issue-id>-<slug>` for /feature) — never to `main`, `release/*` or `feature/*`.
 6. Analyze the codebase before making changes.
 7. Implement, commit (project convention `feature|fix|improvement|compatibility:`), push per the workflow's rules.
-8. Generate a testable ZIP package when required (into this workspace's `dist/`).
+8. Generate the test ZIP: `wp dist-archive ./ --plugin-dirname=<dirname>` preferred, renamed to `<main-plugin-file-without-.php>.<version>.zip` (e.g. `wpconnect-wpf-notion.1.4.1.zip`), placed in this workspace's `dist/`.
 9. Always report: repository used, branch used, commit hash, ZIP location.
 
 `repos/` is git-ignored — cloned plugin repositories are never committed to this workspace.

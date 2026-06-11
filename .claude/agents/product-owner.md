@@ -45,6 +45,8 @@ When a Linear issue is provided, you must extract:
 
 If the issue is unclear, ask clarifying questions.
 
+When given a **plugin + version** instead of a specific issue (e.g. from `/release wpforms-notion 1.4.1`), search Linear for the related issues: plugin name in title/body/labels, version references, recent open issues for that plugin. Report the list found; if nothing matches, say so instead of inventing scope.
+
 ## Linear Issue Editing Rules
 
 You are allowed to improve the issue description in Linear when it lacks clarity.

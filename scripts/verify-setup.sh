@@ -70,7 +70,7 @@ done
 
 echo ""
 echo "## Workflow commands (required)"
-for cmd in setup issue feature hotfix release package; do
+for cmd in setup issue feature hotfix release tested package; do
   [ -f ".claude/commands/${cmd}.md" ]; check "command: /${cmd}" $?
 done
 

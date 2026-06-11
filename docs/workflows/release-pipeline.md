@@ -1,57 +1,81 @@
 # Release Pipeline
 
-Human-readable narrative of what `/release WPC-123` does. The executable definition lives in [.claude/commands/release.md](../../.claude/commands/release.md) — this document explains the *why* and the roles.
+Human-readable narrative of the two-phase release lifecycle. The executable definitions live in [.claude/commands/release.md](../../.claude/commands/release.md) and [.claude/commands/tested.md](../../.claude/commands/tested.md) — this document explains the *why* and the roles.
 
 ---
 
-## Overview
+## Lifecycle
 
 ```
-Linear Issue ($1)
-    │
-    ▼
-[product-owner]  reads the issue, improves requirements,
-    │            writes the Implementation Brief
-    ▼
-[main session]   creates branch release/$1
-    │
-    ▼
-[developer]      implements the brief, self-reviews,
-    │            commits locally (never pushes)
-    ▼
-[product-owner]  reviews every acceptance criterion
-    │            PASS → continue · FAIL → back to developer (max 2 cycles)
-    ▼
-[main session]   version bump → ZIP → push → tag →
-    │            GitHub Release on supportdk/AgentRELEASES
-    ▼
-[documentation]  CHANGELOG, release notes, docs, Notion page
-    │
-    ▼
-[main session]   closes the Linear issue with the release link
+/release <plugin> <version>
+    ↓
+Development
+    ↓
+Branch pushed to test/<version>
+    ↓
+ZIP generated
+    ↓
+Issues moved to For Test
+    ↓
+QA issue created
+    ↓
+Human tests ZIP              ← QA APPROVAL GATE
+    ↓
+/tested <plugin> <version>   ← manual trigger only
+    ↓
+Tag created
+    ↓
+Tag pushed
+    ↓
+Issues moved to Closed
+    ↓
+Release completed
 ```
 
-## Design principles
+## Phase 1 — `/release <plugin> <version>`
 
-- **The command orchestrates; agents work.** No agent knows the full pipeline — each receives its inputs and returns its outputs. The main session sequences phases and handles git/GitHub/Linear side effects.
-- **The developer never pushes.** Push, tags, and releases are main-session actions. This keeps the developer agent safe to use standalone.
-- **Invoking the command IS the approval.** `/release` and `/hotfix` are fully automatic by user decision. There are no intermediate confirmation gates — the safety net is the PO review (max 2 fix cycles, then abort before anything is pushed).
-- **Abort before publish.** Any failure before Phase 5 leaves only local artifacts (branch + commits). Nothing is published unless the review passed.
+Prepares a version for testing. Example: `/release wpforms-notion 1.4.1`
 
-## Roles per phase
+| Step | Actor | What happens |
+|---|---|---|
+| Resolve | main session | Plugin → `wpconnect-co/<repo>` (CLAUDE.md mapping), clone into `repos/` |
+| Discover | product-owner | Finds the Linear issues for this plugin+version, improves them, writes the brief |
+| Branch | main session | `test/<version>` (e.g. `test/1.4.1`) |
+| Implement | developer | Changes + plugin readme/changelog + version bump in header, local commits |
+| Review | product-owner | Acceptance criteria PASS/FAIL (max 2 fix cycles, then abort) |
+| Package | main session | `wp dist-archive` → renamed `<main-file>.<version>.zip` (e.g. `wpconnect-wpf-notion.1.4.1.zip`) → `dist/` |
+| Push | main session | `test/<version>` to the plugin repo |
+| Linear | main session | Original issues → **For Test** · creates QA issue `Update <Plugin Name> <Version>` → **For Test**, with the ZIP attached (or path/link fallback) |
+| README issue | main session + documentation | If README content changed: append the standardized block to the README issue description (an external automation consumes it) → **For Test** |
 
-| Phase | Actor | Input | Output |
-|---|---|---|---|
-| Brief | product-owner | Linear issue | Implementation Brief |
-| Branch | main session | — | `release/$1` |
-| Implement | developer | Brief | commits + Implementation Summary |
-| Review | product-owner | Summary + diff | APPROVED / REJECTED |
-| Publish | main session | approved work | version, ZIP, tag, GitHub Release |
-| Document | documentation | Summary + version | CHANGELOG, release notes, Notion |
-| Close | main session | release URL | Linear issue → Done |
+**Hard stop.** `/release` never: creates/pushes tags, creates GitHub Releases, merges PRs, deploys to WordPress.org/production, or closes Linear issues.
+
+## QA gate (human)
+
+A human installs the ZIP, verifies activation and the changes, and confirms no blockers. Nothing proceeds without this.
+
+## Phase 2 — `/tested <plugin> <version>`
+
+Finalizes after explicit human confirmation. Example: `/tested wpforms-notion 1.4.1`
+
+| Step | What happens |
+|---|---|
+| Confirm | Requires explicit confirmation that the ZIP was tested and works — asks if missing |
+| Verify | `test/<version>` exists on origin · ZIP exists/referenced · issues are in For Test |
+| Tag | `v<version>` on the head of `test/<version>`, pushed |
+| Release | GitHub Release on the plugin repo only if part of that plugin's documented workflow |
+| Close | Original issues + QA issue + README issue → **Closed** |
+
+`/tested` is never chained automatically after `/release` — it is always a human decision.
 
 ## Variants
 
-- **`/feature`** — stops after the review: push + PR, no version bump, no release. For work that merges via PR review.
-- **`/hotfix`** — minimal brief, mandatory patch bump, only 1 fix cycle allowed. For urgent bugs.
-- **`/issue`** — only the brief phase. For refining requirements before deciding.
+- **`/hotfix WPC-123`** — fast-track Phase 1 for bugs: minimal brief, mandatory patch bump, 1 fix cycle max. Also stops at the QA gate; finalized with `/tested`.
+- **`/feature WPC-123`** — development + PR, no release lifecycle.
+- **`/issue WPC-123`** — brief only.
+
+## Design principles
+
+- **The command orchestrates; agents work.** Branching, packaging, push, tags, Linear status moves are main-session actions. The developer never pushes; the PO never moves issue statuses.
+- **The QA gate is structural.** The dangerous actions (tag, release, close) live in a separate command that requires explicit human confirmation.
+- **Pushes only to `test/<version>`** — `main`, `release/*`, `feature/*` of the plugin repos are never touched by the workflows.

@@ -45,14 +45,15 @@ The primary interface. Each command orchestrates the agents end-to-end:
 
 | Command | What it does |
 |---------|--------------|
-| `/release WPC-123` | Full pipeline: brief → implement → review → version bump → push → GitHub Release → docs → close issue |
-| `/feature WPC-123` | Development pipeline without publishing: brief → implement → review → push + PR |
-| `/hotfix WPC-123` | Fast-track release for bugs: minimal brief → fix → patch bump → release |
+| `/release <plugin> <version>` | **Phase 1**: find Linear issues → implement → review → push `test/<version>` → test ZIP → issues to *For Test* → QA issue. **Stops for human QA** |
+| `/tested <plugin> <version>` | **Phase 2** (manual, after QA): tag `v<version>` → push tag → issues to *Closed*. Never runs automatically |
+| `/hotfix WPC-123` | Fast-track Phase 1 for bugs: minimal brief → fix → patch bump → test ZIP → stops for QA |
+| `/feature WPC-123` | Development pipeline without releasing: brief → implement → review → push + PR |
 | `/issue WPC-123` | Refine a Linear issue into an Implementation Brief — no implementation |
-| `/package <plugin> [version]` | Build a distributable plugin ZIP in `dist/` |
+| `/package <plugin> [version]` | Build a distributable plugin ZIP (`wp dist-archive`, named `<main-file>.<version>.zip`) |
 | `/setup` | Verify the workspace setup on this machine |
 
-> ⚠️ `/release` and `/hotfix` are **fully automatic** — they push and publish without intermediate confirmation. Invoking them is your approval.
+> The release lifecycle has a **human QA gate**: `/release` prepares everything and stops; only after you test the ZIP do you run `/tested` to finalize. `/release` never tags, publishes, merges, deploys, or closes issues.
 
 ---
 
@@ -72,22 +73,28 @@ Use the product-owner agent to process Linear issue WPC-123.
 
 ---
 
-## Pipeline (what /release runs)
+## Release lifecycle
 
 ```
-Linear Issue
+/release <plugin> <version>
     ↓
-product-owner   →  Implementation Brief
+Linear discovery → Implementation Brief (product-owner)
     ↓
-developer       →  implementation + local commits
+Development on branch test/<version> (developer)
     ↓
-product-owner   →  review vs acceptance criteria (max 2 fix cycles)
+Review vs acceptance criteria (product-owner, max 2 cycles)
     ↓
-main session    →  version bump, tag, ZIP, push, GitHub Release
+ZIP generated (<main-file>.<version>.zip) + branch pushed
     ↓
-documentation   →  CHANGELOG, release notes, docs, Notion
+Issues moved to For Test · QA issue "Update <Plugin> <Version>" created
     ↓
-Linear issue closed with release link
+🧑 Human tests the ZIP          ← QA gate
+    ↓
+/tested <plugin> <version>      ← manual trigger only
+    ↓
+Tag v<version> created + pushed
+    ↓
+Issues moved to Closed → Release completed
 ```
 
 ---

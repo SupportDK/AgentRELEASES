@@ -1,11 +1,11 @@
 ---
-description: Fast-track automated release for a bug — minimal brief, fix, patch bump, publish
+description: Fast-track Phase 1 for a bug — minimal brief, fix, patch bump, test ZIP. STOPS for human QA; finalize with /tested.
 argument-hint: WPC-123 | <plugin name>
 ---
 
 # /hotfix $ARGUMENTS
 
-Fast-track release pipeline for a bug. Fully automatic — invoking this command is the user's approval for push and publication.
+Fast-track Phase 1 pipeline for a bug. Like `/release`, it **STOPS after preparing the test package** — the release is finalized manually with `/tested <plugin> <version>` after human QA.
 
 Same structure as `/release` with these differences:
 
@@ -21,13 +21,11 @@ Delegate to the **product-owner** agent:
 
 ## Phase 2 — Branch
 
-> ⚠️ Temporary testing convention (same as `/release`): all pushes go to `test/<version>` — never to `main` or `hotfix/*`.
-
 ```bash
 git checkout -b test/<version>
 ```
 
-`<version>` = current header version + mandatory patch bump (e.g. `test/2.5.2`).
+`<version>` = current header version + mandatory patch bump (e.g. `test/2.5.2`). Pushes only ever go to `test/<version>` — never to `main` or `hotfix/*`.
 
 ## Phase 3 — Developer: fix
 
@@ -41,26 +39,30 @@ Delegate to the **developer** agent:
 - Verify nothing outside the fix's scope was touched (diff should be minimal).
 - Maximum **1 fix cycle** — hotfixes that need more rework should go through `/release`.
 
-## Phase 5 — Patch release (main session)
+## Phase 5 — Test package (main session)
 
 Only after APPROVED:
 
-1. Version bump: **patch is mandatory** (X.Y.Z → X.Y.Z+1).
-2. Package ZIP (per `/package` procedure).
-3. Push branch + tag `vX.Y.Z+1`.
-4. GitHub Release on the target plugin repository (`wpconnect-co/<repository>`) with the ZIP attached.
+1. Version bump: **patch is mandatory** (X.Y.Z → X.Y.Z+1), updated in the plugin header.
+2. Package ZIP per the `/release` Phase 5 procedure (`wp dist-archive` preferred) and rename to `<main-plugin-file-without-.php>.<version>.zip`.
+3. Push the branch `test/<version>`. **No tag, no GitHub Release** — those belong to `/tested`.
 
-## Phase 6 — Documentation
+## Phase 6 — Linear updates (main session)
 
-Delegate to the **documentation** agent: changelog entry (`fix: …`), short release notes. Skip README updates unless the fix changes documented behavior.
+Same as `/release` Phases 7–8:
 
-## Phase 7 — Close the loop
+- Move the bug issue to **For Test**.
+- Create the QA issue `Update <Plugin Name> <Version>` → **For Test**, with the ZIP attached or referenced.
+- README issue handling if the fix changed readme content (rare for hotfixes).
 
-Comment + status "Done" on the Linear issue.
+## STOP — restrictions
 
-## Final report
+Same as `/release`: no tag, no GitHub Release, no merges, no deploys, no closing issues. Output the same "Status: Waiting for human QA" summary, ending with:
 
-Same table as `/release` (includes repository, branch, commit hash, ZIP location).
+```text
+Next step after human testing:
+/tested <plugin> <version>
+```
 
 ## Failure handling
 

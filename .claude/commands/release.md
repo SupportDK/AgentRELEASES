@@ -1,113 +1,168 @@
 ---
-description: Full automated release pipeline — brief, implement, review, version, ZIP, push, GitHub Release, docs, close issue
-argument-hint: WPC-123 | <plugin name> [version]
+description: Phase 1 of the release lifecycle — develop, package and prepare a version for human QA. STOPS before tagging/publishing; finalize with /tested after QA.
+argument-hint: <plugin> <version>   (e.g. wpforms-notion 1.4.1)
 ---
 
 # /release $ARGUMENTS
 
-Run the **fully automated** release pipeline. Invoking this command is the user's explicit approval for the entire pipeline, including push and publication — do not pause for intermediate confirmations.
+Prepare plugin version **$ARGUMENTS** for human QA testing. This command runs the full development cycle and **STOPS** once the test package is ready. It never finalizes the release — that is `/tested`, triggered manually by a human after QA.
 
-You (the main session) are the orchestrator. Agents do their phase; you do repo acquisition, branching, version bump, packaging, push, tagging, and the GitHub Release.
+You (the main session) are the orchestrator. Agents do their phase; you do repo acquisition, branching, packaging, push, and all Linear status moves.
 
-## Phase 0 — Target repository resolution
+## Phase 0 — Resolve target
 
-Parse `$ARGUMENTS` — it can be a Linear issue ID (`WPC-123`), a plugin display name (`Air WP Sync Pro+`), or a plugin name + explicit version (`GF Airtable 2.5.1`):
+Parse `$ARGUMENTS` as `<plugin> <version>`:
 
-1. **Resolve the repository** using the Repository Resolution Rules in the root `CLAUDE.md` (plugin display name → `wpconnect-co/<repository>`). If the argument is a Linear issue, read it first and resolve the plugin from the issue title/body. Never ask for the repository if it can be resolved from the mapping; if no match exists, ask the user.
-2. **Acquire the repo** per the Repository Acquisition Workflow: verify it exists, clone into `repos/<repository>/` if absent (`git@github.com:wpconnect-co/<repository>.git`), otherwise fetch and require a clean working tree. Checkout the default branch, up to date.
-3. **Explicit version:** if a version was passed in `$ARGUMENTS`, it overrides the computed bump in Phase 5.
-4. If no Linear issue was given, find the matching issue in Linear (by plugin name and recent activity) or ask the user which issue to release.
+1. **Resolve the repository** via the Repository Resolution Rules in the root `CLAUDE.md` (commercial name or repo slug → `wpconnect-co/<repository>`). Never ask if the mapping resolves it; ask only if there is no match.
+2. **Acquire the repo**: verify it exists, clone into `repos/<repository>/` if absent (`git@github.com:wpconnect-co/<repository>.git`), otherwise fetch + clean working tree. Checkout the default branch, up to date.
+3. `<version>` is the explicit target version for this release.
 
-All git work in Phases 2–5 happens inside `repos/<repository>/`.
+All git work below happens inside `repos/<repository>/`.
 
-## Phase 1 — Product Owner: brief
+## Phase 1 — Linear discovery + brief (product-owner)
 
 Delegate to the **product-owner** agent:
-- Read the resolved Linear issue; improve its description if unclear (never change status/priority/assignments).
-- Produce an Implementation Brief (Problem, User Story, Scope, Acceptance Criteria, Out of Scope, Risks).
+
+- Search Linear for the issues related to this plugin and version (plugin name in title/body/labels, version references, recent open issues for the plugin).
+- Improve issue descriptions if they lack clarity (never change status/priority/assignments — status moves are done by the main session later).
+- Produce a consolidated Implementation Brief covering the issues in scope for this version.
+
+Present the list of issues found and the brief; if no issues match, ask the user which Linear issues belong to this version.
 
 ## Phase 2 — Branch
-
-> ⚠️ **Temporary testing convention:** while the pipeline is being validated, ALL pushes go to `test/<version>` branches — never to `main` or `release/*`. `<version>` = the target version resolved in Phase 0/5 (e.g. `test/2.5.1`). If the version is not yet known at branch time, compute it first (current header version + expected bump).
-
-Inside `repos/<repository>/`:
 
 ```bash
 git checkout -b test/<version>
 ```
 
-## Phase 3 — Developer: implementation
+Example: `test/1.4.1`. Pushes only ever go to `test/<version>` — never to `main` or `release/*`.
 
-Delegate to the **developer** agent with the full Implementation Brief:
-- Implement the smallest safe change satisfying all acceptance criteria.
-- Self-review (WordPress best practices, escaping, hooks, ABSPATH, scope).
-- Local commits with the convention `feature|fix|improvement|compatibility: <user-visible change>`.
-- Return the Implementation Summary including a **Suggested Version Bump** (patch/minor/major). The developer must NOT push.
+## Phase 3 — Implementation (developer)
 
-## Phase 4 — Product Owner: review
+Delegate to the **developer** agent with the Implementation Brief:
 
-Delegate to the **product-owner** agent with the Implementation Summary and the diff:
-- Every acceptance criterion → PASS/FAIL; WordPress quality check; verdict APPROVED/REJECTED.
+- Implement the changes for all issues in scope.
+- Update the plugin's readme/changelog files **inside the plugin repo** if the changes are user-visible (this is part of the release deliverable, not workspace documentation).
+- Bump `Version:` in the plugin header to `<version>` (and any other version constants the plugin uses).
+- Self-review, then local commits with the convention `feature|fix|improvement|compatibility:`.
+- The developer must NOT push.
 
-**If REJECTED:** return findings to the **developer** to fix, then re-review. Maximum 2 fix cycles — after that, ABORT the release: stop, report open findings, leave the branch intact, do not push anything.
+## Phase 4 — Review (product-owner)
 
-## Phase 5 — Version, package, push, release (main session)
+Delegate to the **product-owner** agent with the Implementation Summary and the diff: every acceptance criterion → PASS/FAIL. REJECTED → back to the developer (max 2 cycles, then ABORT before any push and report).
 
-Only after APPROVED:
+## Phase 5 — Package (ZIP)
 
-1. **Version bump** — if an explicit version was passed in `$ARGUMENTS` (Phase 0), use it. Otherwise determine it from the current plugin header + suggested bump (feature → minor, fix → patch, breaking → major). Update:
-   - `Version:` in the plugin header
-   - Plugin changelog file if present
-   Commit: `improvement: bump version to X.Y.Z` (or fold into the release commit).
+Only after APPROVED. Inside `repos/<repository>/`:
 
-2. **Package** — apply the `/package` procedure: build `dist/<slug>.zip` (in this workspace's `dist/`, not inside the plugin repo) with a single top-level `<slug>/` folder, runtime files only. Verify with `unzip -l`.
-
-3. **Push + tag** (inside `repos/<repository>/`):
+1. **Preferred:** use WP-CLI dist-archive:
    ```bash
-   git push -u origin test/<version>
-   git tag v<X.Y.Z>
-   git push origin v<X.Y.Z>
+   wp dist-archive ./ --plugin-dirname=<plugin-dirname>
    ```
-   Temporary testing convention: push only to `test/<version>` — never to `main` or `release/*`.
+   **Fallback** (if `wp` or the dist-archive command is unavailable): apply the `/package` zip procedure (single top-level `<plugin-dirname>/` folder, runtime files only).
 
-4. **GitHub Release** — create a release on the **target plugin repository** (`wpconnect-co/<repository>`) via the GitHub MCP or `gh release create`, with:
-   - tag `v<X.Y.Z>`, title `<plugin-name> v<X.Y.Z>`
-   - the ZIP attached as an asset
-   - release notes from Phase 6 (create as draft first if notes are not ready, then finalize)
+2. **Rename to the naming convention** — main plugin file without `.php`, then the version:
+   ```text
+   <main-plugin-file-without-.php>.<version>.zip
+   ```
+   Example: main file `wpconnect-wpf-notion.php`, version `1.4.1` → `wpconnect-wpf-notion.1.4.1.zip`
 
-   Never create plugin releases on `SupportDK/AgentRELEASES` — that repo is the orchestration workspace, not a plugin repo.
+3. Move the ZIP to the workspace `dist/` directory and verify its contents (`unzip -l`).
 
-## Phase 6 — Documentation
+## Phase 6 — Commit + push
 
-Delegate to the **documentation** agent with the Implementation Summary, commits, and version:
-- Update `CHANGELOG.md` (root and/or plugin changelog).
-- Produce Release Notes (summary + grouped changes) — use them for the GitHub Release body.
-- Update README/docs if the change affects configuration or usage.
-- Prepare Notion page content; publish it via the Notion MCP from the main session.
+```bash
+git push -u origin test/<version>
+```
 
-## Phase 7 — Close the loop
+## Phase 7 — Linear updates (main session)
 
-- Comment on the Linear issue with: release URL, version, ZIP link.
-- Set the issue status to "Done" via the Linear MCP.
+1. Move every original issue in scope to status **For Test**.
+2. Create a new QA issue titled:
+   ```text
+   Update <Plugin Name> <Version>
+   ```
+   Example: `Update WPForms Notion 1.4.1`
+3. Move the QA issue to **For Test**.
+4. **Attach or reference the ZIP** in the QA issue:
+   - Preferred: upload as a Linear attachment (Linear MCP `prepare_attachment_upload` + `create_attachment`).
+   - Fallback if attachments are not possible: add to the issue description the local ZIP path, a storage link if uploaded anywhere, and a clear note that the tester must use **that ZIP** to test.
 
-## Final report
+## Phase 8 — README issue (if applicable)
 
-| Field | Value |
-|---|---|
-| Issue | WPC-… |
-| Repository | wpconnect-co/<repository> |
-| Branch | test/<version> |
-| Commit hash | <hash> |
-| Version | vX.Y.Z |
-| Commits | list |
-| Review | APPROVED (criteria X/X) |
-| ZIP | dist/<slug>.zip |
-| Release | URL |
-| Notion | page URL |
-| Linear | Done |
+If the implementation modified `README`/readme-related content of the plugin (an external automation reads the README Linear issue description to update documentation):
+
+1. Detect the README/readme.txt changes in the diff.
+2. Locate the Linear issue for the README of this version — or create one if missing.
+3. Append this block to its **description**:
+
+   ```markdown
+   ## README update for <Plugin Name> <Version>
+
+   ### Summary
+
+   <short summary>
+
+   ### Proposed README changes
+
+   <markdown content or changelog/readme section>
+
+   ### Source branch
+
+   test/<version>
+
+   ### Related release
+
+   <plugin> <version>
+   ```
+
+4. Move the README issue to **For Test**.
+
+## STOP — restrictions
+
+`/release` must NOT, under any circumstance:
+
+- Create or push a Git tag
+- Create a GitHub Release
+- Merge any Pull Request
+- Deploy to WordPress.org or production
+- Close Linear issues
+
+Those actions belong to `/tested`, after explicit human QA approval. Never chain `/tested` automatically.
+
+## Final output
+
+```text
+Status: Waiting for human QA
+
+Plugin:
+<Plugin Name>
+
+Version:
+<Version>
+
+Branch:
+test/<version>
+
+ZIP:
+<zip path or link>
+
+Original issues moved to:
+For Test
+
+QA issue:
+Update <Plugin Name> <Version>
+
+README issue:
+<issue key if applicable>
+
+Next step after human testing:
+/tested <plugin> <version>
+```
 
 ## Failure handling
 
-- Review failing after 2 fix cycles → ABORT before any push; nothing is published.
-- Push/tag/release errors → report verbatim, do not force-push, list exactly which steps completed so the user can resume manually.
-- If the GitHub Release fails after push, the branch and tag remain — report and let the user retry just the release step.
+- No matching Linear issues → ask the user which issues belong to this version before implementing anything.
+- Review failing after 2 cycles → ABORT before any push; nothing leaves the machine.
+- `wp dist-archive` unavailable → use the `/package` fallback and note it in the output.
+- Linear attachment unsupported → use the documented fallback in Phase 7.4.
