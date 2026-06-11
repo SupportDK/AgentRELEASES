@@ -6,9 +6,15 @@ Complete reference for each agent in the AGENT WPC system.
 
 ## How Agents Work
 
-Agents are Claude Code sub-agents defined by `CLAUDE.md` files in `.claude/agents/`. The main Claude Code session delegates to them automatically when you ask for it.
+Agents are Claude Code sub-agents defined as flat markdown files in `.claude/agents/<name>.md` (frontmatter: name, description, model, tools). The main session delegates to them automatically based on their `description`, or explicitly when you ask.
 
-**Invoke an agent from the project root:**
+**Preferred: workflow commands** (they orchestrate the agents end-to-end):
+
+```
+/release WPC-123    /feature WPC-123    /hotfix WPC-123    /issue WPC-123
+```
+
+**Direct invocation:**
 
 ```
 Use the product-owner agent to process Linear issue WPC-123.
@@ -16,21 +22,11 @@ Use the developer agent to implement this brief: [...]
 Use the documentation agent to document this summary: [...]
 ```
 
-**Focused session from the agent directory:**
-
-```bash
-cd agents/product-owner && claude
-cd agents/developer && claude
-cd agents/documentation && claude
-```
-
-The `.claude/agents/` files are the authoritative definitions (they include frontmatter with model and tools). The `agents/` files are lightweight aliases for directory-based invocation.
-
 ---
 
 ## Product Owner
 
-**Definition:** `.claude/agents/product-owner/CLAUDE.md`
+**Definition:** `.claude/agents/product-owner.md`
 **Model:** Sonnet
 **Tools:** Read, Grep, Glob, Bash
 **MCP:** Linear — `get_team`, `list_issues`, `get_issue`, `save_issue`
@@ -77,7 +73,7 @@ Decision: APPROVED / REJECTED
 
 ## Developer
 
-**Definition:** `.claude/agents/developer/CLAUDE.md`
+**Definition:** `.claude/agents/developer.md`
 **Model:** Sonnet
 **Tools:** Read, Grep, Glob, Bash, Edit, Write
 
@@ -125,7 +121,7 @@ Suggested Commit Message
 
 ## Documentation
 
-**Definition:** `.claude/agents/documentation/CLAUDE.md`
+**Definition:** `.claude/agents/documentation.md`
 **Model:** Sonnet
 **Tools:** Read, Grep, Glob, Write
 

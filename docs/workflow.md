@@ -1,6 +1,8 @@
 # Workflow Guide
 
-Step-by-step guide for the full development cycle: from Linear issue to committed code.
+Step-by-step guide for the **manual** development cycle: from Linear issue to committed code, with human validation at each handoff.
+
+> For the automated pipelines, use the workflow commands instead: `/release WPC-123` (full pipeline, automatic), `/feature WPC-123` (dev + PR), `/hotfix WPC-123` (fast bug release), `/issue WPC-123` (brief only). See [workflows/release-pipeline.md](workflows/release-pipeline.md).
 
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: agent-wpc-setup
-description: Use this skill when setting up, cloning, migrating, or onboarding the AGENT WPC Claude Code workspace on a new computer. It helps configure MCP servers, verify project structure, and guide authentication for Linear, Notion, GitHub, and WordPress development tools.
+description: Use this skill when setting up, cloning, migrating, or onboarding the AGENT WPC Claude Code workspace on a new computer. It helps verify project structure, configure MCP authentication for Linear, Notion, and GitHub, and validate agents, skills, and commands availability.
 ---
 
 # AGENT WPC Setup Skill
@@ -18,112 +18,109 @@ Use this skill when the user says things like:
 - "Why are my MCPs missing?"
 - "Onboard a new teammate"
 
+## How portability works
+
+Everything needed is **versioned in the repository**:
+
+| Component | Location | Loaded automatically? |
+|---|---|---|
+| MCP servers | `.mcp.json` (project root) | Yes — when the user trusts the project |
+| Agents | `.claude/agents/*.md` | Yes |
+| Skills | `.claude/skills/*/SKILL.md` | Yes |
+| Commands | `.claude/commands/*.md` | Yes |
+| Settings | `.claude/settings.json` | Yes (`enableAllProjectMcpServers: true`) |
+
+The ONLY per-machine steps are: trusting the project, OAuth authentication, and SSH keys.
+
 ## Setup workflow
 
 ### 1. Verify project structure
 
 Confirm the user is inside the AGENT WPC repository.
 
-Expected folders:
+Expected items:
 
 ```text
-.claude/
-agents/
+.mcp.json
+.claude/agents/product-owner.md
+.claude/agents/developer.md
+.claude/agents/documentation.md
+.claude/commands/
+.claude/skills/
 docs/
 scripts/
-_wp-agent-skills/
-_wp-devdocs-mcp/
 ```
 
-### 2. Verify setup script
+### 2. Verify MCP loading
 
-Check whether the following file exists:
+The four MCPs (linear, notion, github, wp-devdocs) are declared in `.mcp.json` and load automatically when Claude Code starts in the project directory.
 
-```bash
-scripts/setup-mcp.sh
-```
-
-If missing, instruct the user to restore the repository or pull the latest version.
-
-### 3. Configure MCP servers
-
-Ask the user to execute:
-
-```bash
-./scripts/setup-mcp.sh
-```
-
-This script should configure the required MCP servers:
-
-- Linear
-- Notion
-- GitHub
-
-### 4. Open Claude Code
-
-Ask the user to start Claude Code:
-
-```bash
-claude
-```
-
-### 5. Authenticate MCP servers
-
-Inside Claude Code, ask the user to run:
-
-```text
-/mcp
-```
-
-Guide the user through the authentication process for:
-
-- Linear
-- Notion
-- GitHub
-
-### 6. Validate the installation
-
-Verify MCP availability using:
+Validate with:
 
 ```bash
 claude mcp list
 ```
 
-Then inspect each MCP:
+If a server is missing, the user likely declined the project-MCP prompt — restart Claude Code in the project directory and accept, or check `.claude/settings.json` contains `"enableAllProjectMcpServers": true`.
 
-```bash
-claude mcp get linear
-claude mcp get notion
-claude mcp get github
-```
-
-Expected result:
-
-```text
-Status: Connected
-```
-
-for all configured MCPs.
-
-## Troubleshooting
-
-### MCP missing after cloning
-
-Cause:
-
-The project was cloned successfully, but MCP registrations are stored locally by Claude Code and are not automatically transferred between computers.
-
-Resolution:
+Fallback (manual registration):
 
 ```bash
 ./scripts/setup-mcp.sh
 ```
 
-Then authenticate again through:
+### 3. Authenticate MCP servers
+
+Inside Claude Code, run:
 
 ```text
 /mcp
 ```
+
+Guide the user through OAuth authentication for:
+
+- Linear
+- Notion
+- GitHub
+
+`wp-devdocs` runs locally via npx and needs no authentication — only Node.js >= 20.
+
+### 4. Validate the installation
+
+```bash
+claude mcp list
+claude mcp get linear
+claude mcp get notion
+claude mcp get github
+```
+
+Expected: `Status: Connected` for all HTTP MCPs.
+
+Then run the project verification script:
+
+```bash
+./scripts/verify-setup.sh
+```
+
+Or simply run `/setup` inside Claude Code.
+
+### 5. (Optional) Index WordPress hooks for wp-devdocs
+
+First time only, to populate the local hooks database:
+
+```bash
+npx wp-devdocs-mcp quick-add-all
+```
+
+Takes 5–10 minutes, ~500MB local SQLite database.
+
+## Troubleshooting
+
+### MCP missing after cloning
+
+Cause: the user declined the project trust prompt, or `enableAllProjectMcpServers` is missing.
+
+Resolution: restart `claude` inside the project and accept the prompt. Fallback: `./scripts/setup-mcp.sh` then `/mcp`.
 
 ### Authentication failures
 
@@ -164,44 +161,17 @@ Do not:
 - Store GitHub Personal Access Tokens inside the repository.
 - Store Linear API keys inside the repository.
 - Store Notion secrets inside the repository.
-- Commit `.env` files containing secrets.
+- Commit `.env` files or `.claude/settings.local.json`.
 
 Authentication must remain local to each machine.
-
-## Related components
-
-### Skills
-
-```text
-_wp-agent-skills/
-```
-
-Contains WordPress-specific skills and workflows.
-
-### MCP
-
-```text
-_wp-devdocs-mcp/
-```
-
-Provides WordPress documentation search and retrieval capabilities.
-
-### Agents
-
-```text
-agents/product-owner/
-agents/developer/
-```
-
-Contain the AGENT WPC workflow definitions.
 
 ## Goal
 
 The objective of this skill is to reduce onboarding time for a new computer to:
 
 1. Clone repository.
-2. Run setup script.
-3. Authenticate MCPs.
-4. Start working.
+2. Open `claude` and trust the project (MCPs load from `.mcp.json`).
+3. Authenticate MCPs via `/mcp`.
+4. Run `/setup` to verify.
 
 Target setup time: less than 5 minutes.
