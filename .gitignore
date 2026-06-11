@@ -1,5 +1,6 @@
-# Claude Code local configuration
-.claude/
+# Claude Code — only machine-local files (agents, skills, commands ARE versioned)
+.claude/settings.local.json
+.claude/*.local.*
 
 # macOS
 .DS_Store

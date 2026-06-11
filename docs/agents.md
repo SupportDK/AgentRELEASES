@@ -1,73 +1,168 @@
 # Agent Reference
 
-## How to invoke an agent
+Complete reference for each agent in the AGENT WPC system.
 
-Each agent is a Claude Code sub-agent defined by a `CLAUDE.md` file in its subdirectory.
+---
 
-To invoke an agent, open Claude Code with the agent's directory as the working context, or reference the agent by name in a multi-agent workflow.
+## How Agents Work
+
+Agents are Claude Code sub-agents defined by `CLAUDE.md` files in `.claude/agents/`. The main Claude Code session delegates to them automatically when you ask for it.
+
+**Invoke an agent from the project root:**
+
+```
+Use the product-owner agent to process Linear issue WPC-123.
+Use the developer agent to implement this brief: [...]
+Use the documentation agent to document this summary: [...]
+```
+
+**Focused session from the agent directory:**
+
+```bash
+cd agents/product-owner && claude
+cd agents/developer && claude
+cd agents/documentation && claude
+```
+
+The `.claude/agents/` files are the authoritative definitions (they include frontmatter with model and tools). The `agents/` files are lightweight aliases for directory-based invocation.
 
 ---
 
 ## Product Owner
 
-**Directory:** `agents/product-owner/`
+**Definition:** `.claude/agents/product-owner/CLAUDE.md`
+**Model:** Sonnet
+**Tools:** Read, Grep, Glob, Bash
+**MCP:** Linear — `get_team`, `list_issues`, `get_issue`, `save_issue`
 
-**Trigger:** When a new Linear issue needs to be turned into a development task, or when a delivered implementation needs review.
+**Trigger:** A new Linear issue is ready to become a development task, or a finished implementation needs to be reviewed.
 
 **Inputs:**
-- Linear issue URL or ID
-- Context about the plugin or feature area
+- Linear issue ID or URL
+- Context about the plugin or feature area (optional)
 
 **Outputs:**
-- Implementation Brief (Problem, User Story, Scope, Acceptance Criteria, Out of Scope, Risks)
-- Implementation Review (PASS/FAIL per criterion, APPROVED/REJECTED)
-- Documentation Request (handed to Documentation agent)
 
-**Does not:** write code, modify files, invent features.
+| Output | When |
+|--------|------|
+| Implementation Brief | After reading the Linear issue |
+| Implementation Review | After Developer delivers the summary |
+| Documentation Request | After approving the implementation |
+
+**Rules:**
+- Does not write code
+- Does not modify repository files
+- Does not invent features beyond the issue scope
+- Can update Linear issue descriptions to improve clarity (never changes status, priority, or assignments)
+- Uses MoSCoW prioritization when scoping
+
+**Implementation Brief structure:**
+```
+Problem Statement
+User Story
+Scope
+Acceptance Criteria
+Out of Scope
+Risks
+```
+
+**Implementation Review structure:**
+```
+Criterion 1 → PASS / FAIL
+Criterion 2 → PASS / FAIL
+Decision: APPROVED / REJECTED
+```
 
 ---
 
 ## Developer
 
-**Directory:** `agents/developer/`
+**Definition:** `.claude/agents/developer/CLAUDE.md`
+**Model:** Sonnet
+**Tools:** Read, Grep, Glob, Bash, Edit, Write
 
-**Trigger:** When the Product Owner delivers an Implementation Brief.
+**Trigger:** Product Owner delivers an Implementation Brief.
 
 **Inputs:**
-- Implementation Brief from the Product Owner
-- Repository context
+- Implementation Brief (from Product Owner)
+- Repository context (explored automatically)
 
 **Outputs:**
-- Implemented code (committed to the repository)
-- Implementation Summary (files changed, what was done, acceptance criteria check, caveats, suggested commit message)
 
-**Does not:** define requirements, write documentation, skip acceptance criteria.
+| Output | When |
+|--------|------|
+| Implementation Summary | After implementing and self-reviewing |
+| ZIP package (`dist/<slug>.zip`) | For every WordPress plugin task |
+| Local git commit | Only after explicit APPROVED signal from the user |
 
-**WordPress rules:**
-- Use `add_action` / `add_filter` for hooks
-- Escape all output (`esc_html`, `esc_attr`, `esc_url`)
-- Include `ABSPATH` guard in every plugin file
-- Follow WordPress naming conventions
+**Rules:**
+- Inspects the repo before making any change
+- Implements the smallest safe change that satisfies all acceptance criteria
+- Performs a mandatory self-review before presenting results
+- Creates a testable ZIP and stops — does not commit until approved
+- Never pushes without explicit instruction
+- Never modifies documentation (that's the Documentation agent's job)
+- Sandbox protection: only creates or modifies files within the current sandbox directory
+
+**WordPress standards the Developer follows:**
+- `add_action` / `add_filter` — no custom bootstrapping
+- Escape all output: `esc_html`, `esc_attr`, `esc_url`
+- `ABSPATH` guard in every plugin file
+- WordPress naming conventions for hooks and function prefixes
+- Minimal procedural code unless a class is clearly warranted
+
+**Implementation Summary structure:**
+```
+Files Changed
+Changes Made
+Acceptance Criteria Check
+Edge Cases / Caveats
+ZIP Package (path, structure, testing instructions)
+Suggested Commit Message
+```
 
 ---
 
 ## Documentation
 
-**Directory:** `agents/documentation/`
+**Definition:** `.claude/agents/documentation/CLAUDE.md`
+**Model:** Sonnet
+**Tools:** Read, Grep, Glob, Write
 
-**Trigger:** When the Product Owner sends a Documentation Request after an approved implementation.
+**Trigger:** Product Owner sends a Documentation Request after an approved implementation.
 
 **Inputs:**
-- Implementation Summary from the Developer
+- Implementation Summary (from Developer)
 - Commit message
-- Repository context
+- Repository context (explored automatically)
 
 **Outputs (only for user-visible changes):**
-- Feature Documentation (what changed, why it matters, how it works)
-- Changelog entry
-- README / docs update (if the feature affects configuration or usage)
 
-**Does not:** write code, document internal refactors or tests, invent features.
+| Output | When |
+|--------|------|
+| Feature Documentation | When the change is visible to users |
+| Changelog Entry | For every documented change |
+| README / docs update | When the change affects configuration or usage |
+
+**Changes that are documented:**
+- New features
+- User-visible improvements
+- Bug fixes that affect users
+- Compatibility updates
+
+**Changes that are NOT documented:**
+- Internal refactors
+- Code cleanup
+- Tests
+- Formatting changes
+- Internal bug fixes invisible to users
+
+**Output structure:**
+```
+Feature Documentation (what changed, why it matters, how it works)
+Changelog Entry
+README / Docs Update (if needed)
+```
 
 ---
 
@@ -76,10 +171,18 @@ To invoke an agent, open Claude Code with the agent's directory as the working c
 All commits in this repository follow this prefix convention:
 
 | Prefix | Use |
-|---|---|
+|--------|-----|
 | `feature:` | New functionality |
 | `fix:` | Bug fixes |
 | `improvement:` | Enhancements to existing features |
 | `compatibility:` | WordPress, PHP, WooCommerce, or external compatibility updates |
 
 Messages describe the **user-visible change**, not internal implementation details.
+
+**Examples:**
+```
+feature: add default catalog visibility option
+fix: resolve Airtable mapping bug
+improvement: optimize API queries
+compatibility: WordPress 6.9
+```
