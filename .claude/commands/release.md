@@ -29,6 +29,13 @@ Delegate to the **product-owner** agent:
 
 Present the list of issues found and the brief; if no issues match, ask the user which Linear issues belong to this version.
 
+## Phase 1.5 — Mark work started (main session)
+
+Before development begins, move **every issue in scope** to status **In Progress**:
+
+- Tool: `mcp__linear__save_issue` with `id: <issue identifier>` and `state: "In Progress"` (if the team uses a different name, resolve it first with `mcp__linear__list_issue_statuses(team)` and use the team's "started"-type state).
+- Record each transition (issue, from → to, timestamp) — it goes into the release log in Phase 9.
+
 ## Phase 2 — Branch
 
 ```bash
@@ -77,16 +84,47 @@ git push -u origin test/<version>
 
 ## Phase 7 — Linear updates (main session)
 
-1. Move every original issue in scope to status **For Test**.
-2. Create a new QA issue titled:
-   ```text
-   Update <Plugin Name> <Version>
+Use these exact Linear MCP tools — all of these capabilities are confirmed available (create issues, update issues/status, comments, file attachments):
+
+1. **Move every original issue in scope to For Test**: `mcp__linear__save_issue` with `id` + `state: "For Test"` (resolve the exact state name via `mcp__linear__list_issue_statuses(team)` if needed). Record each transition.
+
+2. **Create the QA issue** — this step is MANDATORY and must never be silently skipped:
+   - Tool: `mcp__linear__save_issue` with NO `id`, `title: "Update <Plugin Name> <Version>"` (e.g. `Update WPForms Notion 1.4.1`), the `team` of the original issues, and the description from step 4.
+   - **Verify creation**: the tool response must return the new issue identifier. Fetch it back with `mcp__linear__get_issue` and record the identifier. If creation fails (error, permission denial), STOP and report the exact error in the final output — do not continue as if it succeeded.
+
+3. **Move the QA issue to For Test** (same `save_issue` + `state` call, or set `state` at creation).
+
+4. **QA issue description — the Testing Package block is mandatory**, with or without attachment support:
+
+   ```markdown
+   ## Testing Package
+
+   ZIP:
+   <zip filename>
+
+   Path:
+   <local path>
+
+   Download:
+   <link if available>
+
+   Plugin:
+   <plugin>
+
+   Version:
+   <version>
+
+   Branch:
+   test/<version>
    ```
-   Example: `Update WPForms Notion 1.4.1`
-3. Move the QA issue to **For Test**.
-4. **Attach or reference the ZIP** in the QA issue:
-   - Preferred: upload as a Linear attachment (Linear MCP `prepare_attachment_upload` + `create_attachment`).
-   - Fallback if attachments are not possible: add to the issue description the local ZIP path, a storage link if uploaded anywhere, and a clear note that the tester must use **that ZIP** to test.
+
+   Plus a clear note that the tester must use **that ZIP** to test.
+
+5. **Attach the ZIP file** to the QA issue (confirmed supported):
+   1. `mcp__linear__prepare_attachment_upload` (issue, filename, `contentType: "application/zip"`, exact size in bytes)
+   2. `curl -X PUT --data-binary @dist/<zip>` to the returned `uploadRequest.url` with ALL returned headers verbatim (within 60s)
+   3. `mcp__linear__create_attachment_from_upload` with the returned `assetUrl`
+   If any upload step fails, fall back to the Testing Package block alone (already present per step 4) and report the upload failure in the final output.
 
 ## Phase 8 — README issue (if applicable)
 
@@ -97,26 +135,53 @@ If the implementation modified `README`/readme-related content of the plugin (an
 3. Append this block to its **description**:
 
    ```markdown
-   ## README update for <Plugin Name> <Version>
-
-   ### Summary
-
-   <short summary>
-
-   ### Proposed README changes
 
    <markdown content or changelog/readme section>
 
-   ### Source branch
-
-   test/<version>
-
-   ### Related release
-
-   <plugin> <version>
    ```
 
 4. Move the README issue to **For Test**.
+
+(Full README block format: see the documentation agent's "README Issue Content" section.)
+
+## Phase 9 — Release log (main session)
+
+Create/update the release log files in the workspace under `releases/<repository>/<version>/` and commit them to the workspace repo:
+
+**`release-log.md`**:
+
+```markdown
+# Release log — <Plugin Name> <Version>
+
+Repository: wpconnect-co/<repository>
+Branch: test/<version>
+Commit: <hash>
+Date: <ISO date>
+
+## QA Tracking
+
+QA Issue:
+Update <Plugin Name> <Version>
+
+Linear ID:
+<identifier from Phase 7.2>
+
+Status:
+For Test
+
+ZIP:
+<zip filename>
+
+## Workflow Status History
+
+| Issue | Transition | Timestamp |
+|---|---|---|
+| WPC-… | Open → In Progress | <ts> |
+| WPC-… | In Progress → For Test | <ts> |
+| QA issue | created → For Test | <ts> |
+```
+
+**`linear-issues.md`**: one section per issue in scope (identifier, title, link) with its own `## Workflow Status History` (Open → In Progress → For Test → Complete) and timestamps when available. `/tested` appends the terminal transitions later.
 
 ## STOP — restrictions
 
@@ -151,18 +216,24 @@ Original issues moved to:
 For Test
 
 QA issue:
-Update <Plugin Name> <Version>
+Update <Plugin Name> <Version>  (<Linear identifier> — verified created)
 
 README issue:
 <issue key if applicable>
 
+Release log:
+releases/<repository>/<version>/release-log.md
+
 Next step after human testing:
 /tested <plugin> <version>
 ```
+
+If the QA issue could not be created or the ZIP upload failed, the output MUST say so explicitly with the error — never report success for a skipped step.
 
 ## Failure handling
 
 - No matching Linear issues → ask the user which issues belong to this version before implementing anything.
 - Review failing after 2 cycles → ABORT before any push; nothing leaves the machine.
 - `wp dist-archive` unavailable → use the `/package` fallback and note it in the output.
-- Linear attachment unsupported → use the documented fallback in Phase 7.4.
+- ZIP attachment upload fails → the Testing Package block (Phase 7.4) already covers the tester; report the upload error.
+- QA issue creation fails → STOP, report the exact MCP error. Never silently skip it.

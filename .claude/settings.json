@@ -11,7 +11,18 @@
       "Bash(git checkout:*)",
       "Bash(git remote -v)",
       "Bash(claude mcp list:*)",
-      "Bash(./scripts/verify-setup.sh)"
+      "Bash(./scripts/verify-setup.sh)",
+      "mcp__linear__list_teams",
+      "mcp__linear__list_issues",
+      "mcp__linear__get_issue",
+      "mcp__linear__list_issue_statuses",
+      "mcp__linear__get_issue_status",
+      "mcp__linear__save_issue",
+      "mcp__linear__save_comment",
+      "mcp__linear__prepare_attachment_upload",
+      "mcp__linear__create_attachment_from_upload",
+      "mcp__linear__get_attachment",
+      "mcp__linear__list_comments"
     ]
   },
   "env": {

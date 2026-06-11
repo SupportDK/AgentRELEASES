@@ -49,11 +49,24 @@ Create a GitHub Release on the **plugin repository** (`wpconnect-co/<repository>
 
 ## Phase 4 — Close Linear issues (main session)
 
-Move to **Closed**:
+**Detect the team's terminal state — do not hardcode it.** Run `mcp__linear__list_issue_statuses(team)` and pick the state of type `completed` (its name may be "Complete", "Done", "Closed"… depending on the team's workflow). If several completed-type states exist, prefer the one named like Complete/Done and tell the user which one was used.
+
+Move to that terminal state via `mcp__linear__save_issue` (`id` + `state`):
 
 1. Every original issue of this release
 2. The QA issue `Update <Plugin Name> <Version>`
 3. The README issue, if applicable
+
+Record each transition with timestamp.
+
+## Phase 5 — Update release log (main session)
+
+In `releases/<repository>/<version>/`:
+
+- `release-log.md`: update `Status:` in **QA Tracking** to the terminal state, append the final transitions (For Test → <terminal state>) with timestamps to **Workflow Status History**, and add the tag (`v<version>`) and release URL if created.
+- `linear-issues.md`: append the terminal transition to each issue's status history.
+
+Commit both files to the workspace repo.
 
 ## Final output
 
@@ -72,6 +85,9 @@ test/<version>
 GitHub Release:
 <URL or "not created (not part of this plugin's workflow)">
 
+Terminal state used:
+<Complete | Done | Closed — as detected in the team's workflow>
+
 Issues closed:
 <list of issue keys>
 
@@ -80,6 +96,9 @@ Update <Plugin Name> <Version>
 
 README issue closed:
 <issue key or n/a>
+
+Release log updated:
+releases/<repository>/<version>/release-log.md
 ```
 
 ## Restrictions

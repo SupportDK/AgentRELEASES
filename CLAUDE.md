@@ -5,12 +5,18 @@ Multi-agent WordPress development workspace. Primary interface: `/release`, `/te
 ## Release lifecycle (two phases, human QA gate in between)
 
 ```
-/release <plugin> <version>   → develop, push test/<version>, ZIP, Linear issues → For Test, QA issue created. STOPS.
+/release <plugin> <version>   → issues → In Progress → develop → push test/<version> → ZIP →
+                                issues → For Test → QA issue created (verified) → release log. STOPS.
         ↓  (human tests the ZIP)
-/tested <plugin> <version>    → tag v<version>, push tag, issues → Closed. Manually triggered only.
+/tested <plugin> <version>    → tag v<version>, push tag, issues → terminal state (detected,
+                                not hardcoded), release log updated. Manually triggered only.
 ```
 
 `/release` (and `/hotfix`) must NEVER: create/push tags, create GitHub Releases, merge PRs, deploy, or close Linear issues. Those belong exclusively to `/tested`, which is never chained automatically — it is the human QA approval gate.
+
+**Linear status lifecycle:** Open → **In Progress** (when /release starts) → **For Test** (when the QA package is ready) → **terminal state** (when /tested succeeds; detect the team's completed-type state via `list_issue_statuses` — may be Complete/Done/Closed). Status moves are always main-session actions via `mcp__linear__save_issue`; the QA issue creation must be verified (fetch back the identifier) and never silently skipped.
+
+**Release logs:** every release writes `releases/<repository>/<version>/release-log.md` (QA Tracking: QA issue + Linear ID + status + ZIP) and `linear-issues.md` (per-issue Workflow Status History with timestamps), committed to this workspace.
 
 ## Repository Resolution Rules
 
