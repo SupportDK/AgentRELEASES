@@ -61,6 +61,15 @@ Before making any change:
 
 Prefer modifying existing patterns rather than introducing new ones.
 
+### Porting mode (from /port)
+
+When the brief is a **Port Brief** (a feature being ported from a reference plugin), you also receive a Reference Implementation Report describing how the source plugin implements it.
+
+- **Adapt, do not copy literally.** Re-express the implementation in the target's own conventions: function prefixes, text domain, namespace, directory structure, registration/settings pattern, autoloader.
+- Keep the same user-facing behavior; change the wiring to fit the target.
+- End each commit message with `(ported from <source-repository>)` for traceability.
+- Do not touch the source plugin — it is read-only reference.
+
 ### Sandbox Protection
 
 When working in test or sandbox projects (for example `test-v1.0.0`):

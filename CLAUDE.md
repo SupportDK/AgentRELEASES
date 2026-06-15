@@ -1,6 +1,6 @@
 # AGENT WPC — Workspace Rules
 
-Multi-agent WordPress development workspace. Primary interface: `/release`, `/tested`, `/feature`, `/hotfix`, `/issue`, `/package`, `/setup`.
+Multi-agent WordPress development workspace. Primary interface: `/release`, `/tested`, `/feature`, `/hotfix`, `/issue`, `/stories`, `/port`, `/package`, `/setup`.
 
 ## Release lifecycle (two phases, human QA gate in between)
 
@@ -73,6 +73,17 @@ When a workflow command targets a plugin repository:
 9. Always report: repository used, branch used, commit hash, ZIP location.
 
 `repos/` is git-ignored — cloned plugin repositories are never committed to this workspace.
+
+## Cross-plugin porting (`/port`)
+
+To reuse a feature already implemented in another plugin, `/port <feature> from <source> to <target>` reads the source and adapts the implementation into the target:
+
+- Both plugins are cloned under `repos/`. The **source is read-only** (no branch, never modified); the **target** gets a `port/<slug>` working branch.
+- The `code-analyst` agent (read-only) produces a Reference Implementation Report; the `developer` adapts it to the target's conventions (prefixes, text domain, namespace, structure) — **adapt, never copy literally**.
+- Traceability: port commits end with `(ported from <source-repository>)`; a report is written to `port-logs/<target-slug>/<slug>/port-report.md`.
+- `/port` **never publishes** — no push, tag, release, ZIP or Linear changes. Publishing is done afterwards via `/release` or `/feature`.
+
+`port-logs/` is versioned in this workspace (like `release-logs/`); `repos/` stays git-ignored.
 
 ## Conventions
 

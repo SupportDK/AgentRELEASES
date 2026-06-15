@@ -64,13 +64,13 @@ echo "## Structure (required)"
 
 echo ""
 echo "## Agents (required)"
-for agent in product-owner developer documentation; do
+for agent in product-owner developer documentation code-analyst; do
   [ -f ".claude/agents/${agent}.md" ]; check "agent: ${agent}" $?
 done
 
 echo ""
 echo "## Workflow commands (required)"
-for cmd in setup issue stories feature hotfix release tested package; do
+for cmd in setup issue stories feature hotfix release tested port package; do
   [ -f ".claude/commands/${cmd}.md" ]; check "command: /${cmd}" $?
 done
 

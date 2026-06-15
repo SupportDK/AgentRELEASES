@@ -58,6 +58,8 @@ The QA gate is structural: `/release` never tags, publishes, merges, deploys or 
 | `/hotfix WPC-123` | Fast-track Phase 1 for bugs: minimal brief → fix → patch bump → stops for QA |
 | `/feature WPC-123` | Development only: brief → implement → review → push + PR |
 | `/issue WPC-123` | Brief only — refine requirements, no implementation |
+| `/stories <plugin> <version>` | PO refines the version's Linear issues into full user stories |
+| `/port <feature> from <src> to <dst>` | Port a feature from a reference plugin into another; feeds `/release` or `/feature` |
 | `/package <plugin>` | Distributable ZIP (`wp dist-archive`, `<main-file>.<version>.zip`) in `dist/` |
 | `/setup` | Verify the workspace on this machine |
 
@@ -76,6 +78,10 @@ Implements against the Implementation Brief. Smallest safe change, WordPress bes
 ### documentation (`.claude/agents/documentation.md`)
 
 Documents reality — never assumptions. Only user-visible changes. Produces Feature Documentation, Changelog Entries, Release Notes, README updates, and Notion page content. Tools: Read, Grep, Glob, Write.
+
+### code-analyst (`.claude/agents/code-analyst.md`)
+
+Read-only analyst used by `/port`. Reads a reference (source) plugin and produces a Reference Implementation Report (entry points, files & symbols, data flow, dependencies, integration points, porting risks) so the developer can adapt the feature into a target plugin. Never modifies code. Tools: Read, Grep, Glob, Bash.
 
 ---
 
