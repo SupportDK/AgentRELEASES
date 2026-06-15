@@ -24,19 +24,19 @@ Then resolve the repository via the root `CLAUDE.md` mapping and open `repos/<re
 
 All must pass before finalizing — if any fails, stop and report:
 
-1. The branch `test/<version>` exists (locally and on `origin`):
+1. The branch `release/<version>` exists (locally and on `origin`):
    ```bash
-   git fetch origin && git rev-parse --verify origin/test/<version>
+   git fetch origin && git rev-parse --verify origin/release/<version>
    ```
 2. The ZIP `<main-plugin-file>.<version>.zip` exists in `dist/` or was referenced in the QA issue.
 3. The related Linear issues (originals, QA issue `Update <Plugin Name> <Version>`, README issue if any) are in **For Test**.
 
 ## Phase 2 — Tag
 
-On the head of `test/<version>`:
+On the head of `release/<version>`:
 
 ```bash
-git checkout test/<version> && git pull origin test/<version>
+git checkout release/<version> && git pull origin release/<version>
 git tag v<version>
 git push origin v<version>
 ```
@@ -80,7 +80,7 @@ Version:
 <Version>  (tag v<version> pushed)
 
 Branch:
-test/<version>
+release/<version>
 
 GitHub Release:
 <URL or "not created (not part of this plugin's workflow)">

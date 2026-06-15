@@ -11,7 +11,7 @@ Human-readable narrative of the two-phase release lifecycle. The executable defi
     ↓
 Development
     ↓
-Branch pushed to test/<version>
+Branch pushed to release/<version>
     ↓
 ZIP generated
     ↓
@@ -41,11 +41,11 @@ Prepares a version for testing. Example: `/release wpforms-notion 1.4.1`
 | Resolve | main session | Plugin → `wpconnect-co/<repo>` (CLAUDE.md mapping), clone into `repos/` |
 | Discover | product-owner | Finds the Linear issues for this plugin+version, improves them, writes the brief |
 | Start | main session | Issues in scope → **In Progress** (work has visibly started) |
-| Branch | main session | `test/<version>` (e.g. `test/1.4.1`) |
+| Branch | main session | `release/<version>` (e.g. `release/1.4.1`) |
 | Implement | developer | Changes + plugin readme/changelog + version bump in header, local commits |
 | Review | product-owner | Acceptance criteria PASS/FAIL (max 2 fix cycles, then abort) |
 | Package | main session | `wp dist-archive` → renamed `<main-file>.<version>.zip` (e.g. `wpconnect-wpf-notion.1.4.1.zip`) → `dist/` |
-| Push | main session | `test/<version>` to the plugin repo |
+| Push | main session | `release/<version>` to the plugin repo |
 | Linear | main session | Original issues → **For Test** · creates QA issue `Update <Plugin Name> <Version>` **in the same Linear project as the originals** (creation and project assignment **verified** — identifier fetched back, never silently skipped or left unassigned) → **For Test**, ZIP attached via Linear upload + mandatory Testing Package block in the description |
 | README issue | main session + documentation | If README content changed: append the standardized block to the README issue description (an external automation consumes it) → **For Test** |
 | Release log | main session | Writes `release-logs/<plugin-slug>/<version>/release-log.md` (QA Tracking incl. project; links po-stories.md if present) + `linear-issues.md` (per-issue status history with timestamps), committed to the workspace |
@@ -63,8 +63,8 @@ Finalizes after explicit human confirmation. Example: `/tested wpforms-notion 1.
 | Step | What happens |
 |---|---|
 | Confirm | Requires explicit confirmation that the ZIP was tested and works — asks if missing |
-| Verify | `test/<version>` exists on origin · ZIP exists/referenced · issues are in For Test |
-| Tag | `v<version>` on the head of `test/<version>`, pushed |
+| Verify | `release/<version>` exists on origin · ZIP exists/referenced · issues are in For Test |
+| Tag | `v<version>` on the head of `release/<version>`, pushed |
 | Release | GitHub Release on the plugin repo only if part of that plugin's documented workflow |
 | Close | Original issues + QA issue + README issue → the team's **terminal state** (detected via `list_issue_statuses`, type `completed` — may be Complete/Done/Closed; never hardcoded) |
 | Log | Release log updated: terminal transitions appended, tag and release URL recorded |
@@ -94,4 +94,4 @@ Before `/release`, the PO can refine the version's Linear issues into complete u
 
 - **The command orchestrates; agents work.** Branching, packaging, push, tags, Linear status moves are main-session actions. The developer never pushes; the PO never moves issue statuses.
 - **The QA gate is structural.** The dangerous actions (tag, release, close) live in a separate command that requires explicit human confirmation.
-- **Pushes only to `test/<version>`** — `main`, `release/*`, `feature/*` of the plugin repos are never touched by the workflows.
+- **Pushes only to `release/<version>`** — `main` and the plugin repos' default branch are never touched directly by the workflows; finalization (tag) happens in `/tested`.

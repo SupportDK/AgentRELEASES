@@ -40,10 +40,10 @@ Before development begins, move **every issue in scope** to status **In Progress
 ## Phase 2 — Branch
 
 ```bash
-git checkout -b test/<version>
+git checkout -b release/<version>
 ```
 
-Example: `test/1.4.1`. Pushes only ever go to `test/<version>` — never to `main` or `release/*`.
+Example: `release/1.4.1`. Pushes only ever go to `release/<version>` — never to `main`.
 
 ## Phase 3 — Implementation (developer)
 
@@ -80,7 +80,7 @@ Only after APPROVED. Inside `repos/<repository>/`:
 ## Phase 6 — Commit + push
 
 ```bash
-git push -u origin test/<version>
+git push -u origin release/<version>
 ```
 
 ## Phase 7 — Linear updates (main session)
@@ -118,7 +118,7 @@ Use these exact Linear MCP tools — all of these capabilities are confirmed ava
    <version>
 
    Branch:
-   test/<version>
+   release/<version>
    ```
 
    Plus a clear note that the tester must use **that ZIP** to test.
@@ -135,7 +135,7 @@ If the implementation modified `README`/readme-related content of the plugin (an
 
 1. Detect the README/readme.txt changes in the diff.
 2. Locate the Linear issue for the README of this version — or create one if missing.
-3. Append this block to its **description**:
+3. Append the changelog to its **description**:
 
    ```markdown
 
@@ -157,7 +157,7 @@ Create/update the release log files in the workspace under `release-logs/<plugin
 # Release log — <Plugin Name> <Version>
 
 Repository: wpconnect-co/<repository>
-Branch: test/<version>
+Branch: release/<version>
 Commit: <hash>
 Date: <ISO date>
 
@@ -217,7 +217,7 @@ Version:
 <Version>
 
 Branch:
-test/<version>
+release/<version>
 
 ZIP:
 <zip path or link>

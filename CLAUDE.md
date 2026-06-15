@@ -5,7 +5,7 @@ Multi-agent WordPress development workspace. Primary interface: `/release`, `/te
 ## Release lifecycle (two phases, human QA gate in between)
 
 ```
-/release <plugin> <version>   → issues → In Progress → develop → push test/<version> → ZIP →
+/release <plugin> <version>   → issues → In Progress → develop → push release/<version> → ZIP →
                                 issues → For Test → QA issue created (verified) → release log. STOPS.
         ↓  (human tests the ZIP)
 /tested <plugin> <version>    → tag v<version>, push tag, issues → terminal state (detected,
@@ -66,7 +66,7 @@ When a workflow command targets a plugin repository:
    `git clone git@github.com:wpconnect-co/<repository>.git repos/<repository>`
    (HTTPS fallback: `https://github.com/wpconnect-co/<repository>.git`)
 4. If already present: `git fetch` and ensure a clean working tree before starting.
-5. Checkout the appropriate branch. **All workflow pushes go to `test/...` branches** (`test/<version>` for /release and /hotfix, `test/<issue-id>-<slug>` for /feature) — never to `main`, `release/*` or `feature/*`.
+5. Checkout the appropriate branch: **`release/<version>` for /release and /hotfix**, **`feature/<issue-id>-<slug>` for /feature**. Never push to `main` — finalization (tags) happens only in `/tested`.
 6. Analyze the codebase before making changes.
 7. Implement, commit (project convention `feature|fix|improvement|compatibility:`), push per the workflow's rules.
 8. Generate the test ZIP: `wp dist-archive ./ --plugin-dirname=<dirname>` preferred, renamed to `<main-plugin-file-without-.php>.<version>.zip` (e.g. `wpconnect-wpf-notion.1.4.1.zip`), placed in this workspace's `dist/`.

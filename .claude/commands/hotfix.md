@@ -22,10 +22,10 @@ Delegate to the **product-owner** agent:
 ## Phase 2 — Branch
 
 ```bash
-git checkout -b test/<version>
+git checkout -b release/<version>
 ```
 
-`<version>` = current header version + mandatory patch bump (e.g. `test/2.5.2`). Pushes only ever go to `test/<version>` — never to `main` or `hotfix/*`.
+`<version>` = current header version + mandatory patch bump (e.g. `release/2.5.2`). Pushes only ever go to `release/<version>` — never to `main`.
 
 ## Phase 3 — Developer: fix
 
@@ -45,7 +45,7 @@ Only after APPROVED:
 
 1. Version bump: **patch is mandatory** (X.Y.Z → X.Y.Z+1), updated in the plugin header.
 2. Package ZIP per the `/release` Phase 5 procedure (`wp dist-archive` preferred) and rename to `<main-plugin-file-without-.php>.<version>.zip`.
-3. Push the branch `test/<version>`. **No tag, no GitHub Release** — those belong to `/tested`.
+3. Push the branch `release/<version>`. **No tag, no GitHub Release** — those belong to `/tested`.
 
 ## Phase 6 — Linear updates (main session)
 

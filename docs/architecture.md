@@ -17,7 +17,7 @@ Three specialized agents cover distinct phases of the software development lifec
 product-owner: finds Linear issues for plugin+version → Implementation Brief
      │
      ▼
-main session: branch test/<version> in repos/<repository>/
+main session: branch release/<version> in repos/<repository>/
      │
      ▼
 developer: implements + plugin readme/changelog + version bump → local commits
@@ -26,7 +26,7 @@ developer: implements + plugin readme/changelog + version bump → local commits
 product-owner: reviews acceptance criteria (max 2 cycles, then abort)
      │
      ▼
-main session: ZIP (wp dist-archive → <main-file>.<version>.zip) → push test/<version>
+main session: ZIP (wp dist-archive → <main-file>.<version>.zip) → push release/<version>
      │
      ▼
 main session: Linear → issues to For Test · QA issue "Update <Plugin> <Version>" · README issue block
@@ -53,7 +53,7 @@ The QA gate is structural: `/release` never tags, publishes, merges, deploys or 
 
 | Command | Purpose |
 |---|---|
-| `/release <plugin> <version>` | Phase 1: develop → test/<version> → ZIP → Linear For Test → STOP for human QA |
+| `/release <plugin> <version>` | Phase 1: develop → release/<version> → ZIP → Linear For Test → STOP for human QA |
 | `/tested <plugin> <version>` | Phase 2 (manual): tag + push tag → Linear Closed. The QA approval gate |
 | `/hotfix WPC-123` | Fast-track Phase 1 for bugs: minimal brief → fix → patch bump → stops for QA |
 | `/feature WPC-123` | Development only: brief → implement → review → push + PR |

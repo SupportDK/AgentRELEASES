@@ -155,7 +155,7 @@ When invoked from `/release` and the plugin's README/readme content changed: pre
 
 ### Source branch
 
-test/<version>
+release/<version>
 
 ### Related release
 

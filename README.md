@@ -45,7 +45,7 @@ The primary interface. Each command orchestrates the agents end-to-end:
 
 | Command | What it does |
 |---------|--------------|
-| `/release <plugin> <version>` | **Phase 1**: find Linear issues → implement → review → push `test/<version>` → test ZIP → issues to *For Test* → QA issue. **Stops for human QA** |
+| `/release <plugin> <version>` | **Phase 1**: find Linear issues → implement → review → push `release/<version>` → test ZIP → issues to *For Test* → QA issue. **Stops for human QA** |
 | `/tested <plugin> <version>` | **Phase 2** (manual, after QA): tag `v<version>` → push tag → issues to *Closed*. Never runs automatically |
 | `/hotfix WPC-123` | Fast-track Phase 1 for bugs: minimal brief → fix → patch bump → test ZIP → stops for QA |
 | `/feature WPC-123` | Development pipeline without releasing: brief → implement → review → push + PR |
@@ -81,7 +81,7 @@ Use the product-owner agent to process Linear issue WPC-123.
     ↓
 Linear discovery → Implementation Brief (product-owner)
     ↓
-Development on branch test/<version> (developer)
+Development on branch release/<version> (developer)
     ↓
 Review vs acceptance criteria (product-owner, max 2 cycles)
     ↓
