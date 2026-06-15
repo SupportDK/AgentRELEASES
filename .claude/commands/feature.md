@@ -16,6 +16,7 @@ Parse `$ARGUMENTS` (Linear issue ID or plugin display name) and apply the **Repo
 - Resolve plugin → `wpconnect-co/<repository>` (from the argument or from the Linear issue title/body). Never ask if the mapping resolves it; ask only if there is no match.
 - Clone into `repos/<repository>/` if absent; otherwise fetch + clean working tree. Checkout the default branch.
 - If only a plugin name was given, locate the corresponding Linear issue or ask the user which one to implement.
+- **Detect a pending port branch**: `git -C repos/<repository> branch --list 'port/*'` (and `origin/port/*`). If a `port/*` branch exists, list it and ask whether this feature should build on top of it; if confirmed, branch from `port/<slug>` in Phase 2 instead of the default branch (carrying the port's commits).
 
 All git work below happens inside `repos/<repository>/`.
 
@@ -29,10 +30,14 @@ Show the brief to the user, then continue.
 
 ## Phase 2 — Branch
 
-Create the working branch from the current default branch (never push to `main`):
+Create the working branch from the base resolved in Phase 0 (never push to `main`):
 
 ```bash
+# default case
 git checkout -b feature/<issue-id>-<short-slug>
+
+# port hand-off (if a port/<slug> branch was confirmed in Phase 0)
+git checkout port/<slug> && git checkout -b feature/<issue-id>-<short-slug>
 ```
 
 `<short-slug>` = 2–4 kebab-case words from the issue title.

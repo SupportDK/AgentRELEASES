@@ -17,6 +17,18 @@ Parse `$ARGUMENTS` as `<plugin> <version>`:
 2. **Acquire the repo**: verify it exists, clone into `repos/<repository>/` if absent (`git@github.com:wpconnect-co/<repository>.git`), otherwise fetch + clean working tree. Checkout the default branch, up to date.
 3. `<version>` is the explicit target version for this release.
 
+### Detect a pending port branch
+
+A `/port` run may have left adapted, not-yet-published commits on a `port/<slug>` branch in this repo. Detect them so the release includes them:
+
+```bash
+git -C repos/<repository> branch --list 'port/*'
+```
+
+- If one or more `port/*` branches exist (local or on `origin` — also check `git -C repos/<repository> branch -r --list 'origin/port/*'`), **list them and ask the user** whether this release should build on top of one (showing the matching `port-logs/<plugin-slug>/.../port-report.md` summary if present). Default/expected answer is yes when a port branch matches the work being released.
+- If the user confirms, this release **branches from `port/<slug>`** instead of the default branch (see Phase 2). The port's commits are carried into the release.
+- If no `port/*` branch exists, proceed normally from the default branch.
+
 All git work below happens inside `repos/<repository>/`.
 
 ## Phase 1 — Linear discovery + brief (product-owner)
@@ -39,11 +51,17 @@ Before development begins, move **every issue in scope** to status **In Progress
 
 ## Phase 2 — Branch
 
+Create `release/<version>` from the base resolved in Phase 0:
+
 ```bash
+# default case — base is the default branch
 git checkout -b release/<version>
+
+# port hand-off — base is the confirmed port branch (carries its commits)
+git checkout port/<slug> && git checkout -b release/<version>
 ```
 
-Example: `release/1.4.1`. Pushes only ever go to `release/<version>` — never to `main`.
+Example: `release/1.4.1`. Pushes only ever go to `release/<version>` — never to `main`. When built on a port branch, note it in the release log (Phase 9) and add the `(ported from <source>)` provenance to the final report.
 
 ## Phase 3 — Implementation (developer)
 
@@ -181,6 +199,11 @@ ZIP:
 ## PO Stories
 
 <link to po-stories.md if it exists, with a one-line summary — otherwise "No /stories run for this version">
+
+## Ported From
+
+<if this release was built on a port/<slug> branch: source plugin + link to
+port-logs/<plugin-slug>/<slug>/port-report.md — otherwise omit this section>
 
 ## Workflow Status History
 

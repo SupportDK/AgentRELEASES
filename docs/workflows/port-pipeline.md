@@ -44,7 +44,7 @@ port-report.md written · STOP (not published)
 
 - **Adapt, never copy literally.** The feature's behavior is preserved; its wiring is re-expressed in the target's conventions. This is why analysis (code-analyst) and adaptation (developer) are separate roles.
 - **The source is sacred.** It is never branched or modified — only read.
-- **`/port` does not publish.** No push, tag, release, ZIP or Linear changes. It hands a `port/<slug>` branch with local commits to the existing lifecycle (`/release` for the full QA gate, `/feature` for a PR).
+- **`/port` does not publish.** No push, tag, release, ZIP or Linear changes. It hands a `port/<slug>` branch with local commits to the existing lifecycle (`/release` for the full QA gate, `/feature` for a PR). Both **auto-detect the `port/<slug>` branch** and offer to build the release/feature branch on top of it, so the hand-off is seamless — you don't have to remember the branch name.
 - **Traceability.** Every ported commit cites its origin; `port-logs/` records source references and the adaptations made.
 
 ## How the feature is identified

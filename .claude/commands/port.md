@@ -103,6 +103,9 @@ Next step to publish:
 /release <target-plugin> <version>     (full QA lifecycle)
   or
 /feature <target-plugin>               (PR only)
+
+(/release and /feature auto-detect this port/<slug> branch and offer to
+build on top of it — confirm when asked so the port's commits are carried in.)
 ```
 
 ## STOP — restrictions
