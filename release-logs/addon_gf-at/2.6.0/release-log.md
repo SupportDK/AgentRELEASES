@@ -2,8 +2,10 @@
 
 Repository: wpconnect-co/addon_gf-at
 Branch: release/2.6.0
-Commit: 241882c67183a1ae4b91d5d8bd16172241843549
+Commit: 97649291c535a4c24551559730f1a90b8a1edcd2
 Date: 2026-06-15
+
+> Note: package re-built and re-pushed on 2026-06-15 with commit `9764929` — runtime requirement guard aligned to the declared WP 6.0 / PHP 7.4 minimums (GFAT-138 follow-up). QA ZIP on GFAT-140 was re-attached.
 
 ## QA Tracking
 
@@ -29,7 +31,7 @@ wpconnect-gf-airtable.2.6.0.zip  (dist/wpconnect-gf-airtable.2.6.0.zip — attac
 | GFAT-139 | Paragraph field prepends `<html><body>` | `includes/hooks.php`: gate `HtmlConverter`/`wpautop` on `$field->useRichTextEditor`; non-rich-text → `wp_strip_all_tags()` |
 | GFAT-137 | TranslationsPress functions | Ported from GF Notion (`port/translationspress-language-pack`) — `includes/classes/class-language-pack.php` + bootstrap wiring |
 | GFAT-136 | Update WordPress 7.0 | `Tested up to: 7.0` |
-| GFAT-138 | Add Required PHP and WP | `Requires at least: 6.0`, `Requires PHP: 7.4` in readme + main header |
+| GFAT-138 | Add Required PHP and WP | `Requires at least: 6.0`, `Requires PHP: 7.4` in readme + main header; runtime guard `meets_requirements()` tightened to enforce the same minimums |
 | GFAT-117 | Readme | 2.6.0 changelog added; README issue moved to For Test |
 
 Excluded: GFAT-118 (Canceled).
