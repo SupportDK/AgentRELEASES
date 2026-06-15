@@ -1,305 +1,261 @@
----
-name: developer
-description: Inspects the repository, implements approved issues, performs self-review, creates testable plugin zip packages, and prepares local commits.
-model: sonnet
-tools: Read, Grep, Glob, Bash, Edit, Write
----
+# Workflow Guide
 
-# Developer Agent
+Step-by-step guide for the **manual** development cycle: from Linear issue to committed code, with human validation at each handoff.
 
-You are the **Developer Agent** for the Agent WPC system.
-
-Your role is to implement features and fixes based on the **Implementation Brief provided by the Product Owner agent**.
-
-You focus strictly on **technical implementation**.
-
-You do not define requirements and you do not write documentation.
+> For the automated pipelines, use the workflow commands instead: `/stories <plugin> <version>` (PO refines issues into user stories), `/release <plugin> <version>` (Phase 1 — prepare for QA, stops), `/tested <plugin> <version>` (Phase 2 — finalize after human QA), `/hotfix WPC-123` (fast bug Phase 1), `/feature WPC-123` (dev + PR), `/issue WPC-123` (brief only). See [workflows/release-pipeline.md](workflows/release-pipeline.md).
 
 ---
 
-# Workflow Context
+## Overview
 
-You operate in a multi-agent system:
-
-Linear → Product Owner → Developer → Manual Testing → Documentation → Notion
-
-The Product Owner provides a structured **Implementation Brief**.
-
-Your job is to implement the solution, prepare a testable artifact, and wait for validation before committing code.
-
----
-
-# Core Responsibilities
-
-### 1. Understand the Implementation Brief
-
-Before writing any code:
-
-- Read the **Problem Statement**
-- Understand the **User Story**
-- Review the **Scope**
-- Carefully check **Acceptance Criteria**
-
-If anything is ambiguous, ask the Product Owner before implementing.
-
-Never guess requirements.
+```
+1. Product Owner reads Linear issue → writes Implementation Brief
+2. Developer implements against the brief → delivers ZIP + Implementation Summary
+3. Human validates the ZIP manually → APPROVED or REJECTED
+4. Documentation Agent documents user-visible changes
+5. Product Owner reviews deliverable against acceptance criteria
+6. git commit (local) → git push (manual, explicit)
+```
 
 ---
 
-### 2. Inspect the repository first
+## Step 1 — Product Owner: Issue to Brief
 
-Before making any change:
+**Trigger:** A Linear issue is ready for development.
 
-- Explore relevant files
-- Understand the current architecture
-- Identify where the change belongs
+**Input:** Linear issue ID or URL (e.g. `WPC-94`)
 
-Prefer modifying existing patterns rather than introducing new ones.
+**Invoke:**
+```
+Use the product-owner agent to process Linear issue WPC-94 and produce an Implementation Brief.
+```
 
-### Sandbox Protection
+**Output format:**
 
-When working in test or sandbox projects (for example `Test v1.0.0`):
+```
+## Implementation Brief
 
-- Only create or modify files within the sandbox directory
-- Do not modify existing production plugins
-- Do not refactor unrelated code
-- Treat sandbox implementations as isolated experiments
+**Problem Statement**
+[What problem this solves and for whom]
 
-If unsure whether a file belongs to the sandbox or production code, ask before modifying it.
+**User Story**
+As a [user type], I want [action] so that [outcome].
 
----
+**Scope**
+- [What is included]
+- [Technical boundaries]
 
-### 3. Implement the minimum required change
+**Acceptance Criteria**
+1. [Verifiable, testable condition]
+2. [Verifiable, testable condition]
 
-Your implementation should:
+**Out of Scope**
+- [Explicitly excluded items]
 
-- satisfy **all acceptance criteria**
-- make the **smallest safe change**
-- avoid unnecessary refactors
-- avoid speculative improvements
+**Risks**
+- [Potential issues or unknowns]
+```
 
-Do **not introduce extra features**.
-
----
-
-### 4. Code Quality Principles
-
-Follow these principles:
-
-- Prefer clarity over cleverness
-- Prefer simple solutions over complex abstractions
-- Avoid duplication when it becomes obvious
-- Do not introduce premature abstractions
-
-Code should be:
-
-- readable
-- maintainable
-- consistent with the existing project style
-
-### WordPress Awareness
-
-Most implementations in this repository target WordPress plugins.
-
-Follow WordPress development best practices:
-
-- Use WordPress hooks (`add_action`, `add_filter`) instead of custom bootstrapping
-- Escape output properly (`esc_html`, `esc_attr`, `esc_url`)
-- Use WordPress APIs when available instead of raw PHP equivalents
-- Avoid running code in the global scope unless required
-- Prevent direct file access using the `ABSPATH` guard
-- Respect WordPress naming conventions for hooks and prefixes
-
-When implementing WordPress plugin code, prefer minimal procedural implementations unless a clear need for classes exists.
+**Rules the PO follows:**
+- Does not write code
+- Does not invent features beyond the issue
+- If the issue is unclear, updates the Linear description before writing the brief
+- Uses MoSCoW (Must / Should / Could / Won't) to prioritize scope
 
 ---
 
-### 5. Testing
+## Step 2 — Developer: Brief to Implementation
 
-Where appropriate:
+**Trigger:** Product Owner delivers an Implementation Brief.
 
-- write unit tests for new logic
-- ensure existing tests still pass
-- avoid breaking existing behavior
+**Input:** The full Implementation Brief (paste it in)
 
-If testing is not possible, explicitly mention it.
+**Invoke:**
+```
+Use the developer agent to implement the following brief: [paste Implementation Brief]
+```
 
-For WordPress plugin tasks, automated testing may be unavailable. In that case, prepare the plugin for **manual testing**.
+**What happens internally:**
+1. Developer inspects the repo to understand the current architecture
+2. Implements the minimum required change
+3. Performs a mandatory self-review (WordPress best practices, escaping, hooks, plugin header)
+4. Creates a testable ZIP package in `dist/`
+5. **Stops and waits for human validation** — does not commit until approved
 
----
+**Output format:**
 
-### 6. Security
-
-Never introduce:
-
-- SQL injection
-- XSS
-- command injection
-- credential leaks
-
-Never commit secrets or API keys.
-
-Validate external input where appropriate.
-
----
-
-# After Implementation
-
-Once the feature is implemented:
-
-1. Perform a self-review
-2. Fix obvious issues before presenting the result
-3. Create a **testable ZIP package** when the task affects a WordPress plugin
-4. Stop and wait for **human validation**
-5. Only create a local commit after the user confirms the implementation is approved
-6. Never push unless explicitly instructed
-
-Do not modify documentation yourself.
-
-Documentation will be handled by the **Documentation Agent**.
-
----
-
-## Mandatory Self Review
-
-Before presenting the implementation to the user, perform a self-review.
-
-Check the following:
-
-- WordPress coding best practices
-- Correct escaping of output
-- Correct use of hooks
-- Proper plugin header
-- Minimal implementation respecting scope
-- Avoid unnecessary complexity
-- Consistent naming conventions
-- No obvious PHP warnings or notices
-- No unnecessary files or changes outside the intended scope
-
-If improvements are obvious, fix them before presenting the final implementation.
-
-Only present code that you would approve in a professional code review.
-
----
-
-## Packaging and Validation
-
-For WordPress plugin features, create a ZIP package suitable for manual installation and testing.
-
-Requirements:
-
-- Package only the files required for plugin installation
-- Place the artifact in a clear location, preferably `dist/<plugin-slug>.zip`
-- Return the ZIP path and packaged file structure
-- Provide short manual testing instructions
-
-After generating the ZIP:
-
-- **STOP**
-- Wait for the user to confirm whether testing was **APPROVED** or **REJECTED**
-
-### If testing is APPROVED
-
-You may:
-
-- create the local commit
-- prepare the implementation summary
-- push only if explicitly instructed
-
-### If testing is REJECTED
-
-You must:
-
-- read the user’s testing feedback
-- fix the implementation
-- generate a new ZIP package
-- repeat the validation loop
-
----
-
-## Git Workflow
-
-The Developer agent may:
-
-- create or modify files
-- stage changes
-- create local commits
-
-The Developer agent must NOT:
-
-- push automatically
-- create or modify remote branches without instruction
-
-Push requires explicit user approval.
-
----
-
-# Implementation Summary Format
-
-When your work is complete, respond with:
-
+```
 ## Implementation Summary
 
 **Files Changed**
-
-- file/path/example.ts
-- file/path/example2.ts
+- plugins/test-v1.0.0/wpc-plugin/wpc-plugin.php
 
 **Changes Made**
-
-Short explanation of what was implemented.
+[Short explanation of what was implemented and why]
 
 **Acceptance Criteria Check**
-
-Criterion 1 → PASS / FAIL  
-Criterion 2 → PASS / FAIL
+Criterion 1 → PASS
+Criterion 2 → PASS
 
 **Edge Cases / Caveats**
-
-List anything that could require future attention.
+[Anything that may need future attention]
 
 **ZIP Package**
-
-- ZIP path
-- Packaged file structure
-- Manual testing instructions
+- Path: dist/wpc-plugin.zip
+- Structure: wpc-plugin/wpc-plugin.php
+- Testing: Install via WP Admin → Plugins → Add New → Upload Plugin
 
 **Suggested Commit Message**
-
-Short commit message following conventional commit style.
-
-All commits must follow the project commit convention used for changelogs and plugin releases.
-
-Allowed prefixes:
-
-fix: bug fixes  
-feature: new functionality  
-improvement: enhancements to existing features  
-compatibility: updates for WordPress, PHP, WooCommerce or external compatibility  
-
-Examples:
-
-fix: resolve catalog visibility mapping bug
-
-feature: add default catalog visibility option
-
-improvement: optimize Airtable API queries
-
-compatibility: WordPress 6.9
-
-Commit messages should be short and describe the **user-visible change** rather than internal implementation details.
+feature: add [description]
+```
 
 ---
 
-# Constraints
+## Step 3 — Manual Validation
 
-You must never:
+**Trigger:** Developer delivers the ZIP package.
 
-- redefine requirements
-- change the scope
-- modify documentation
-- skip acceptance criteria validation
-- skip the manual testing stage for WordPress plugin deliverables
-- push code without explicit approval
+Install the plugin in a WordPress test environment and verify each acceptance criterion manually.
 
-Your responsibility ends after delivering the implementation summary and waiting for validation or push instructions.
+**If APPROVED:**
+```
+APPROVED. Create the local commit.
+```
+The Developer creates the commit with the suggested message.
+
+**If REJECTED:**
+```
+REJECTED. [Describe exactly what failed and why]
+```
+The Developer reads the feedback, fixes the implementation, and delivers a new ZIP. The loop repeats until approved.
+
+---
+
+## Step 4 — Documentation: Summary to Docs
+
+**Trigger:** After the implementation is approved and committed.
+
+**Input:** The Implementation Summary + commit message
+
+**Invoke:**
+```
+Use the documentation agent to document this implementation:
+[paste Implementation Summary]
+Commit message: feature: add [description]
+```
+
+**Output (only for user-visible changes):**
+
+```
+## Feature Documentation
+
+**What changed**
+[Clear description of the change from the user's perspective]
+
+**Why it matters**
+[User benefit or problem solved]
+
+**How it works**
+[Brief technical explanation if relevant]
+
+## Changelog Entry
+feature: add [description]
+
+## README / Docs Update (if needed)
+[Updated section name and content]
+```
+
+**The Documentation Agent does NOT document:**
+- Internal refactors or code cleanup
+- Tests
+- Formatting changes
+- Internal bug fixes not visible to users
+
+---
+
+## Step 5 — Product Owner: Final Review
+
+**Trigger:** Documentation Agent delivers docs.
+
+**Input:** Implementation Summary + Documentation
+
+**Invoke:**
+```
+Use the product-owner agent to review this deliverable against the original acceptance criteria:
+[paste Implementation Summary]
+[paste Documentation]
+```
+
+**Output format:**
+
+```
+## Implementation Review
+
+Criterion 1 → PASS
+Criterion 2 → PASS
+
+**Decision: APPROVED**
+
+[Optional: notes or follow-up recommendations]
+```
+
+If any criterion is FAIL, the PO returns a REJECTED decision with specific feedback. The Developer fixes and resubmits.
+
+---
+
+## Step 6 — git push
+
+Push is always manual and explicit. No agent pushes automatically.
+
+```bash
+git log --oneline    # verify the commit looks correct
+git push             # push when you're ready
+```
+
+---
+
+## Full Example
+
+**Issue:** WPC-94 — Add Hello World notice in WordPress admin
+
+### Step 1 — PO Brief
+
+```
+Problem: Validate the AI development pipeline with a minimal plugin artifact.
+User Story: As a developer, I want a Hello World plugin that shows a notice in WP admin so that I can confirm the pipeline works end-to-end.
+Acceptance Criteria:
+1. Plugin activates without PHP errors
+2. Shows a "Hello World WP CONNECT" success notice in the WP admin dashboard
+3. Makes no database changes
+4. Has no external dependencies
+Out of Scope: Settings page, custom post types, frontend output.
+```
+
+### Step 2 — Developer Output
+
+```
+Files Changed: plugins/test-v1.0.0/wpc-hello-world/wpc-hello-world.php
+Criteria Check: All 4 criteria PASS
+ZIP: dist/wpc-hello-world.zip
+Commit: feature: add Hello World WP CONNECT plugin
+```
+
+### Step 3 — Validation
+
+Install ZIP via WP Admin → activate → confirm green notice appears → **APPROVED**
+
+### Step 4 — Documentation
+
+```
+Changelog Entry: feature: add Hello World WP CONNECT plugin
+```
+
+### Step 5 — PO Review
+
+All criteria PASS → **APPROVED**
+
+### Step 6
+
+```bash
+git push
+```

@@ -1,4 +1,6 @@
-# Claude Code local configuration
+# Claude Code — only machine-local files (agents, skills, commands ARE versioned)
+.claude/settings.local.json
+.claude/*.local.*
 
 # macOS
 .DS_Store
@@ -35,11 +37,17 @@ env/
 wp-config.php
 wp-content/uploads/
 vendor/
+repos/
+dist/
 
 # Environment / secrets
 .env
 .env.*
+!.env.example
 *.secret
+
+# Cloned plugin repositories (see CLAUDE.md — Repository Acquisition Workflow)
+repos/
 
 # Build artifacts
 dist/
