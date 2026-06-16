@@ -65,6 +65,12 @@ Overall: **APPROVED (8/8)**. The review's one minor finding (mixed indentation i
 - The TranslationsPress/GlotPress project must exist at `https://packages.translationspress.com/wp-connect/orders-sync-to-airtable-for-woocommerce/packages.json` for packs to actually download — external ops/registration task, outside `/port`.
 - This plugin currently ships no `/languages` folder or `.pot`. Translations are delivered entirely via TranslationsPress packs once the project is registered.
 
+### Slug verification (2026-06-16)
+
+Triggered by the text-domain/slug bug found in the GF Airtable & GF SendGrid ports. Checked here too — **no defect**: the code is internally consistent and matches the platform. Confirmed by the user, the TranslationsPress project for this plugin uses **name `orders-sync-to-airtable-for-woocommerce` and slug `orders-sync-to-airtable-for-woocommerce`**, which equals the plugin's text domain, the `Language_Packs` slug, and the `packages.json` URL path. No code change needed (this plugin's text domain already equals its folder slug, so it never had the GF mismatch).
+
+The endpoint currently returns **HTTP 403** — the TranslationsPress project is **not published yet** under that slug. This is the pending external registration task above, not a code bug. Once the project is created and the POT/translations are uploaded, packs will download automatically with no re-release.
+
 ## Next step to publish
 
 `/release Orders Sync to Airtable for Woo 1.1.0` (WPC-99 is in project "Orders Sync to Airtable for Woo v1.1.0") — or `/feature`. Both auto-detect this `port/translationspress-language-pack` branch and offer to build on top of it so the port commit is carried in.
