@@ -123,7 +123,29 @@ Fix the shared workflow's "Install WP-CLI" step to pin a compatible combination,
 or fetch a wp-cli.phar build ≥ 2.13. Then re-run the failed run 27605459191 (replays the merged-PR
 event → produces tag `2.9.0` + Release + deploy). Re-running before the fix will fail identically.
 
+## Resolution — CI fixed and release completed (2026-06-16)
+
+The blocker was fixed by bumping the plugin's `.github/workflows/tag-and-deploy.yml` from
+`github-workflows@v1.3` → **`@v1.4`** (both `auto-tag-and-release` and `deploy-to-wpconnect`).
+`v1.4` pins `wp-cli/dist-archive-command:3.1.0` (requires `wp-cli ^2`, satisfied by the 2.12.0 phar),
+replacing v1.3's unpinned `dev-main` install that required `wp-cli ^2.13`.
+
+Sequence:
+- PR #14 (`chore/ci-bump-workflows-v1.4` → main) — merged `a16a201`. Bumps CI to @v1.4. Did not trigger release.
+- PR #15 (`release/2.9.0` → main, empty re-trigger commit) — merged `be03817`.
+- Run **27606454236** (`auto-tag-and-release@v1.4`) → **success**: Install WP-CLI ✅, Build ✅, Release ✅;
+  `deploy` job ✅ (Prod / wpconnect.co), Slack success notification ✅.
+
+Final artifacts:
+- Tag: **2.9.0** → `be0381746ef633011d408bd23d923ab50e739c8d`
+- GitHub Release: https://github.com/wpconnect-co/addon_gf-sib/releases/tag/2.9.0 (by github-actions[bot], 2026-06-16T09:01:37Z)
+- Deploy: completed to Prod.
+
 ## Status of finalization
 
-PARTIAL — code merged to `main`; release/deploy **blocked** by the CI dependency issue above.
-Awaiting shared-workflow fix + re-run. No further plugin-side action required.
+COMPLETE — issues in terminal **Done**; tag `2.9.0` + GitHub Release published; deployed to Prod.
+
+### Recurrence prevention
+`v1.3` of the shared workflow is broken for ALL plugins (unpinned `dist-archive-command`). Any plugin
+still on `@v1.3` will fail its next release the same way. Move each plugin's `tag-and-deploy.yml` to
+`@v1.4` (or later) before its next `/release`. Tracked in workspace memory `gf-brevo-ci-release`.
