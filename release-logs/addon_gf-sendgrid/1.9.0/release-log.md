@@ -78,6 +78,8 @@ Human QA approved (tested on the corrected ZIP carrying commit `e1badb8` — tra
 - **No GitHub Release** created (tied to the deploy/tag step).
 - No merge or WordPress.org/production deploy performed.
 
+> Post-finalization (2026-06-16, commit `13c9a69`): added a `package.json` with an `npm run make-pot` script (generates `wpconnect-gf-sendgrid.pot` to upload to TranslationsPress) and excluded `*.pot` from dist. **Dev-tooling only — both files are excluded from the ZIP, so the distributed plugin and the QA-tested package are byte-identical.** The deploy tag target moves to `13c9a69`.
+
 ## Next step
 
-Deploy: create and push the tag `v1.9.0` on the head of `release/1.9.0` (`e1badb8`) at deploy time, plus any GitHub Release if applicable.
+Deploy: create and push the tag `v1.9.0` on the head of `release/1.9.0` (`13c9a69`) at deploy time, plus any GitHub Release if applicable.
