@@ -2,8 +2,10 @@
 
 Repository: wpconnect-co/addon_gf-sendgrid
 Branch: release/1.9.0
-Commit: bcb86518fbf717a7abe6f9c336594ddc4abb91c4
+Commit: 9bab98c2683b214d90d97c87375e4db873b623b9
 Date: 2026-06-15
+
+> Note: package re-built on 2026-06-16 with commit `9bab98c` — **structure alignment with the TranslationsPress source**. The port had kept the bundled `languages/` directory (`.mo`/`.po`/`.pot`), the local `load_plugin_textdomain()` loader and the `Domain Path` header, whereas the reference plugin (`addon_gf-notion`) removed all of them as part of the TranslationsPress migration. These were removed so translations are served exclusively from translationspress.com (loaded just-in-time by WP core from `wp-content/languages/plugins/`). QA ZIP on GFSG-81 re-attached.
 
 ## QA Tracking
 
@@ -43,7 +45,8 @@ This release was built on top of the port branch `port/translationspress-languag
 
 - Port report: `port-logs/addon_gf-sendgrid/translationspress-language-pack/port-report.md`
 - Port commit carried into this release: `9119792` — `feature: pull translations from TranslationsPress via language pack updater (ported from addon_gf-notion)`
-- Adaptation highlight: namespace `WPCONNECT_GF_SG`; t15s slug + TranslationsPress URL use the text domain `wpc-gf-sg` (not the folder slug), matching the `/languages/wpc-gf-sg-*.mo` prefix.
+- Adaptation highlight: namespace `WPCONNECT_GF_SG`; t15s slug + TranslationsPress URL use the text domain `wpc-gf-sg` (not the folder slug), so the packs are keyed on `wpc-gf-sg-*`.
+- Structure correction (`9bab98c`, 2026-06-16): the bundled `languages/` directory, the local `load_plugin_textdomain()` loader and the `Domain Path` header were removed to match the source's TranslationsPress migration — the initial port had left them in place. See the port report's "Structure correction" section.
 
 ## Workflow Status History
 
