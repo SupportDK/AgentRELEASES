@@ -56,6 +56,20 @@ Criterion 10 (php -l clean, PHP 8.3) → PASS
 
 Overall: **APPROVED (10/10)**. Source repo `addon_gf-notion` verified untouched (clean tree, still on `main`, no branch created).
 
+## Structure correction (2026-06-16, applied on `release/2.6.0`, commit `f6c4293`)
+
+The original port deliberately left the bundled local translations untouched (Criterion 9 above counted "no `languages/` changes" as a PASS). That was the wrong call: in the source (`addon_gf-notion`), removing the local translation pipeline is an **intrinsic part** of the TranslationsPress migration (commit `63ca971` deleted the whole `languages/` directory and dropped the local `load_plugin_textdomain()` call). The reference plugin's `main` has **no** `languages/` dir, **no** `Domain Path` header and **no** local text-domain loader. The author's own prior `feature/translationpress` branch on the target had likewise removed `languages/`.
+
+By keeping them, the port produced a half-migrated state (remote pack mechanism added, but local `.mo`/`.po`/`.pot` still shipped and still loaded locally), structurally divergent from the source.
+
+Corrected on `release/2.6.0` to match the source structure:
+
+- Removed the `languages/` directory (`wpc-gf-at-{de_DE,es_ES,fr_FR}.{mo,po}` + `wpc-gf-at.pot`).
+- Removed the `load_translations()` function and its `add_action( 'init', … )` from `wpconnect-gf-airtable.php`.
+- Removed the `Domain Path: /languages/` plugin header.
+
+Unchanged (deliberately): the text domain stays `wpc-gf-at` and the t15s slug / TranslationsPress URL stay `wpc-gf-at` — that mapping decision (above) remains correct; only the redundant local pipeline was dropped. `php -l` clean. QA ZIP `dist/wpconnect-gf-airtable.2.6.0.zip` regenerated (no `languages/` entry; 114 KB → 76 KB).
+
 ## Notes / external follow-up
 
 - The TranslationsPress/GlotPress project must exist at `https://packages.translationspress.com/wp-connect/wpc-gf-at/packages.json` for packs to actually download — that is an external ops/registration task, outside `/port`.

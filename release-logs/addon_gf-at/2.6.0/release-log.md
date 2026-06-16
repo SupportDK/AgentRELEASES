@@ -2,10 +2,12 @@
 
 Repository: wpconnect-co/addon_gf-at
 Branch: release/2.6.0
-Commit: 97649291c535a4c24551559730f1a90b8a1edcd2
+Commit: f6c429374ccb395d0944375642b156d085100cfe
 Date: 2026-06-15
 
 > Note: package re-built and re-pushed on 2026-06-15 with commit `9764929` — runtime requirement guard aligned to the declared WP 6.0 / PHP 7.4 minimums (GFAT-138 follow-up). QA ZIP on GFAT-140 was re-attached.
+>
+> Note: package re-built on 2026-06-16 with commit `f6c4293` — **structure alignment with the TranslationsPress source**. The port had kept the bundled `languages/` directory (`.mo`/`.po`/`.pot`), the local `load_plugin_textdomain()` loader and the `Domain Path` header, whereas the reference plugin (`addon_gf-notion`) removed all of them as part of the TranslationsPress migration. These were removed so translations are served exclusively from translationspress.com (loaded just-in-time by WP core from `wp-content/languages/plugins/`). QA ZIP on GFAT-140 must be re-attached.
 
 ## QA Tracking
 
@@ -46,7 +48,8 @@ This release was built on top of the port branch `port/translationspress-languag
 
 - Port report: `port-logs/addon_gf-at/translationspress-language-pack/port-report.md`
 - Port commit carried into this release: `5d12f15` — `feature: pull translations from TranslationsPress via language pack updater (ported from addon_gf-notion)`
-- Adaptation highlight: t15s slug + TranslationsPress URL use the text domain `wpc-gf-at` (not the folder slug), matching the `/languages/wpc-gf-at-*.mo` prefix.
+- Adaptation highlight: t15s slug + TranslationsPress URL use the text domain `wpc-gf-at` (not the folder slug), so the packs are keyed on `wpc-gf-at-*`.
+- Structure correction (`f6c4293`, 2026-06-16): the bundled `languages/` directory, the local `load_plugin_textdomain()` loader and the `Domain Path` header were removed to match the source's TranslationsPress migration — the initial port had left them in place. See the port report's "Structure correction" section.
 
 ## Workflow Status History
 
