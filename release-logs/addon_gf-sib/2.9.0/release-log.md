@@ -17,10 +17,22 @@ Linear Project:
 GF Brevo v2.9.0
 
 Status:
-For Test
+Done  (terminal state — finalized 2026-06-16)
 
 ZIP:
 wpconnect-gf-sendinblue.2.9.0.zip  (dist/wpconnect-gf-sendinblue.2.9.0.zip — attached to GFSIB-218)
+
+Tag / GitHub Release / Deploy:
+Handled by CI, NOT a manual tag. This plugin's `auto-tag-and-release` workflow
+(`.github/workflows/tag-and-deploy.yml`) triggers on a `release/*` → `main` PR merge
+and then auto-creates the tag `2.9.0`, the GitHub Release, and the deploy. All 8 prior
+releases were published this way (author `github-actions[bot]`, tags without `v` prefix).
+A manual `v2.9.0`/`2.9.0` tag was briefly pushed during `/tested` and then removed to
+avoid colliding with the CI auto-tag on merge.
+
+Release PR (CI trigger, NOT merged):
+https://github.com/wpconnect-co/addon_gf-sib/pull/13  (release/2.9.0 → main)
+→ Pending: the team merges this PR; CI then performs tag 2.9.0 + GitHub Release + deploy.
 
 ## Scope — issues in this version
 
@@ -62,7 +74,31 @@ No /stories run for this version. Issues were validated inline during /release (
 | GFSIB-178 | Todo → In Progress | 2026-06-15T15:47:36Z |
 | GFSIB-178 | In Progress → For Test | 2026-06-15T16:03:03Z |
 | GFSIB-218 (QA) | created → For Test | 2026-06-15T16:02:10Z |
+| GFSIB-213 | For Test → Done | 2026-06-15T16:24:49Z |
+| GFSIB-217 | For Test → Done | 2026-06-15T16:24:48Z |
+| GFSIB-216 | For Test → Done | 2026-06-15T16:24:48Z |
+| GFSIB-215 | For Test → Done | 2026-06-15T16:24:48Z |
+| GFSIB-206 | For Test → Done | 2026-06-15T16:24:49Z |
+| GFSIB-204 | For Test → Done | 2026-06-15T16:24:49Z |
+| GFSIB-211 | For Test → Done | 2026-06-15T16:24:49Z |
+| GFSIB-178 | For Test → Done | 2026-06-15T16:24:49Z |
+| GFSIB-218 (QA) | For Test → Done | 2026-06-15T16:24:48Z |
+
+> Note: all issues were already in **Done** when `/tested` ran on 2026-06-16 (closed
+> 2026-06-15T16:24, before this run — manual close or prior partial `/tested`). `/tested`
+> recorded the existing terminal state rather than re-moving them. Terminal state used: **Done**
+> (team "GF Brevo" has two completed-type states: Done, Closed).
+
+## /tested outcome (2026-06-16)
+
+- Verifications: branch `origin/release/2.9.0` ✅, ZIP in `dist/` ✅, tag `2.9.0` absent ✅.
+- Issues already in terminal **Done** (not For Test) — flagged to the user; user approved finalizing.
+- Tag: NOT pushed manually (a brief manual tag was created then removed). Tagging is delegated
+  to CI on PR merge per this plugin's `auto-tag-and-release` workflow.
+- GitHub Release + deploy: handled by CI on PR merge — not created manually here.
+- PR #13 (`release/2.9.0 → main`) opened as the CI trigger, left **unmerged** (merge/deploy is the team's step).
 
 ## Next step
 
-After human QA approval: `/tested GF Brevo 2.9.0` (tags v2.9.0, moves issues to terminal state, updates this log).
+Team merges PR #13 (`release/2.9.0 → main`). CI (`auto-tag-and-release`) then creates tag `2.9.0`,
+the GitHub Release, and deploys. No further `/tested` action required.

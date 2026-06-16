@@ -13,6 +13,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-213/following-recent-304-subscri
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:28Z |
 | In Progress → For Test | 2026-06-15T16:01:01Z |
+| For Test → Done | 2026-06-15T16:24:49Z |
 
 ---
 
@@ -25,6 +26,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-217/following-recent-304-subscri
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:29Z |
 | In Progress → For Test | 2026-06-15T16:01:06Z |
+| For Test → Done | 2026-06-15T16:24:48Z |
 
 ---
 
@@ -37,6 +39,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-216/the-brevo-api-is-currently-u
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:30Z |
 | In Progress → For Test | 2026-06-15T16:01:10Z |
+| For Test → Done | 2026-06-15T16:24:48Z |
 
 ---
 
@@ -50,6 +53,7 @@ Note: Investigated — no `gform.addFilter` JS dependency exists in the plugin; 
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:31Z |
 | In Progress → For Test | 2026-06-15T16:01:24Z |
+| For Test → Done | 2026-06-15T16:24:48Z |
 
 ---
 
@@ -62,6 +66,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-206/logo-ne-saffiche-pas
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:32Z |
 | In Progress → For Test | 2026-06-15T16:01:35Z |
+| For Test → Done | 2026-06-15T16:24:49Z |
 
 ---
 
@@ -74,6 +79,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-204/redirect-url-with-parameter
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:33Z |
 | In Progress → For Test | 2026-06-15T16:01:42Z |
+| For Test → Done | 2026-06-15T16:24:49Z |
 
 ---
 
@@ -86,6 +92,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-211/update-wordpress-70
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:34Z |
 | In Progress → For Test | 2026-06-15T16:01:55Z |
+| For Test → Done | 2026-06-15T16:24:49Z |
 
 ---
 
@@ -98,6 +105,7 @@ Link: https://linear.app/wp-connect/issue/GFSIB-178/readme
 |---|---|
 | Todo → In Progress | 2026-06-15T15:47:36Z |
 | In Progress → For Test | 2026-06-15T16:03:03Z |
+| For Test → Done | 2026-06-15T16:24:49Z |
 
 ---
 
@@ -110,7 +118,9 @@ Attachment: wpconnect-gf-sendinblue.2.9.0.zip
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-06-15T16:02:10Z |
+| For Test → Done | 2026-06-15T16:24:48Z |
 
 ---
 
-> `/tested GF Brevo 2.9.0` will append the terminal transitions (For Test → Closed/Done) after human QA approval.
+> Terminal transitions (For Test → **Done**) appended by `/tested GF Brevo 2.9.0` on 2026-06-16.
+> Note: all issues were **already in "Done"** when `/tested` ran (closed 2026-06-15T16:24:49Z, before this run — likely a manual close or a prior partial `/tested`). The `/tested` run did not re-move them; it recorded the existing terminal state and finalized the release path. Team "GF Brevo" has two completed-type states (Done, Closed); the issues' existing terminal state is **Done**.
