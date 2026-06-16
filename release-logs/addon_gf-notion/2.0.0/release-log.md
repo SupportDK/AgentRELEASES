@@ -21,11 +21,7 @@ For Test
 
 ZIP:
 wpconnect-gf-notion.2.0.0.zip  (dist/wpconnect-gf-notion.2.0.0.zip)
-
-> ⚠️ ZIP attachment upload to the QA issue failed (Linear/GCS signed-URL 60s
-> window expired on every attempt). The Testing Package block (filename, local
-> path, branch) is present in the GFNO-95 description so the tester can locate
-> the ZIP. Attach manually if a Linear attachment is required.
+Attached to GFNO-95 ✓ (Linear attachment id 8f8418c7-c249-437a-9612-93106108438e)
 
 ## PO Stories
 
