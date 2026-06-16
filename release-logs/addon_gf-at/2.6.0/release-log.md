@@ -23,7 +23,7 @@ Linear Project:
 GF Airtable v2.6.0
 
 Status:
-For Test
+Done (terminal state — QA approved 2026-06-16 via /tested; tag `v2.6.0` deferred to deploy, not created here)
 
 ZIP:
 wpconnect-gf-airtable.2.6.0.zip  (dist/wpconnect-gf-airtable.2.6.0.zip — attached to GFAT-140)
@@ -68,7 +68,22 @@ This release was built on top of the port branch `port/translationspress-languag
 | GFAT-117 | Todo → In Progress | 2026-06-15T16:59:09Z |
 | GFAT-117 | In Progress → For Test | 2026-06-15T17:19:15Z |
 | GFAT-140 (QA) | created → For Test | 2026-06-15T17:10:34Z |
+| GFAT-139 | For Test → Done | 2026-06-16T09:34:50Z |
+| GFAT-137 | For Test → Done | 2026-06-16T09:34:51Z |
+| GFAT-136 | For Test → Done | 2026-06-16T09:34:52Z |
+| GFAT-138 | For Test → Done | 2026-06-16T09:34:53Z |
+| GFAT-117 | For Test → Done | 2026-06-16T09:34:55Z |
+| GFAT-140 (QA) | For Test → Done | 2026-06-16T09:34:56Z |
+
+## Finalization (/tested, 2026-06-16)
+
+Human QA approved (tested on the corrected ZIP carrying commits `ae1b730` / `54b5d68` — translations confirmed loading; GFAT-139 paragraph fix confirmed). Terminal state used: **Done** (the team has two `completed`-type states, "Done" and "Closed"; "Done" was chosen per the Complete/Done preference rule).
+
+- All issues (GFAT-139/137/136/138 + README GFAT-117 + QA GFAT-140) moved to **Done**.
+- **Tag `v2.6.0` was NOT created** — per the team's workflow the tag is created at deploy time, not by `/tested`.
+- **No GitHub Release** created (tied to the deploy/tag step).
+- No merge or WordPress.org/production deploy performed.
 
 ## Next step
 
-After human QA approval: `/tested GF Airtable 2.6.0` (tags v2.6.0, moves issues to terminal state, updates this log).
+Deploy: create and push the tag `v2.6.0` on the head of `release/2.6.0` (`54b5d68`) at deploy time, plus any GitHub Release if applicable.

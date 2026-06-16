@@ -13,6 +13,7 @@ Link: https://linear.app/wp-connect/issue/GFAT-139/for-all-of-my-forms-the-parag
 |---|---|
 | Todo → In Progress | 2026-06-15T16:59:04Z |
 | In Progress → For Test | 2026-06-15T17:10:14Z |
+| For Test → Done | 2026-06-16T09:34:50Z |
 
 ---
 
@@ -26,6 +27,7 @@ Note: Implemented via /port from GF Notion (addon_gf-notion). See port-logs/addo
 |---|---|
 | Todo → In Progress | 2026-06-15T16:59:05Z |
 | In Progress → For Test | 2026-06-15T17:10:15Z |
+| For Test → Done | 2026-06-16T09:34:51Z |
 
 ---
 
@@ -38,6 +40,7 @@ Link: https://linear.app/wp-connect/issue/GFAT-136/update-wordpress-70
 |---|---|
 | Todo → In Progress | 2026-06-15T16:59:06Z |
 | In Progress → For Test | 2026-06-15T17:10:17Z |
+| For Test → Done | 2026-06-16T09:34:52Z |
 
 ---
 
@@ -50,6 +53,7 @@ Link: https://linear.app/wp-connect/issue/GFAT-138/add-required-php-and-wp
 |---|---|
 | Todo → In Progress | 2026-06-15T16:59:07Z |
 | In Progress → For Test | 2026-06-15T17:10:18Z |
+| For Test → Done | 2026-06-16T09:34:53Z |
 
 ---
 
@@ -62,6 +66,7 @@ Link: https://linear.app/wp-connect/issue/GFAT-117/readme
 |---|---|
 | Todo → In Progress | 2026-06-15T16:59:09Z |
 | In Progress → For Test | 2026-06-15T17:19:15Z |
+| For Test → Done | 2026-06-16T09:34:55Z |
 
 ---
 
@@ -74,7 +79,8 @@ Attachment: wpconnect-gf-airtable.2.6.0.zip
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-06-15T17:10:34Z |
+| For Test → Done | 2026-06-16T09:34:56Z |
 
 ---
 
-> `/tested GF Airtable 2.6.0` will append the terminal transitions (For Test → Closed/Done) after human QA approval.
+> Finalized via `/tested GF Airtable 2.6.0` on 2026-06-16 — all issues moved to **Done** (terminal). Tag `v2.6.0` deferred to deploy (not created by /tested).
