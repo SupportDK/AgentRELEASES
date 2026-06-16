@@ -14,6 +14,7 @@ Note: Implemented via /port from GF Notion (addon_gf-notion). See port-logs/addo
 |---|---|
 | Todo → In Progress | 2026-06-15T17:45:53Z |
 | In Progress → For Test | 2026-06-15T17:53:12Z |
+| For Test → Done | 2026-06-16T09:29:32Z |
 
 ---
 
@@ -26,6 +27,7 @@ Link: https://linear.app/wp-connect/issue/GFSG-79/update-wordpress-70
 |---|---|
 | Todo → In Progress | 2026-06-15T17:45:51Z |
 | In Progress → For Test | 2026-06-15T17:53:10Z |
+| For Test → Done | 2026-06-16T09:29:36Z |
 
 ---
 
@@ -39,6 +41,7 @@ Note: Header + readme declare WP 6.0 / PHP 7.4; runtime requirement guard (`get_
 |---|---|
 | Todo → In Progress | 2026-06-15T17:45:54Z |
 | In Progress → For Test | 2026-06-15T17:53:13Z |
+| For Test → Done | 2026-06-16T09:29:40Z |
 
 ---
 
@@ -51,6 +54,7 @@ Link: https://linear.app/wp-connect/issue/GFSG-63/readme
 |---|---|
 | Todo → In Progress | 2026-06-15T17:46:04Z |
 | In Progress → For Test | 2026-06-15T17:54:45Z |
+| For Test → Done | 2026-06-16T09:29:42Z |
 
 ---
 
@@ -63,7 +67,8 @@ Attachment: wpconnect-gf-sendgrid.1.9.0.zip
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-06-15T17:53:24Z |
+| For Test → Done | 2026-06-16T09:29:45Z |
 
 ---
 
-> `/tested GF SendGrid 1.9.0` will append the terminal transitions (For Test → Closed/Done) after human QA approval.
+> Finalized via `/tested GF SendGrid 1.9.0` on 2026-06-16 — all issues moved to **Done** (terminal). Tag `v1.9.0` deferred to deploy (not created by /tested).

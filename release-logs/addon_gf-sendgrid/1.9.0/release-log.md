@@ -21,7 +21,7 @@ Linear Project:
 GF SendGrid v1.9.0
 
 Status:
-For Test
+Done (terminal state — QA approved 2026-06-16 via /tested; tag `v1.9.0` deferred to deploy, not created here)
 
 ZIP:
 wpconnect-gf-sendgrid.1.9.0.zip  (dist/wpconnect-gf-sendgrid.1.9.0.zip — attached to GFSG-81)
@@ -63,7 +63,21 @@ This release was built on top of the port branch `port/translationspress-languag
 | GFSG-63 | Todo → In Progress | 2026-06-15T17:46:04Z |
 | GFSG-63 | In Progress → For Test | 2026-06-15T17:54:45Z |
 | GFSG-81 (QA) | created → For Test | 2026-06-15T17:53:24Z |
+| GFSG-78 | For Test → Done | 2026-06-16T09:29:32Z |
+| GFSG-79 | For Test → Done | 2026-06-16T09:29:36Z |
+| GFSG-80 | For Test → Done | 2026-06-16T09:29:40Z |
+| GFSG-63 | For Test → Done | 2026-06-16T09:29:42Z |
+| GFSG-81 (QA) | For Test → Done | 2026-06-16T09:29:45Z |
+
+## Finalization (/tested, 2026-06-16)
+
+Human QA approved (tested on the corrected ZIP carrying commit `e1badb8` — translations confirmed loading). Terminal state used: **Done** (the team has two `completed`-type states, "Done" and "Closed"; "Done" was chosen per the Complete/Done preference rule).
+
+- All issues (GFSG-78/79/80/63 + QA GFSG-81) moved to **Done**.
+- **Tag `v1.9.0` was NOT created** — per the team's workflow the tag is created at deploy time, not by `/tested`.
+- **No GitHub Release** created (tied to the deploy/tag step).
+- No merge or WordPress.org/production deploy performed.
 
 ## Next step
 
-After human QA approval: `/tested GF SendGrid 1.9.0` (tags v1.9.0, moves issues to terminal state, updates this log).
+Deploy: create and push the tag `v1.9.0` on the head of `release/1.9.0` (`e1badb8`) at deploy time, plus any GitHub Release if applicable.
