@@ -2,12 +2,14 @@
 
 Repository: wpconnect-co/addon_gf-at
 Branch: release/2.6.0
-Commit: f6c429374ccb395d0944375642b156d085100cfe
+Commit: ae1b730689e72e064f6f9960789a3fab6ec90fdf
 Date: 2026-06-15
 
 > Note: package re-built and re-pushed on 2026-06-15 with commit `9764929` — runtime requirement guard aligned to the declared WP 6.0 / PHP 7.4 minimums (GFAT-138 follow-up). QA ZIP on GFAT-140 was re-attached.
 >
 > Note: package re-built on 2026-06-16 with commit `f6c4293` — **structure alignment with the TranslationsPress source**. The port had kept the bundled `languages/` directory (`.mo`/`.po`/`.pot`), the local `load_plugin_textdomain()` loader and the `Domain Path` header, whereas the reference plugin (`addon_gf-notion`) removed all of them as part of the TranslationsPress migration. These were removed so translations are served exclusively from translationspress.com (loaded just-in-time by WP core from `wp-content/languages/plugins/`). QA ZIP on GFAT-140 must be re-attached.
+>
+> Note: package re-built on 2026-06-16 with commit `ae1b730` — **text-domain / slug fix (translations were not loading in QA)**. The TranslationsPress project slug is `wpconnect-gf-airtable` (packs ship `wpconnect-gf-airtable-{locale}.mo`), but the port pointed the t15s slug + packages.json URL at the text domain `wpc-gf-at` (HTTP 403 → nothing downloaded; and a name mismatch even if it had). Aligned the plugin text domain to `wpconnect-gf-airtable` (header + all gettext calls) and fixed the language-pack slug + URL, matching GF Notion's working model. Hook names (`wpc-gf-at/*`) unchanged. QA ZIP on GFAT-140 re-attached. See the port report's "Text-domain / slug fix" section.
 
 ## QA Tracking
 

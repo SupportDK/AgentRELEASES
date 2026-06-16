@@ -2,10 +2,12 @@
 
 Repository: wpconnect-co/addon_gf-sendgrid
 Branch: release/1.9.0
-Commit: 9bab98c2683b214d90d97c87375e4db873b623b9
+Commit: e1badb8fc89128914a5de5116121ba0a026d77c3
 Date: 2026-06-15
 
 > Note: package re-built on 2026-06-16 with commit `9bab98c` — **structure alignment with the TranslationsPress source**. The port had kept the bundled `languages/` directory (`.mo`/`.po`/`.pot`), the local `load_plugin_textdomain()` loader and the `Domain Path` header, whereas the reference plugin (`addon_gf-notion`) removed all of them as part of the TranslationsPress migration. These were removed so translations are served exclusively from translationspress.com (loaded just-in-time by WP core from `wp-content/languages/plugins/`). QA ZIP on GFSG-81 re-attached.
+>
+> Note: package re-built on 2026-06-16 with commit `e1badb8` — **text-domain / slug fix (translations were not loading in QA)**. The TranslationsPress project slug is `wpconnect-gf-sendgrid` (packs ship `wpconnect-gf-sendgrid-{locale}.mo`), but the port pointed the t15s slug + packages.json URL at the text domain `wpc-gf-sg` (HTTP 403 → nothing downloaded; and a name mismatch even if it had). Aligned the plugin text domain to `wpconnect-gf-sendgrid` (header + all gettext calls) and fixed the language-pack slug + URL, matching GF Notion's working model. Hook names (`wpc-gf-sg/*`) unchanged. QA ZIP on GFSG-81 re-attached. See the port report's "Text-domain / slug fix" section.
 
 ## QA Tracking
 

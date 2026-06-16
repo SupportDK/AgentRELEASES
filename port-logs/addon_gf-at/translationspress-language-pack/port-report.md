@@ -70,6 +70,23 @@ Corrected on `release/2.6.0` to match the source structure:
 
 Unchanged (deliberately): the text domain stays `wpc-gf-at` and the t15s slug / TranslationsPress URL stay `wpc-gf-at` — that mapping decision (above) remains correct; only the redundant local pipeline was dropped. `php -l` clean. QA ZIP `dist/wpconnect-gf-airtable.2.6.0.zip` regenerated (no `languages/` entry; 114 KB → 76 KB).
 
+## Text-domain / slug fix (2026-06-16, applied on `release/2.6.0`, commit `ae1b730`)
+
+QA testing showed translations never load. Root cause: the port's "key mapping decision" above was **backwards**. The TranslationsPress project is registered under the slug **`wpconnect-gf-airtable`** (verified: `…/wp-connect/wpconnect-gf-airtable/packages.json` → HTTP 200; the port's `…/wpc-gf-at/packages.json` → HTTP 403), and its packs ship files named **`wpconnect-gf-airtable-{locale}.mo`** (verified by downloading `wpconnect-gf-airtable-fr_FR.zip`). The port instead pointed the t15s slug + URL at the text domain `wpc-gf-at`, so:
+
+1. `get_translations()` → `wp_remote_get()` got a 403 → returned `[]` → nothing was ever registered for download (primary cause).
+2. Even with the URL fixed, WP loads text domain `wpc-gf-at` (looks for `wpc-gf-at-{locale}.mo`) while the packs install `wpconnect-gf-airtable-{locale}.mo` → name mismatch → never loaded.
+
+GF Notion works precisely because **text domain == slug == folder == `wpconnect-gf-notion`**. The author's own `feature/translationpress` branch had already aligned the text domain to `wpconnect-gf-airtable`; the port did not follow that model.
+
+Fix (chosen by the user — align code to the platform slug):
+
+- Plugin text domain changed `wpc-gf-at` → `wpconnect-gf-airtable`: the `Text Domain:` header and **all gettext calls** (`__()`/`esc_html__()`/…, ~82 occurrences across 6 files).
+- Language-pack bootstrap: slug + packages.json URL → `wpconnect-gf-airtable`.
+- **Unchanged:** action/filter hook names (`wpc-gf-at/*`) — those are public API identifiers, not text domains — and the `WPCONNECT_GF_AT_*` constants / `wpcgfat_` option prefix.
+
+`php -l` clean on all changed files. QA ZIP regenerated.
+
 ## Notes / external follow-up
 
 - The TranslationsPress/GlotPress project must exist at `https://packages.translationspress.com/wp-connect/wpc-gf-at/packages.json` for packs to actually download — that is an external ops/registration task, outside `/port`.

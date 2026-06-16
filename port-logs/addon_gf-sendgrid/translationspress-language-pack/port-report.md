@@ -73,6 +73,23 @@ Corrected on `release/1.9.0` to match the source structure:
 
 Unchanged (deliberately): the text domain stays `wpc-gf-sg` and the t15s slug / TranslationsPress URL stay `wpc-gf-sg` — that mapping decision (above) remains correct; only the redundant local pipeline was dropped. `php -l` clean. QA ZIP `dist/wpconnect-gf-sendgrid.1.9.0.zip` regenerated (no `languages/` entry; 63 KB → 40 KB).
 
+## Text-domain / slug fix (2026-06-16, applied on `release/1.9.0`, commit `e1badb8`)
+
+QA testing of GF Airtable surfaced the same defect here. Root cause: the port's "key mapping decision" above was **backwards**. The TranslationsPress project is registered under the slug **`wpconnect-gf-sendgrid`** (verified: `…/wp-connect/wpconnect-gf-sendgrid/packages.json` → HTTP 200; the port's `…/wpc-gf-sg/packages.json` → HTTP 403), and its packs ship files named **`wpconnect-gf-sendgrid-{locale}.mo`**. The port pointed the t15s slug + URL at the text domain `wpc-gf-sg`, so:
+
+1. `get_translations()` → `wp_remote_get()` got a 403 → returned `[]` → nothing registered for download (primary cause).
+2. Even with the URL fixed, WP loads text domain `wpc-gf-sg` while the packs install `wpconnect-gf-sendgrid-{locale}.mo` → name mismatch → never loaded.
+
+GF Notion works because **text domain == slug == folder**. The author's own `feature/translationpress` branch had already aligned the text domain to `wpconnect-gf-sendgrid`.
+
+Fix (align code to the platform slug):
+
+- Plugin text domain changed `wpc-gf-sg` → `wpconnect-gf-sendgrid`: the `Text Domain:` header and **all gettext calls** (~95 occurrences across 8 files).
+- Language-pack bootstrap: slug + packages.json URL → `wpconnect-gf-sendgrid`.
+- **Unchanged:** action/filter hook names (`wpc-gf-sg/*`) and the `WPCONNECT_GF_SG_*` constants / `wpc_gf_sg_` option prefix.
+
+`php -l` clean on all changed files. QA ZIP regenerated.
+
 ## Notes / external follow-up
 
 - The TranslationsPress/GlotPress project must exist at `https://packages.translationspress.com/wp-connect/wpc-gf-sg/packages.json` for packs to actually download — external ops/registration task, outside `/port`.
