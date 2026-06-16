@@ -98,7 +98,32 @@ No /stories run for this version. Issues were validated inline during /release (
 - GitHub Release + deploy: handled by CI on PR merge — not created manually here.
 - PR #13 (`release/2.9.0 → main`) opened as the CI trigger, left **unmerged** (merge/deploy is the team's step).
 
-## Next step
+## CI merge + outcome (2026-06-16)
 
-Team merges PR #13 (`release/2.9.0 → main`). CI (`auto-tag-and-release`) then creates tag `2.9.0`,
-the GitHub Release, and deploys. No further `/tested` action required.
+- PR #13 (`release/2.9.0 → main`) **merged** at 2026-06-16T08:43 (merge commit `9d67661`) — explicit user instruction.
+- Workflow `auto-tag-and-release` (run 27605459191) **FAILED** at step "Install WP-CLI".
+- **No tag `2.9.0`, no GitHub Release, no deploy** were produced. `deploy` job was skipped.
+
+### Root cause (upstream, not plugin code)
+The shared workflow `wpconnect-co/github-workflows/.github/workflows/auto-tag-and-release.yml@v1.3`
+downloads the stable `wp-cli.phar` (currently **2.12.0**) then runs
+`wp package install wp-cli/dist-archive-command`, which resolves to `dev-main`. That dev branch now
+requires `wp-cli/wp-cli ^2.13`, incompatible with the 2.12.0 phar → Composer exit code 2 → job fails.
+
+```
+wp-cli/dist-archive-command dev-main requires wp-cli/wp-cli ^2.13 -> found wp-cli/wp-cli[2.12.0]
+```
+
+This is environmental/upstream drift and affects **every** plugin using `auto-tag-and-release@v1.3`,
+independent of GF Brevo 2.9.0's code (which is correct: header `Version: 2.9.0`, `Stable tag: 2.9.0`).
+
+### Remediation (pending decision)
+Fix the shared workflow's "Install WP-CLI" step to pin a compatible combination, e.g.
+`wp package install wp-cli/dist-archive-command:@stable` pinned to a release supporting wp-cli ^2,
+or fetch a wp-cli.phar build ≥ 2.13. Then re-run the failed run 27605459191 (replays the merged-PR
+event → produces tag `2.9.0` + Release + deploy). Re-running before the fix will fail identically.
+
+## Status of finalization
+
+PARTIAL — code merged to `main`; release/deploy **blocked** by the CI dependency issue above.
+Awaiting shared-workflow fix + re-run. No further plugin-side action required.
