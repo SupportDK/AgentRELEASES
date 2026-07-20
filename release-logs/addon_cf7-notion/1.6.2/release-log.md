@@ -1,8 +1,8 @@
 # Release log — CF7 Notion 1.6.2
 
 Repository: wpconnect-co/addon_cf7-notion
-Branch: release/cf7-notion-1.6.2
-Commit: 99ecf03ca4742d1e654736e4105306da764cdff6
+Branch: release/1.6.2
+Commit: 6e87c288ac73cc69f4dfc6f4339b68d5a715ebf7
 Date: 2026-07-20
 
 ## QA Tracking
@@ -23,7 +23,10 @@ ZIP:
 /home/cristian/AgentRELEASES/dist/add-on-cf7-for-notion.1.6.2.zip
 
 SHA256:
-8b91bfd6540934fca0eab777d602a972738fc8d4592ef07752e297b394240aa3
+574bffc2fa3ed34c7dcfc2fc901f8282a6235ebcfff977e812214160829528c8
+
+Linear attachment:
+CF7NO-47 attachment `e24d486d-139a-4506-add0-c7e05e273039` — QA ZIP uploaded to Linear for download. CF7NO-47 description also includes the `readme.txt` External services section for Notion API.
 
 ## PO Stories
 
@@ -51,3 +54,11 @@ No /stories run for this version. CF7NO-46 was handled as a focused WP.org compl
 6. Review `readme.txt` External services: it must document only the Notion API.
 
 Hard stop: no tag, merge, GitHub release, SVN publication, or Linear closure before Cris approves this exact ZIP via /tested.
+
+## Post-review corrections (2026-07-20)
+
+Applied after code review, before QA sign-off (same version 1.6.2):
+
+- **Branch renamed** `release/cf7-notion-1.6.2` → `release/1.6.2` (workspace convention `release/<version>`; old remote branch deleted). Work lived in worktree `worktrees/addon_cf7-notion-release-1.6.2`.
+- **Translation timing:** `load_translations` moved back to `init` priority 5 (was `plugins_loaded`) — WordPress 6.7+ best practice and the pre-1.6.0 behavior. Commit `6e87c28`.
+- Repackaged the same version; ZIP replaced on CF7NO-47 (old attachment deleted, new `add-on-cf7-for-notion.1.6.2.zip`, SHA above). `php -l` OK; no TranslationsPress references remain.
