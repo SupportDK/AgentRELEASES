@@ -9,6 +9,15 @@ https://linear.app/wp-connect/issue/GFNO-96/align-platform-requirements-php-74-m
 | Backlog → In Progress | 2026-07-20T19:22:39Z |
 | In Progress → For Test | 2026-07-20T19:24:15Z |
 
+## GFNO-99 — Add support and documentation links to the plugin settings page
+https://linear.app/wp-connect/issue/GFNO-99/add-support-and-documentation-links-to-the-plugin-settings-page
+
+### Workflow Status History
+| Transition | Timestamp |
+|---|---|
+| Backlog → In Progress | 2026-07-20T19:27:57Z |
+| In Progress → For Test | 2026-07-20T19:30:37Z |
+
 ## GFNO-101 — Update GF Notion 2.0.1 (QA issue)
 https://linear.app/wp-connect/issue/GFNO-101/update-gf-notion-201
 
