@@ -38,3 +38,14 @@ No /stories run for this version
 | WPFNO-35 | In Progress → For Test | 2026-06-11T16:34:21Z |
 | WPFNO-36 | created → For Test | 2026-06-11T15:16:25Z |
 | WPFNO-36 | project assigned (WPForms Notion v1.4.1) | 2026-06-11T16:34:22Z |
+
+## QA Fixes (post-package, same version)
+
+Found during human QA on WordPress 6.7 (WP_DEBUG log):
+
+`Function _load_textdomain_just_in_time was called incorrectly` for the `wpconnect-wpf-notion` domain (translation triggered before `init`).
+
+- **Fix commit:** `5e0af10` on `release/1.4.1`
+- **Change:** `get_requirements()` no longer translates during `plugins_loaded`; returns stable untranslated keys, with translatable labels moved to `notice_for_missing_requirements()` (admin_notices, after init). Text domain now loads on `init`.
+- **Repackaged** the same version and **replaced** the ZIP attached to the QA issue (old attachment deleted, corrected build uploaded). ZIP verified to contain the fix.
+- No version bump (per QA decision to iterate on the release branch before /tested).
