@@ -32,7 +32,7 @@ cp .env.example .env
 nano .env          # set GITHUB_PAT=ghp_your_real_token
 
 # 3. Register the GitHub MCP (loads .env, validates the token)
-#    linear/notion/wp-devdocs load automatically from .mcp.json
+#    wp-devdocs loads automatically from .mcp.json
 ./scripts/setup-mcp.sh
 
 # 4. Open Claude Code and trust the project
@@ -40,10 +40,7 @@ claude
 ```
 
 ```text
-# 5. Inside Claude Code: authenticate Linear and Notion (OAuth in browser)
-/mcp
-
-# 6. Verify the whole workspace
+# 5. Verify the whole workspace
 /setup
 ```
 
@@ -80,8 +77,7 @@ Use your **real token** — placeholders like `ghp_TU_TOKEN` will fail with HTTP
 
 ```bash
 claude mcp get github
-claude mcp get linear
-claude mcp get notion
+claude mcp get wp-devdocs
 ```
 
 Expected result for each:
@@ -103,9 +99,9 @@ Or run the full diagnostic (also used by `/setup`):
 | Component | How it loads |
 |---|---|
 | Agents, skills, commands, settings | Versioned in `.claude/` — automatic |
-| linear, notion, wp-devdocs MCPs | `.mcp.json` (versioned) — automatic when the project is trusted |
+| wp-devdocs MCP | `.mcp.json` (versioned) — automatic when the project is trusted |
 | github MCP | `setup-mcp.sh` registers it at **local scope** with your PAT (never at project scope — that would write the token into the versioned `.mcp.json`) |
-| Linear / Notion auth | OAuth via `/mcp` — once per machine |
+| Linear / Notion auth | Direct API tokens from the active Hermes/Orion environment |
 | GitHub auth | `GITHUB_PAT` in `.env` — once per machine |
 | wp-devdocs | npx, no auth (needs Node.js >= 20) |
 
@@ -129,7 +125,7 @@ Or run the full diagnostic (also used by `/setup`):
 | `HTTP 400 at https://api.githubcopilot.com/mcp/` | Empty, invalid or **fine-grained** PAT: `.env` needs a real **classic** token (`ghp_...`), then re-run `./scripts/setup-mcp.sh` |
 | `GITHUB_PAT is a FINE-GRAINED token` from the script | Generate a **classic** token instead (`ghp_...`, `repo` scope) and replace it in `.env` |
 | `error: missing required argument 'name'` from `claude mcp add` | Outdated script — `git pull` (the `-H` flag is variadic and must come AFTER the server name and URL) |
-| linear/notion missing | They load from `.mcp.json` — restart `claude` in the project and accept the trust prompt |
+| Linear / Notion MCP authentication prompt | Obsolete: Linear and Notion are direct token-only integrations in Hermes/Orion |
 | `origin -> SupportDK/AgentRELEASES` check fails | `git remote set-url origin git@github-supportdk:SupportDK/AgentRELEASES.git`. Plugin repos must NOT be remotes of this workspace |
 | `GITHUB_PAT not set` from the script | Edit `.env` and set the token, re-run the script |
 | wp-devdocs missing | Install Node.js >= 20 (`npx` required) |

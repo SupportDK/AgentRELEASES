@@ -20,7 +20,7 @@ cp .env.example .env
 nano .env                    # GITHUB_PAT=ghp_your_real_token
 
 # 3. Register the GitHub MCP (loads .env, validates the token;
-#    linear/notion/wp-devdocs load automatically from .mcp.json)
+#    wp-devdocs loads automatically from .mcp.json)
 ./scripts/setup-mcp.sh
 
 # 4. Open Claude Code and trust the project
@@ -28,10 +28,7 @@ claude
 ```
 
 ```text
-# 5. Inside Claude Code: authenticate Linear and Notion (GitHub uses the PAT)
-/mcp
-
-# 6. Verify everything
+# 5. Verify everything
 /setup
 ```
 
@@ -104,7 +101,7 @@ Issues moved to Closed → Release completed
 ## Repository Structure
 
 ```
-.mcp.json                       ← project MCPs: linear, notion, github, wp-devdocs
+.mcp.json                       ← project MCPs: github, wp-devdocs
 .claude/
 ├── agents/                     ← product-owner.md, developer.md, documentation.md
 ├── commands/                   ← setup, issue, feature, hotfix, release, package
@@ -135,7 +132,7 @@ CHANGELOG.md
 - **Notion** — documentation destination
 - **wp-devdocs** — verified WordPress hooks/blocks index (via `npx wp-devdocs-mcp`)
 
-OAuth tokens are always local to each machine. Nothing secret is ever committed.
+Linear and Notion use direct API tokens in Hermes/Orion; GitHub MCP uses its local PAT. Nothing secret is ever committed.
 
 ---
 

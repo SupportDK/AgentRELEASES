@@ -3,9 +3,9 @@
 # Loads .env, validates GITHUB_PAT, and registers the GitHub MCP locally.
 #
 # Design notes (read before editing):
-# - linear, notion and wp-devdocs are declared in the versioned .mcp.json
-#   (project scope) and load automatically — this script does NOT re-register
-#   them, to avoid duplicate configurations.
+# - wp-devdocs is declared in the versioned .mcp.json (project scope) and
+#   loads automatically. Linear and Notion use direct token-authenticated APIs,
+#   not MCP servers.
 # - github is the exception: its endpoint needs the PAT in an Authorization
 #   header. It is registered at LOCAL scope only. NEVER register it with
 #   `-s project`: that would write the real token into the versioned
@@ -94,11 +94,11 @@ if ! command -v claude >/dev/null 2>&1; then
 fi
 
 if [ ! -f "$ROOT/.mcp.json" ]; then
-  echo "⚠️  .mcp.json not found at project root — linear/notion/wp-devdocs"
+  echo "⚠️  .mcp.json not found at project root — wp-devdocs"
   echo "   will not load automatically. Pull the latest repo version."
 fi
 
-echo "Cleaning stale local registrations (linear/notion/wp-devdocs load from .mcp.json)..."
+echo "Cleaning stale Linear/Notion MCP registrations..."
 claude mcp remove linear -s local 2>/dev/null || true
 claude mcp remove notion -s local 2>/dev/null || true
 claude mcp remove wp-devdocs -s local 2>/dev/null || true
@@ -118,12 +118,10 @@ claude mcp list 2>/dev/null || echo "  (run 'claude mcp list' manually to valida
 
 echo ""
 echo "Next steps:"
-echo "  1. Run: claude   (trust the project so .mcp.json loads linear/notion/wp-devdocs)"
-echo "  2. Inside Claude Code, run /mcp and authenticate Linear and Notion (OAuth)."
-echo "     GitHub is already authenticated via your PAT — no OAuth needed."
+echo "  1. Run: claude   (trust the project so .mcp.json loads wp-devdocs)"
+echo "  2. Linear and Notion use direct API tokens supplied by the active Hermes/Orion environment."
 echo "  3. Validate:"
 echo "       claude mcp get github"
-echo "       claude mcp get linear"
-echo "       claude mcp get notion"
+echo "       claude mcp get wp-devdocs"
 echo "     Expected: Status: Connected"
 echo "  4. Run /setup for the full workspace check."

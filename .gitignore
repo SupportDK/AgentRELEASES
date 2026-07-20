@@ -56,3 +56,6 @@ dist/
 build/
 *.min.js
 *.min.css
+
+# git worktrees for in-flight plugin release branches (local only)
+worktrees/

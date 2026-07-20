@@ -109,12 +109,11 @@ echo ""
 echo "## MCP servers — must be Connected (required)"
 if command -v claude >/dev/null 2>&1; then
   MCP_LIST=$(claude mcp list 2>/dev/null)
-  for mcp in linear notion github wp-devdocs; do
+  for mcp in github wp-devdocs; do
     printf '%s\n' "$MCP_LIST" | grep -i "^${mcp}:" | grep -q "✔"
     check "mcp connected: $mcp" $?
   done
-  echo ""
-  echo "  ℹ️  linear/notion need OAuth via /mcp · github needs GITHUB_PAT in .env + ./scripts/setup-mcp.sh"
+
 else
   echo "  ⚠️  claude CLI not found — skipping MCP checks"
   FAIL=$((FAIL + 1))

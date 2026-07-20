@@ -29,7 +29,7 @@ Use the documentation agent to document this summary: [...]
 **Definition:** `.claude/agents/product-owner.md`
 **Model:** Sonnet
 **Tools:** Read, Grep, Glob, Bash
-**MCP:** Linear — `get_team`, `list_issues`, `get_issue`, `save_issue`
+**Integration:** Linear direct API — token-authenticated reads and updates.
 
 **Trigger:** A new Linear issue is ready to become a development task, or a finished implementation needs to be reviewed.
 

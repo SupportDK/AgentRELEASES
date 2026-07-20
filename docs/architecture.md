@@ -69,7 +69,7 @@ The QA gate is structural: `/release` never tags, publishes, merges, deploys or 
 
 ### product-owner (`.claude/agents/product-owner.md`)
 
-Reads Linear issues (via Linear MCP), improves descriptions, writes Implementation Briefs, reviews deliverables criterion by criterion (including WordPress quality signals), and produces Documentation Requests. Never writes code. Tools: Read, Grep, Glob, Bash.
+Reads Linear issues via the direct token-authenticated API, improves descriptions, writes Implementation Briefs, reviews deliverables criterion by criterion (including WordPress quality signals), and produces Documentation Requests. Never writes code. Tools: Read, Grep, Glob, Bash.
 
 ### developer (`.claude/agents/developer.md`)
 
@@ -111,21 +111,19 @@ Read-only analyst used by `/port`. Reads a reference (source) plugin and produce
 
 ---
 
-## MCP strategy
+## Integration strategy
 
-Declared in `.mcp.json` at the project root (versioned, loaded automatically when the project is trusted):
+MCP servers declared in `.mcp.json` at the project root (versioned, loaded automatically when the project is trusted):
 
 | Server | Transport | Purpose | Auth |
 |---|---|---|---|
-| `linear` | HTTP | Issue source of truth | OAuth via `/mcp`, local per machine |
-| `notion` | HTTP | Documentation destination | OAuth via `/mcp`, local per machine |
 | `github` | HTTP | PRs, releases | OAuth via `/mcp`, local per machine |
 | `wp-devdocs` | stdio (`npx wp-devdocs-mcp`) | Verified WP hooks/blocks index | None (Node >= 20) |
 
 Rules:
 
 - `.mcp.json` and `.claude/settings.json` (with `enableAllProjectMcpServers: true`) are versioned.
-- OAuth tokens and `.claude/settings.local.json` are **never** committed.
+- Linear and Notion use direct API tokens supplied by Hermes/Orion; tokens and `.claude/settings.local.json` are **never** committed.
 - `scripts/setup-mcp.sh` remains as a manual fallback; `scripts/verify-setup.sh` is the diagnostic used by `/setup`.
 - wp-devdocs first run: `npx wp-devdocs-mcp quick-add-all` to index hooks (optional, ~500MB).
 

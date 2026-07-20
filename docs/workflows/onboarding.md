@@ -16,7 +16,7 @@ cp .env.example .env
 nano .env                  # GITHUB_PAT=ghp_your_real_token
 
 # 3. Register the GitHub MCP (loads .env, validates the token;
-#    linear/notion/wp-devdocs load from the versioned .mcp.json)
+#    wp-devdocs loads from the versioned .mcp.json)
 ./scripts/setup-mcp.sh
 
 # 4. Open Claude Code and trust the project
@@ -24,10 +24,7 @@ claude
 ```
 
 ```text
-# 5. Authenticate Linear and Notion (inside Claude Code)
-/mcp
-
-# 6. Verify
+# 5. Verify
 /setup
 ```
 
@@ -47,7 +44,7 @@ Everything is versioned in the repository:
 What can never be in the repo — and therefore needs the manual steps:
 
 - **`.env` with your real `GITHUB_PAT`** → step 2 (template versioned as `.env.example`)
-- **OAuth tokens** (Linear, Notion) → step 5
+- **Direct API tokens** (Linear, Notion) → supplied by the active Hermes/Orion environment
 - **SSH key** for the `github-supportdk` host alias → machine-level git config
 - **Project trust** → Claude Code asks once per machine
 
@@ -77,8 +74,7 @@ Why local scope and not project scope: registering github with `-s project` woul
 
 ```bash
 claude mcp get github
-claude mcp get linear
-claude mcp get notion
+claude mcp get wp-devdocs
 ```
 
 Expected: `Status: Connected` for each.
