@@ -85,8 +85,53 @@ To reuse a feature already implemented in another plugin, `/port <feature> from 
 
 `port-logs/` is versioned in this workspace (like `release-logs/`); `repos/` stays git-ignored.
 
+## Workspace commands & tooling
+
+This workspace is an **orchestration layer**, not a buildable app — there is no compile/test step for the workspace itself. The actual plugin code lives in external `wpconnect-co` repos, cloned on demand into the git-ignored `repos/`. What you run here:
+
+```bash
+./scripts/verify-setup.sh     # diagnostics used by /setup (structure, agents, commands, MCPs, secrets hygiene)
+./scripts/setup-mcp.sh        # register the GitHub MCP from .env (linear/notion/wp-devdocs load from .mcp.json)
+```
+
+- **Config in `.env`**: only `GITHUB_PAT` (a *classic* `ghp_…` token, `repo` scope — fine-grained `github_pat_…` tokens fail with HTTP 400). Copy `.env.example` → `.env`; both `.env` and `repos/`/`dist/` are git-ignored.
+- **Vendored sub-projects** (`_wp-*`) are upstream sources, not edited by hand. `_wp-devdocs-mcp/` is a real Node package consumed via `npx wp-devdocs-mcp`; if you must work on it, its own scripts are `npm test` (`node test/*.js`) and `npm run lint` (eslint). Hook index (optional, first run): `npx wp-devdocs-mcp quick-add-all`.
+- **Plugin build/test** happens inside the cloned plugin repo, not here: package with `wp dist-archive ./ --plugin-dirname=<dirname>` → renamed `<main-plugin-file>.<version>.zip` in `dist/`.
+
 ## Conventions
 
 - Commits: `feature|fix|improvement|compatibility: <user-visible change>`
 - Agents: developer never pushes; push/tags/releases are main-session actions inside workflow commands.
 - Secrets: `.env` (git-ignored, template `.env.example`); never commit tokens.
+
+## Documentation conventions (readme.txt / changelog.txt)
+
+Keep every plugin's changelog and readme consistent with the wpconnect house style.
+
+**Changelog format** — in `changelog.txt`, or the `== Changelog ==` section of `readme.txt`:
+
+```
+= X.Y.Z =
+*Release Date: 21st July 2026*
+
+* Compatibility with WordPress 7.0
+* Feature: …
+* Improvement: …
+* Fix: …
+```
+
+- Date line: `*Release Date: <Nth> <Month> <Year>*` (ordinal day: `9th`, `21st`). One blank line **after the date**, single line breaks **between entries**, one blank line **between versions**.
+- Entry tags are limited to **Feature / Improvement / Fix**. `Compatibility with WordPress <ver>` is its own leading line (no tag). Order within a version: **Compatibility → Feature → Improvement → Fix**.
+- Don't re-advertise removed non-compliant services (e.g. drop old "Added TranslationsPress" lines when removing it for wp.org compliance).
+
+**readme.txt section order** — free CF7/GF/WPForms add-ons must be identical across siblings:
+`Description → Features → Installation → How does it work? How to use it? → Frequently Asked Questions → External services → Screenshots → Changelog → Support → Troubleshooting`
+- Any plugin that calls an external API (Airtable/Notion/…) must include `== External services ==` (endpoint, what/when data is sent, ToS + Privacy links) — a wp.org requirement.
+
+**Release dates**: source from git tags (`git log -1 --format=%ai <tag>`) or GitHub Releases; for untagged historical versions fall back to the version-bump commit date; leave undated only if no reliable source exists.
+
+**Linear docs**: each plugin has a project-attached "Readme <Plugin>" document (readme + full changelog), updatable via `mcp__linear__save_document`. The document **templates** under *Settings → Documents* are NOT reachable through the Linear MCP — those must be edited by hand.
+
+## Engineering notes
+
+- **WordPress 6.7 `_load_textdomain_just_in_time`**: never call `__()`/`_e()` before the `init` hook. Load the text domain on `init` (not `plugins_loaded`), and don't translate inside requirement checks that run at `plugins_loaded` (return stable keys, translate later in the admin notice).
