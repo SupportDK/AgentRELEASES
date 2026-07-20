@@ -2,8 +2,18 @@
 
 Repository: wpconnect-co/addon_cf7-airtable
 Branch: release/2.5.2
-Commit: dbda8ea
+Commit: 05052f7
 Date: 2026-07-20
+
+## Post-QA changes (2026-07-20)
+
+After CF7AT-55 was marked Done (no v2.5.2 tag created yet), additional changes were pushed to `release/2.5.2` at the user's request; these live in git and will be included when `/tested` tags the branch:
+
+- `load_translations` moved to `init` priority 5 (was `plugins_loaded`) — WordPress 6.7 best practice; behaviorally inert here.
+- `changelog.txt` + `readme.txt`: release dates added (from git tags) and entries reorganized (Compatibility with WordPress → Feature → Improvement → Fix, single line breaks). Tags limited to Fix/Improvement/Feature. Versions 1.0.0/1.0.1/1.0.2/1.1.0/1.1.1 have no tag, left undated.
+- `readme.md` (developer doc, not shipped): TranslationsPress references removed.
+
+The Linear QA ZIP on CF7AT-55 (Done) was intentionally left as the originally-approved build; final branch commit is `05052f7`.
 
 ## QA Tracking
 

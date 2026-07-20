@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/addon_cf7-notion
 Branch: release/1.6.2
-Commit: 04e586e
+Commit: d998bb7
 Date: 2026-07-20
 
 ## QA Tracking
@@ -23,14 +23,14 @@ ZIP:
 /home/cristian/AgentRELEASES/dist/add-on-cf7-for-notion.1.6.2.zip
 
 SHA256:
-ba8bff9b7cef96fc432f76689a33b9359686c5472d330b4830b4649ef366ad29
+8e827eebbda048e3e5cc49a2363d1d83fd899ded35705b898d0b343f4f87b89e
 
 Linear attachment:
-CF7NO-47 attachment `4f23f27f-e941-45ca-b6a2-bc2ae9397f48` — QA ZIP uploaded to Linear for download.
+CF7NO-47 attachment `24febcf9-4f25-43e9-bcf3-a8a7d7088d1f` — QA ZIP uploaded to Linear for download.
 
-## Changelog dates (2026-07-20)
+## Changelog dates & format (2026-07-20)
 
-Added release dates to `changelog.txt` entries (format `= x.y.z =` + `*Nth Month YYYY*`), sourced from git tags. Normalized all changelog tags to Fix/Improvement/Feature. Versions 1.0.0/1.0.1/1.0.2 have no tag, left undated. Commit `04e586e`, ZIP repackaged and re-attached (SHA above).
+Added release dates to `changelog.txt` entries (format `= x.y.z =` then `*Nth Month YYYY*`), sourced from git tags. Entries within each version ordered Compatibility with WordPress → Feature → Improvement → Fix, single line breaks between entries, blank line between versions. Tags limited to Fix/Improvement/Feature. Versions 1.0.0/1.0.1/1.0.2 have no tag, left undated. Final commit `d998bb7`, ZIP repackaged and re-attached (SHA above).
 
 ## PO Stories
 
