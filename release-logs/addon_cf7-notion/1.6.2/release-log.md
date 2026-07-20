@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/addon_cf7-notion
 Branch: release/1.6.2
-Commit: d998bb7
+Commit: 11ecd28
 Date: 2026-07-20
 
 ## QA Tracking
@@ -23,10 +23,10 @@ ZIP:
 /home/cristian/AgentRELEASES/dist/add-on-cf7-for-notion.1.6.2.zip
 
 SHA256:
-8e827eebbda048e3e5cc49a2363d1d83fd899ded35705b898d0b343f4f87b89e
+5cf73b52c9425ee66f0d79d33b22ae8cb9869469fd143588a7ae087f0b65ef31
 
 Linear attachment:
-CF7NO-47 attachment `24febcf9-4f25-43e9-bcf3-a8a7d7088d1f` — QA ZIP uploaded to Linear for download.
+CF7NO-47 attachment `39b7de95-a594-427c-a217-c9e4fda162e2` — QA ZIP uploaded to Linear for download.
 
 ## Changelog dates & format (2026-07-20)
 

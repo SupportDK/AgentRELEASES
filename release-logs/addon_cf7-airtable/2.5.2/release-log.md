@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/addon_cf7-airtable
 Branch: release/2.5.2
-Commit: 05052f7
+Commit: 6111205
 Date: 2026-07-20
 
 ## Post-QA changes (2026-07-20)
