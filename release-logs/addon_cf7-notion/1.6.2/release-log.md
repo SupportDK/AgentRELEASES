@@ -66,3 +66,7 @@ Applied after code review, before QA sign-off (same version 1.6.2):
 - **Branch renamed** `release/cf7-notion-1.6.2` → `release/1.6.2` (workspace convention `release/<version>`; old remote branch deleted). Work lived in worktree `worktrees/addon_cf7-notion-release-1.6.2`.
 - **Translation timing:** `load_translations` moved back to `init` priority 5 (was `plugins_loaded`) — WordPress 6.7+ best practice and the pre-1.6.0 behavior. Commit `6e87c28`.
 - Repackaged the same version; ZIP replaced on CF7NO-47 (old attachment deleted, new `add-on-cf7-for-notion.1.6.2.zip`, SHA above). `php -l` OK; no TranslationsPress references remain.
+
+## Changelog house-format (2026-07-20)
+
+changelog.txt aligned to the wpconnect house style (`*Release Date: ...*` + `* ` bullets, order Compatibility → Feature → Improvement → Fix). Historical release dates added (git tags; 1.0.0/1.0.1/1.0.2 from git history; 1.6.0 uses GitHub release date 24 Feb 2026). Final commit `2c8aae9`; ZIP re-attached to CF7NO-47 (attachment `b792a7f0`, SHA `73aadc6950e58057ea37aaae0e60341facd477de5d8b2393486ece64f9185903`).

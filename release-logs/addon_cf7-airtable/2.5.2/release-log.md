@@ -56,3 +56,7 @@ No /stories run for this version. Issues refined inline during Phase 1 (product-
 | CF7AT-52 | In Progress → For Test | 2026-07-20T14:49:51Z |
 | CF7AT-53 | In Progress → For Test | 2026-07-20T14:49:52Z |
 | CF7AT-55 | created → For Test | 2026-07-20T14:50:09Z |
+
+## Changelog house-format (2026-07-20)
+
+changelog.txt + readme.txt aligned to the wpconnect house style (matching air-wp-sync / orders-sync): `*Release Date: Nth Month YYYY*` + `* ` bullets, order Compatibility → Feature → Improvement → Fix. Historical release dates added (git tags + GitHub releases; oldest from git history). 1.1.1 left undated (no tag/release). Final commit `61ca6e5` (git only — CF7AT-55 Done, QA ZIP unchanged).

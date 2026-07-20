@@ -50,3 +50,7 @@ Found during human QA on WordPress 6.7 (WP_DEBUG log):
 - **Change:** `get_requirements()` no longer translates during `plugins_loaded`; returns stable untranslated keys, with translatable labels moved to `notice_for_missing_requirements()` (admin_notices, after init). Text domain now loads on `init`.
 - **Repackaged** the same version and **replaced** the ZIP attached to the QA issue (old attachment deleted, corrected build uploaded). ZIP verified to contain the fix.
 - No version bump (per QA decision to iterate on the release branch before /tested).
+
+## Changelog house-format (2026-07-20)
+
+readme.txt changelog aligned to the wpconnect house style (`*Release Date: ...*` + `* ` bullets, order Compatibility → Feature → Improvement → Fix). Release dates added from git tags (2.2.1 dated 21st July 2026 as the current QA release). Commit `ce81cd5` on `release/2.2.1`; ZIP re-attached to WPFAT-36 (attachment `883f60a6`, SHA `5cc1c166e1ceb2ef1fad2efbce0ec1a80472dc2b49d51cb0295ce2efd5687e56`).
