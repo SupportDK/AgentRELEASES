@@ -70,3 +70,7 @@ Applied after code review, before QA sign-off (same version 1.6.2):
 ## Changelog house-format (2026-07-20)
 
 changelog.txt aligned to the wpconnect house style (`*Release Date: ...*` + `* ` bullets, order Compatibility → Feature → Improvement → Fix). Historical release dates added (git tags; 1.0.0/1.0.1/1.0.2 from git history; 1.6.0 uses GitHub release date 24 Feb 2026). Final commit `2c8aae9`; ZIP re-attached to CF7NO-47 (attachment `b792a7f0`, SHA `73aadc6950e58057ea37aaae0e60341facd477de5d8b2393486ece64f9185903`).
+
+## Readme structure unified (2026-07-20)
+
+readme.txt aligned to the shared CF7 free-add-on structure: moved "External services" from before Installation to after FAQ. Section order now matches CF7 Airtable exactly. Commit `f831a45`; ZIP re-attached to CF7NO-47 (attachment `f8bdd66c`, SHA `b027d53a5aa11ed0909628678b16443b78908d41b53a7040fe58306cde243650`).

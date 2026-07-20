@@ -60,3 +60,7 @@ No /stories run for this version. Issues refined inline during Phase 1 (product-
 ## Changelog house-format (2026-07-20)
 
 changelog.txt + readme.txt aligned to the wpconnect house style (matching air-wp-sync / orders-sync): `*Release Date: Nth Month YYYY*` + `* ` bullets, order Compatibility → Feature → Improvement → Fix. Historical release dates added (git tags + GitHub releases; oldest from git history). 1.1.1 left undated (no tag/release). Final commit `61ca6e5` (git only — CF7AT-55 Done, QA ZIP unchanged).
+
+## Readme structure unified (2026-07-20)
+
+readme.txt aligned to the shared CF7 free-add-on structure: added "How does it work? How to use it?" (after Installation) and "Support" (after Changelog). Section order now matches CF7 Notion exactly: Description → Features → Installation → How does it work? → FAQ → External services → Screenshots → Changelog → Support → Troubleshooting. Commit `88e46c9` (git only — CF7AT-55 Done).
