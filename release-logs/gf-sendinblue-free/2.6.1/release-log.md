@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/gf-sendinblue-free
 Branch: release/2.6.1
-Commit: a55daff8f649296f157e1a4cf737c7a2e9be3aca
+Commit: 501cd0c (QA-prep corrections; supersedes a55daff)
 Date: 2026-07-21
 
 ## QA Tracking
@@ -53,6 +53,15 @@ No /stories run for this version. Story-quality validated inline during Phase 1 
 
 - Packaging: top-level ZIP folder is `addon-gravityforms-sendinblue-free/` (main-file basename, matching the wp.org slug), not the GitHub repo name `gf-sendinblue-free`. Built with `wp dist-archive ./ --plugin-dirname=addon-gravityforms-sendinblue-free`.
 - `scripts/sync-linear-template.mjs` ships in the package (present on `main` from a prior ci sync commit); consistent with the QA-approved GF Notion 2.0.1 package, so left as-is.
+
+## QA-prep corrections (2026-07-21, post-package)
+
+Two issues reported against the initial 2.6.1 QA package were fixed on `release/2.6.1` (commit `501cd0c`) and the QA ZIP was rebuilt in place:
+
+- **Wrong support link (free plugin).** The Support link on the settings page (`includes/classes/gf-addon.php`, from GFSIB-224) pointed to `https://support.wpconnect.co` — that is the paid-product support desk. Repointed to the plugin's own wp.org forum `https://wordpress.org/support/plugin/addon-gravityforms-sendinblue-free/`. Also fixed the readme.txt Troubleshooting link, which pointed to the `air-wp-sync` forum (copy-paste error).
+- **Minimum WordPress version not shown on install.** The main plugin file header was missing `Requires at least:`, so WordPress showed no minimum WP version. Added `Requires at least: 6.0` to the header (matching the other GF add-ons) and aligned `readme.txt` (was 5.5 → 6.0).
+
+Rebuilt: `dist/addon-gravityforms-sendinblue-free.2.6.1.zip` (contains both fixes; verified). Re-attach/notify on GFSIB-288 so QA tests this build.
 
 ## Next step
 
