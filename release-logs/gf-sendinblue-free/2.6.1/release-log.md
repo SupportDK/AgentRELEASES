@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/gf-sendinblue-free
 Branch: release/2.6.1
-Commit: 501cd0c (QA-prep corrections; supersedes a55daff)
+Commit: 4e4d7d6 (wp.org i18n cleanup; supersedes 501cd0c)
 Date: 2026-07-21
 
 ## QA Tracking
@@ -62,6 +62,19 @@ Two issues reported against the initial 2.6.1 QA package were fixed on `release/
 - **Minimum WordPress version not shown on install.** The main plugin file header was missing `Requires at least:`, so WordPress showed no minimum WP version. Added `Requires at least: 6.0` to the header (matching the other GF add-ons) and aligned `readme.txt` (was 5.5 → 6.0).
 
 Rebuilt: `dist/addon-gravityforms-sendinblue-free.2.6.1.zip` (contains both fixes; verified). Re-attach/notify on GFSIB-288 so QA tests this build.
+
+## wp.org i18n cleanup (2026-07-21, lead-dev feedback) — commit 4e4d7d6
+
+Lead-dev instruction: free wp.org-hosted plugins don't need a bundled `languages/` folder nor a `load_plugin_textdomain()` call (translations come from translate.wordpress.org). Applied on `release/2.6.1`:
+
+- Deleted `languages/` (contained only `addon-gravityforms-sendinblue-free.pot`).
+- Removed the `load_translations()` function and its `add_action( 'init', … )` hook from the main plugin file.
+- Removed the `Domain Path: /languages/` header line.
+- Kept the `Text Domain` header and the `DKGFSIB_FREE_PLUGIN_DIRNAME` constant (the constant is still used in `includes/classes/gf-addon.php` as the add-on `$_slug` / `$_full_path`).
+
+Rebuilt: `dist/addon-gravityforms-sendinblue-free.2.6.1.zip` (28.31 KB; verified no `languages/`/`.pot`). Re-attach/notify on GFSIB-288 so QA tests this build.
+
+**Still pending (lead-dev point 2, not yet actioned):** `scripts/sync-linear-template.mjs` still ships inside the ZIP. Lead dev wants workflow scripts moved to a `dev/` folder (create it, add `dev` to `.distignore`) or, if identical across repos, centralized in `wpconnect-co/github-workflows` / `public-github-workflows`. Decision pending from Stéphane.
 
 ## Next step
 
