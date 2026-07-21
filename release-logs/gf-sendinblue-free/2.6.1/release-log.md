@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/gf-sendinblue-free
 Branch: release/2.6.1
-Commit: 4e4d7d6 (wp.org i18n cleanup; supersedes 501cd0c)
+Commit: e9c5d5b (merge main: centralized Linear-sync workflow; supersedes 4e4d7d6)
 Date: 2026-07-21
 
 ## QA Tracking
@@ -72,9 +72,9 @@ Lead-dev instruction: free wp.org-hosted plugins don't need a bundled `languages
 - Removed the `Domain Path: /languages/` header line.
 - Kept the `Text Domain` header and the `DKGFSIB_FREE_PLUGIN_DIRNAME` constant (the constant is still used in `includes/classes/gf-addon.php` as the add-on `$_slug` / `$_full_path`).
 
-Rebuilt: `dist/addon-gravityforms-sendinblue-free.2.6.1.zip` (28.31 KB; verified no `languages/`/`.pot`). Re-attach/notify on GFSIB-288 so QA tests this build.
+**Workflow script removed from the package (lead-dev points 2 & 3).** `scripts/sync-linear-template.mjs` was still shipping inside the ZIP because `release/2.6.1` predated the centralization that had already landed on `main` (PR #8, `fd64d92`, merged 2026-07-21 16:43, plus `dc3595c` "use public reusable Linear template sync"). Merged `origin/main` into `release/2.6.1` (merge commit `e9c5d5b`) — this deletes `scripts/sync-linear-template.mjs`, points the workflow at the centralized/public reusable Linear-sync workflow, and adds `dev` to `.distignore`. No custom `dev/` folder was needed since the script is now centralized in `wpconnect-co` rather than kept per-repo.
 
-**Still pending (lead-dev point 2, not yet actioned):** `scripts/sync-linear-template.mjs` still ships inside the ZIP. Lead dev wants workflow scripts moved to a `dev/` folder (create it, add `dev` to `.distignore`) or, if identical across repos, centralized in `wpconnect-co/github-workflows` / `public-github-workflows`. Decision pending from Stéphane.
+Rebuilt: `dist/addon-gravityforms-sendinblue-free.2.6.1.zip` (25.74 KB; verified no `languages/`, `.pot`, `scripts/` or `.mjs`). Re-attach/notify on GFSIB-288 so QA tests this build.
 
 ## Next step
 
