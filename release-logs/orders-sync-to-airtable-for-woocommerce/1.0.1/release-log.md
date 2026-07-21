@@ -21,19 +21,19 @@ bump is correct rather than a minor.
 ## QA Tracking
 
 QA Issue:
-Update Orders Sync to Airtable for Woo 1.1.0
+Update Orders Sync to Airtable for Woo 1.0.1  (renamed from 1.1.0)
 
 Linear ID:
-WPC-100  (https://linear.app/wp-connect/issue/WPC-100/update-orders-sync-to-airtable-for-woo-110)
+WPC-100  (https://linear.app/wp-connect/issue/WPC-100/update-orders-sync-to-airtable-for-woo-101)
 
 Linear Project:
-Orders Sync to Airtable for Woo v1.1.0
+Orders Sync to Airtable for Woo v1.0.1
 
 Status:
-For Test
+Done ⚠️ (stale — issue was marked Done 2026-07-20; re-prepped for 1.0.1 QA, may need moving back to For Test)
 
 ZIP:
-orders-sync-to-airtable-for-woocommerce.1.1.0.zip  (dist/ — attached to WPC-100; bundles vendor/ action-scheduler 3.9.3 via composer install --no-dev)
+orders-sync-to-airtable-for-woocommerce.1.0.1.zip  (dist/ — rebuilt on release/1.0.1 commit 2228518, re-attached to WPC-100, old 1.1.0 attachments removed; bundles vendor/ action-scheduler 3.9.3 via composer install --no-dev)
 
 ## Scope — issues in this version
 
