@@ -58,4 +58,11 @@ No /stories run for this version.
 - Terminal state used: **Done** (team "CF7 Airtable" has two completed-type states — Closed and Done; Done was chosen per the Complete/Done preference rule).
 - Issues closed: CF7AT-56, CF7AT-57, QA issue CF7AT-58.
 
-Note: The Linear issue CF7AT-56 also lists WordPress.org SVN commit (`trunk/` + `tags/2.5.3/`) + review-team reply as steps — these are **out of scope for `/tested`** and remain a pending manual action; no wp.org/SVN deploy was performed by this command.
+## WordPress.org publication (post-/tested manual step)
+
+- SVN deploy completed 2026-07-31: `trunk/` bumped to 2.5.3 and `tags/2.5.3/` created in a single commit — **r3630039** (committer `wpconnectco`).
+- `trunk/readme.txt` `Stable tag: 2.5.3` → release published to users.
+- Files changed in trunk: `add-on-cf7-for-airtable.php`, `changelog.txt`, `includes/fields.php`, `readme.txt` (same file set as 2.5.2; no adds/removes).
+- Source of truth for the SVN sync: the QA-approved ZIP `dist/add-on-cf7-for-airtable.2.5.3.zip` (distributable file set only — no dev/, node_modules, package.json, readme.md).
+
+Still pending (manual): reply to the WordPress Plugins Team review (ID `P0TDX156090HGN`) confirming 2.5.3 addresses all three findings and is uploaded to SVN.
