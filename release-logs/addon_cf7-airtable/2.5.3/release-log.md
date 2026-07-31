@@ -28,7 +28,7 @@ Linear Project:
 CF7 Airtable v2.5.3
 
 Status:
-For Test
+Done  (tag v2.5.3 pushed)
 
 ZIP:
 add-on-cf7-for-airtable.2.5.3.zip  (attached to CF7AT-58; local: dist/add-on-cf7-for-airtable.2.5.3.zip)
@@ -46,9 +46,16 @@ No /stories run for this version.
 | CF7AT-58 (QA) | created → For Test | 2026-07-31T11:48:11Z |
 | CF7AT-56 | In Progress → For Test | 2026-07-31T11:48:12Z |
 | CF7AT-57 | In Progress → For Test | 2026-07-31T11:48:48Z |
+| CF7AT-58 (QA) | For Test → Done | 2026-07-31T12:48:59Z |
+| CF7AT-56 | For Test → Done | 2026-07-31T12:48:55Z |
+| CF7AT-57 | For Test → Done | 2026-07-31T12:48:57Z |
 
-## Restrictions honored
+## Finalization (/tested)
 
-No tag, no GitHub Release, no PR merge, no wp.org/SVN deploy, no Linear issue closed. Finalization deferred to `/tested`.
+- QA approved by human tester on 2026-07-31 (ZIP activates correctly, changes work, no blockers).
+- Tag: **v2.5.3** pushed to `origin` on head of `release/2.5.3` (`c04dbf56c9742c68f34dfbd51ca375f1a43e3020`).
+- GitHub Release: not created (not part of this plugin's workflow / per user request).
+- Terminal state used: **Done** (team "CF7 Airtable" has two completed-type states — Closed and Done; Done was chosen per the Complete/Done preference rule).
+- Issues closed: CF7AT-56, CF7AT-57, QA issue CF7AT-58.
 
-Note: The Linear issue CF7AT-56 also lists WordPress.org SVN commit + review-team reply as steps — these are intentionally out of scope for `/release` and remain pending manual/`/tested` action after human QA.
+Note: The Linear issue CF7AT-56 also lists WordPress.org SVN commit (`trunk/` + `tags/2.5.3/`) + review-team reply as steps — these are **out of scope for `/tested`** and remain a pending manual action; no wp.org/SVN deploy was performed by this command.
