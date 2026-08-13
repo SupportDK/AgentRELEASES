@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/addon_gf-timetonic
 Branch: release/1.1.0
-Commit: 2245c4b6e59696a5acec60d0805b67aa5ca9173a
+Commit: 42d6243 (HEAD; TranslationsPress pass 2245c4b + fr_FR translation source)
 Date: 2026-08-13
 
 Plugin type: **premium / WPconnect-distributed** (NOT wordpress.org) — wp.org compliance framing intentionally not applied.
@@ -43,7 +43,7 @@ Pass 2 — TranslationsPress migration (commits 629774a, 2245c4b), added at user
 - TIM-92 — migrated to TranslationsPress (T15S). Text domain aligned `wpc-gf-tmt` → `wpconnect-gf-timetonic`; new `includes/classes/class-language-pack.php` (`Language_Packs`) wired on `init`; URL `https://packages.translationspress.com/wp-connect/wpconnect-gf-timetonic/packages.json`; `.pot` renamed to `wpconnect-gf-timetonic.pot`.
 - TIM-65 — `load_plugin_textdomain` **fully removed** (was partially addressed in pass 1; now closed completely — translations load via WP core just-in-time from TP packs).
 - TIM-20 / TIM-74 — WP 6.7 `_load_textdomain_just_in_time` notice resolved (no early/manual textdomain load remains).
-- TIM-9 — French (and all locales) now delivered via TranslationsPress; strings extracted to the renamed .pot. Remaining work is translating on the TP platform (no further plugin code needed).
+- TIM-9 — French (and all locales) now delivered via TranslationsPress; strings extracted to the renamed .pot. **Actual French translation produced**: `languages/wpconnect-gf-timetonic-fr_FR.po` (64 strings, commit 42d6243, validated via `wp i18n make-mo`). It is a source artifact — architecture stays TP-only, so it must be published to the TranslationsPress project `wpconnect-gf-timetonic` to load at runtime (external action; not runtime-loaded from the plugin folder).
 
 Reference: adapted from GF Airtable (addon_gf-at 2.6.0) — same file structure and T15S pattern. Not a literal copy.
 
