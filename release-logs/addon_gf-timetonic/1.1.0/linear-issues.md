@@ -26,9 +26,31 @@ https://linear.app/wp-connect/issue/TIM-74
 ## TIM-65 — Remove manual load_plugin_textdomain usage
 https://linear.app/wp-connect/issue/TIM-65
 
+Note: partially addressed in pass 1 (moved to init), then FULLY closed in pass 2 — `load_plugin_textdomain` removed entirely via the TranslationsPress migration (see TIM-92).
+
 ### Workflow Status History
 - Todo → In Progress — 2026-08-13T21:00:29Z
 - In Progress → For Test — 2026-08-13T21:26:32Z
+- For Test → Done — (pending /tested)
+
+## TIM-92 — Passage sur TranslationsPress
+https://linear.app/wp-connect/issue/TIM-92
+
+Migrated GF TimeTonic to TranslationsPress (T15S); text domain aligned to `wpconnect-gf-timetonic`; `load_plugin_textdomain` removed. Commits 629774a + 2245c4b.
+
+### Workflow Status History
+- Todo → In Progress — 2026-08-13T21:35:27Z
+- In Progress → For Test — 2026-08-13T22:06:54Z
+- For Test → Done — (pending /tested)
+
+## TIM-9 — Trad Francais
+https://linear.app/wp-connect/issue/TIM-9
+
+Translations (incl. French) now delivered via TranslationsPress; strings extracted to `wpconnect-gf-timetonic.pot`. Remaining action is translating on the TP platform (no plugin code needed).
+
+### Workflow Status History
+- Todo → In Progress — 2026-08-13T21:35:28Z
+- In Progress → For Test — 2026-08-13T22:06:55Z
 - For Test → Done — (pending /tested)
 
 ## TIM-63 — Align platform requirements: PHP 7.4 min + GF tested up to 2.10
@@ -131,6 +153,6 @@ https://linear.app/wp-connect/issue/TIM-97
 ---
 
 ## Deferred (not part of this release)
-- TIM-9 — Trad Francais (empty spec)
-- TIM-92 — Passage sur TranslationsPress (empty spec; conflicts with premium/wp.org direction)
 - TIM-11 — Bug Upload Fichiers (needs Loom reproduction)
+
+(TIM-9 and TIM-92 were initially deferred, then implemented in pass 2 via the TranslationsPress migration — see their sections above.)
