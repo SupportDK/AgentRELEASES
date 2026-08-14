@@ -1,26 +1,39 @@
-# Release log — Orders Sync to Airtable for WooCommerce 1.1.0
+# Release log — Orders Sync to Airtable for WooCommerce 1.0.1
 
 Repository: wpconnect-co/orders-sync-to-airtable-for-woocommerce
-Branch: release/1.1.0
-Commit: e0252856f42cbb1572025104fff9aa5bf908d29b
-Date: 2026-06-15
+Branch: release/1.0.1  (renamed from release/1.1.0)
+Commit: 2228518 (renumber to 1.0.1; on top of e025285…60c3487)
+Date: 2026-06-15 (prepared) · 2026-07-21 (renumbered 1.1.0 → 1.0.1)
+
+## Version renumber (2026-07-21)
+
+Per maintainer decision this ships as **1.0.1**, not 1.1.0: the scope was reduced to a
+compatibility patch once WPC-99 (TranslationsPress language pack) was dropped, so a patch
+bump is correct rather than a minor.
+
+- Plugin `Version` header, `ORDERS_SYNC_TO_AIRTABLE_FOR_WOOCOMMERCE_VERSION` constant,
+  readme `Stable tag` and `changelog.txt` heading changed 1.1.0 → 1.0.1 (commit `2228518`).
+- Branch renamed `release/1.1.0` → `release/1.0.1` (old branch deleted local + remote).
+- PR **#9** (`release/1.0.1` → `main`) opened; PR **#6** (`release/1.1.0`) closed as superseded.
+- **Still on 1.1.0 (follow-up):** the dist ZIP (`orders-sync-to-airtable-for-woocommerce.1.1.0.zip`)
+  and the Linear QA issue WPC-100 / project "v1.1.0" — rename/rebuild before QA sign-off.
 
 ## QA Tracking
 
 QA Issue:
-Update Orders Sync to Airtable for Woo 1.1.0
+Update Orders Sync to Airtable for Woo 1.0.1  (renamed from 1.1.0)
 
 Linear ID:
-WPC-100  (https://linear.app/wp-connect/issue/WPC-100/update-orders-sync-to-airtable-for-woo-110)
+WPC-100  (https://linear.app/wp-connect/issue/WPC-100/update-orders-sync-to-airtable-for-woo-101)
 
 Linear Project:
-Orders Sync to Airtable for Woo v1.1.0
+Orders Sync to Airtable for Woo v1.0.1
 
 Status:
-For Test
+Done ⚠️ (stale — issue was marked Done 2026-07-20; re-prepped for 1.0.1 QA, may need moving back to For Test)
 
 ZIP:
-orders-sync-to-airtable-for-woocommerce.1.1.0.zip  (dist/ — attached to WPC-100; bundles vendor/ action-scheduler 3.9.3 via composer install --no-dev)
+orders-sync-to-airtable-for-woocommerce.1.0.1.zip  (dist/ — rebuilt on release/1.0.1 commit 2228518, re-attached to WPC-100, old 1.1.0 attachments removed; bundles vendor/ action-scheduler 3.9.3 via composer install --no-dev)
 
 ## Scope — issues in this version
 

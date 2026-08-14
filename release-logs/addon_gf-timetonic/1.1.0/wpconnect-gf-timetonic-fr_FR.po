@@ -1,0 +1,313 @@
+# French (France) translation for Gravity Forms TimeTonic Add-On.
+# Copyright (C) 2026 WP connect
+# This file is distributed under the same license as the Gravity Forms TimeTonic Add-On plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Gravity Forms TimeTonic Add-On 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wpconnect.freshdesk.com/\n"
+"Last-Translator: WP connect\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-07-28T09:55:50+00:00\n"
+"PO-Revision-Date: 2026-08-13 22:00+0000\n"
+"X-Generator: Claude Code\n"
+"X-Domain: wpconnect-gf-timetonic\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Plugin Name of the plugin
+#: wpconnect-gf-timetonic.php
+msgid "Gravity Forms TimeTonic Add-On"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wpconnect-gf-timetonic.php
+msgid "https://wpconnect.co/gravity-forms-timetonic-add-on/"
+msgstr ""
+
+#. Description of the plugin
+#: wpconnect-gf-timetonic.php
+msgid "Create TimeTonic entries from your Gravity Forms forms."
+msgstr "Créez des entrées TimeTonic à partir de vos formulaires Gravity Forms."
+
+#. Author of the plugin
+#: wpconnect-gf-timetonic.php
+msgid "WP connect"
+msgstr ""
+
+#. Author URI of the plugin
+#: wpconnect-gf-timetonic.php
+msgid "https://wpconnect.co"
+msgstr ""
+
+#. translators: the HTTP response code
+#: includes/classes/class-api-licensing.php:140
+#: includes/classes/class-api-licensing.php:217
+msgid "WP connect server returned an HTTP error, code: %s"
+msgstr "Le serveur WP connect a renvoyé une erreur HTTP, code : %s"
+
+#. translators: the license key expiration date
+#: includes/classes/class-api-licensing.php:159
+msgid "Your license key expired on %s."
+msgstr "Votre clé de licence a expiré le %s."
+
+#: includes/classes/class-api-licensing.php:165
+msgid "Your license key has been disabled."
+msgstr "Votre clé de licence a été désactivée."
+
+#: includes/classes/class-api-licensing.php:168
+msgid "Invalid license."
+msgstr "Licence invalide."
+
+#: includes/classes/class-api-licensing.php:172
+msgid "Your license is not active for this URL."
+msgstr "Votre licence n'est pas active pour cette URL."
+
+#: includes/classes/class-api-licensing.php:175
+msgid "Your license key has reached its activation limit."
+msgstr "Votre clé de licence a atteint sa limite d'activation."
+
+#: includes/classes/class-api-licensing.php:178
+#: includes/classes/class-api-licensing.php:186
+#: includes/classes/class-api-licensing.php:234
+msgid "An error occurred, please try again."
+msgstr "Une erreur s'est produite, veuillez réessayer."
+
+#: includes/classes/class-gf-addon.php:148
+msgid "TimeTonic Add-On Settings"
+msgstr "Réglages de l'extension TimeTonic"
+
+#: includes/classes/class-gf-addon.php:152
+msgid "License Activation"
+msgstr "Activation de la licence"
+
+#. Translators: %1$s = TimeTonic account URL;
+#: includes/classes/class-gf-addon.php:159
+msgid "Visit the <a href=\"%1$s\" target=\"_blank\">Account Overview</a> page in your TimeTonic account to generate an Access token."
+msgstr "Consultez la page <a href=\"%1$s\" target=\"_blank\">Aperçu du compte</a> de votre compte TimeTonic pour générer un jeton d'accès."
+
+#: includes/classes/class-gf-addon.php:162
+msgid "Access tokens should at least be given the <code>Peut écrire dans TimeTonic</code> and <code>Peut lire des données depuis TimeTonic</code> scopes."
+msgstr "Les jetons d'accès doivent au minimum disposer des autorisations <code>Peut écrire dans TimeTonic</code> et <code>Peut lire des données depuis TimeTonic</code>."
+
+#: includes/classes/class-gf-addon.php:163
+msgid "TimeTonic API Key"
+msgstr "Clé API TimeTonic"
+
+#. Translators: %1$s = TimeTonic account URL;
+#: includes/classes/class-gf-addon.php:172
+msgid "Visit the <a href=\"%1$s\" target=\"_blank\">Account Overview</a> page in your TimeTonic account to get your User ID."
+msgstr "Consultez la page <a href=\"%1$s\" target=\"_blank\">Aperçu du compte</a> de votre compte TimeTonic pour obtenir votre identifiant utilisateur."
+
+#: includes/classes/class-gf-addon.php:175
+msgid "Find your userID in your TimeTonic account"
+msgstr "Trouvez votre identifiant utilisateur dans votre compte TimeTonic"
+
+#: includes/classes/class-gf-addon.php:176
+msgid "TimeTonic User ID"
+msgstr "Identifiant utilisateur TimeTonic"
+
+#: includes/classes/class-gf-addon.php:227
+msgid "License Key"
+msgstr "Clé de licence"
+
+#: includes/classes/class-gf-addon.php:235
+msgid "Activate"
+msgstr "Activer"
+
+#: includes/classes/class-gf-addon.php:241
+msgid "De-activate"
+msgstr "Désactiver"
+
+#: includes/classes/class-gf-addon.php:255
+msgid "License successfully activated."
+msgstr "Licence activée avec succès."
+
+#: includes/classes/class-gf-addon.php:260
+msgid "License de-activated."
+msgstr "Licence désactivée."
+
+#: includes/classes/class-gf-addon.php:316
+#: includes/classes/class-gf-addon.php:444
+msgid "Feed Name"
+msgstr "Nom du flux"
+
+#: includes/classes/class-gf-addon.php:317
+msgid "TimeTonic Table"
+msgstr "Table TimeTonic"
+
+#: includes/classes/class-gf-addon.php:318
+msgid "Condition(s)"
+msgstr "Condition(s)"
+
+#. Translators: %1$s = Opening <a> tag; %2$s = Closing <a> tag
+#: includes/classes/class-gf-addon.php:394
+msgid "You must add a TimeTonic API Key to your settings before creating a feed. Let's %1$sadd it%2$s!"
+msgstr "Vous devez ajouter une clé API TimeTonic à vos réglages avant de créer un flux. %1$sAjoutez-la%2$s !"
+
+#. Translators: %1$s = Gravity Forms TimeTonic settings page URL
+#: includes/classes/class-gf-addon.php:409
+msgid "Please visit the <a href=\"%1$s\">plugin settings page</a> and enter a valid TimeTonic API key."
+msgstr "Veuillez consulter la <a href=\"%1$s\">page de réglages de l'extension</a> et saisir une clé API TimeTonic valide."
+
+#: includes/classes/class-gf-addon.php:416
+msgid "Access token missing or invalid"
+msgstr "Jeton d'accès manquant ou invalide"
+
+#: includes/classes/class-gf-addon.php:432
+msgid "Base name"
+msgstr "Nom de la base"
+
+#: includes/classes/class-gf-addon.php:432
+msgid "App ID"
+msgstr "Identifiant de l'application"
+
+#: includes/classes/class-gf-addon.php:433
+msgid "Select the target database from the options below."
+msgstr "Sélectionnez la base de données cible parmi les options ci-dessous."
+
+#: includes/classes/class-gf-addon.php:433
+msgid "Open your database on TimeTonic and look at the URL in your browser bar. The app ID is the part just after the ‘/book’ and before the dot between two slashes in the URL."
+msgstr "Ouvrez votre base de données sur TimeTonic et observez l'URL dans la barre de votre navigateur. L'identifiant de l'application correspond à la partie située juste après « /book » et avant le point, entre deux barres obliques dans l'URL."
+
+#: includes/classes/class-gf-addon.php:436
+msgid "Table name"
+msgstr "Nom de la table"
+
+#: includes/classes/class-gf-addon.php:436
+msgid "Table ID"
+msgstr "Identifiant de la table"
+
+#: includes/classes/class-gf-addon.php:437
+msgid "Select the target table from the options below."
+msgstr "Sélectionnez la table cible parmi les options ci-dessous."
+
+#: includes/classes/class-gf-addon.php:437
+msgid "Enter the name of the table in which the new records will be created. You can also use the part just after the ‘/tab’ located between two slashes in the URL."
+msgstr "Saisissez le nom de la table dans laquelle les nouveaux enregistrements seront créés. Vous pouvez aussi utiliser la partie située juste après « /tab », entre deux barres obliques dans l'URL."
+
+#: includes/classes/class-gf-addon.php:448
+msgid "Enter a feed name to uniquely identify it."
+msgstr "Saisissez un nom de flux pour l'identifier de manière unique."
+
+#: includes/classes/class-gf-addon.php:478
+msgid "Please save these settings before mapping your fields."
+msgstr "Veuillez enregistrer ces réglages avant de mapper vos champs."
+
+#: includes/classes/class-gf-addon.php:483
+msgid "Fields Mapping"
+msgstr "Correspondance des champs"
+
+#: includes/classes/class-gf-addon.php:487
+msgid "Form field"
+msgstr "Champ du formulaire"
+
+#: includes/classes/class-gf-addon.php:490
+msgid "TimeTonic Field Name"
+msgstr "Nom du champ TimeTonic"
+
+#: includes/classes/class-gf-addon.php:494
+msgid "Add and select the form fields, then choose the TimeTonic column where to send each piece of data to. Make sure the column names are entered identically to your database."
+msgstr "Ajoutez et sélectionnez les champs du formulaire, puis choisissez la colonne TimeTonic vers laquelle envoyer chaque donnée. Assurez-vous que les noms des colonnes sont saisis à l'identique de votre base de données."
+
+#: includes/classes/class-gf-addon.php:498
+msgid "TimeTonic records are not creating?"
+msgstr "Les enregistrements TimeTonic ne se créent pas ?"
+
+#: includes/classes/class-gf-addon.php:500
+msgid "To troubleshoot the issue, please go the entry detail page and check the \"TimeTonic\" block.<br>It will display any error encountered while creating records."
+msgstr "Pour diagnostiquer le problème, rendez-vous sur la page de détail de l'entrée et consultez le bloc « TimeTonic ».<br>Il affichera toute erreur rencontrée lors de la création des enregistrements."
+
+#: includes/classes/class-gf-addon.php:507
+msgid "Integration with TimeTonic"
+msgstr "Intégration avec TimeTonic"
+
+#: includes/classes/class-gf-addon.php:511
+msgid "Conditional logic"
+msgstr "Logique conditionnelle"
+
+#: includes/classes/class-gf-addon.php:516
+msgid "Conditions"
+msgstr "Conditions"
+
+#: includes/classes/class-gf-addon.php:517
+msgid "Enable conditional processing"
+msgstr "Activer le traitement conditionnel"
+
+#: includes/classes/class-gf-addon.php:558
+msgid "Choose a base"
+msgstr "Choisissez une base"
+
+#: includes/classes/class-gf-addon.php:558
+#: includes/classes/class-gf-addon.php:564
+msgid "Choose a table"
+msgstr "Choisissez une table"
+
+#. Translators: %1$s = Access token URL; %2$s = Gravity Forms Timetonic settings page URL
+#: includes/classes/class-plugin-updater.php:127
+msgid "To enable updates, please enter your license key on the <a href=\"%1$s\">Add-On Settings page</a>. If you don't have a licence key, please visit <a href=\"%2$s\">the add-on page on WPconnect.co</a>."
+msgstr "Pour activer les mises à jour, veuillez saisir votre clé de licence sur la <a href=\"%1$s\">page de réglages de l'extension</a>. Si vous n'avez pas de clé de licence, veuillez consulter <a href=\"%2$s\">la page de l'extension sur WPconnect.co</a>."
+
+#. translators: the plugin name.
+#: includes/classes/class-plugin-updater.php:273
+msgid "There is a new version of %1$s available."
+msgstr "Une nouvelle version de %1$s est disponible."
+
+#: includes/classes/class-plugin-updater.php:279
+msgid "Contact your network administrator to install the update."
+msgstr "Contactez l'administrateur de votre réseau pour installer la mise à jour."
+
+#. translators: 1. opening anchor tag, do not translate 2. the new plugin version 3. closing anchor tag, do not translate.
+#: includes/classes/class-plugin-updater.php:284
+msgid "%1$sView version %2$s details%3$s."
+msgstr "%1$sVoir les détails de la version %2$s%3$s."
+
+#. Translators: %1$s = Opening <a> tag; %2$s = Version ; %3$s = closing </a> tag ; %4$s = Opening <a> tag; %5$s = Closing </a> tag
+#: includes/classes/class-plugin-updater.php:293
+msgid "%1$sView version %2$s details%3$s or %4$supdate now%5$s."
+msgstr "%1$sVoir les détails de la version %2$s%3$s ou %4$smettre à jour maintenant%5$s."
+
+#: includes/classes/class-plugin-updater.php:304
+msgid "Update now."
+msgstr "Mettre à jour maintenant."
+
+#: includes/classes/class-plugin-updater.php:536
+msgid "You do not have permission to install plugin updates"
+msgstr "Vous n'avez pas l'autorisation d'installer les mises à jour des extensions"
+
+#: includes/classes/class-plugin-updater.php:536
+msgid "Error"
+msgstr "Erreur"
+
+#: includes/helpers.php:33
+msgid "Your license is inactive or invalid."
+msgstr "Votre licence est inactive ou invalide."
+
+#: includes/hooks.php:194
+msgid "TimeTonic"
+msgstr "TimeTonic"
+
+#: includes/hooks.php:217
+#: includes/hooks.php:261
+msgid "No data."
+msgstr "Aucune donnée."
+
+#. Translators: %1$s = Feed ID
+#: includes/hooks.php:227
+msgid "Feed #%1$d"
+msgstr "Flux n°%1$d"
+
+#: includes/hooks.php:237
+msgid "Error:"
+msgstr "Erreur :"
+
+#. Translators: %1$s = Record ID
+#: includes/hooks.php:249
+msgid "Record successfully created (ID %s)."
+msgstr "Enregistrement créé avec succès (ID %s)."
+
+#: wpconnect-gf-timetonic.php:96
+msgid "The \"Gravity Forms TimeTonic Add-On\" plugin is inactive because the minimal requirements are not met."
+msgstr "L'extension « Gravity Forms TimeTonic Add-On » est inactive car les exigences minimales ne sont pas satisfaites."
