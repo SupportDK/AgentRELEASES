@@ -57,3 +57,11 @@ No /stories run for this version. PO review (Phase 4): APPROVED. Independent pro
 ## Next step
 
 After human QA approval: `/tested TimeTonic WP Sync 1.0.3` (tags v1.0.3, moves issues to terminal state, updates this log). `/release` did NOT tag, release, or close anything.
+
+---
+
+## Correction pass — 2026-08-17 — activation fatal fixed
+
+- **Symptom:** fatal on activation — `require_once … vendor/woocommerce/action-scheduler/action-scheduler.php: Failed to open stream` (`timetonic-wp-sync.php:32`).
+- **Cause:** the QA ZIP was packaged without `vendor/`. `composer.json` requires `woocommerce/action-scheduler ^3.7` and the main file hard-`require`s it, but `composer install` was never run before `wp dist-archive`, so Action Scheduler was absent from the ZIP. (`.distignore` excludes `composer.json`/`.lock` but NOT `vendor/`, so vendor ships when present.)
+- **Fix:** `composer install --no-dev --optimize-autoloader` (installed Action Scheduler 3.7.2) → rebuilt via `--plugin-dirname=timetonic-wp-sync`. ZIP now 662846 bytes and bundles `vendor/woocommerce/action-scheduler/`. Re-attached on TIM-111.

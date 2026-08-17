@@ -71,3 +71,13 @@ No /stories run for this version. PO review (Phase 4): APPROVED — all four iss
 ## Next step
 
 After human QA approval: `/tested wpDataTables Airtable Add-On 1.1.0` (tags v1.1.0, moves issues to terminal state, updates this log). `/release` did NOT tag, release, or close anything.
+
+---
+
+## Correction pass — 2026-08-17
+
+- **Fixed links** (`fix:` commit `47fa79c`, pushed to `release/1.1.0`):
+  - Product/pricing constant `WPC_WPD_AT_WPC_PRODUCT_PAGE_URL` → `https://wpconnect.co/wpdatatables-airtable-addon/#pricing` (removed the "needs confirmation" placeholder).
+  - Settings-page URL in `class-license-notices.php` and `class-plugin-updater.php` → `admin.php?page=wpconnect-wpdatatables-airtable-settings` (was the wrong parent slug `wpdatatables-settings#…`). Updater's second link now reuses the pricing constant.
+- **Rebuilt ZIP** (top folder `wpconnect-wpdatatables-airtable/`, 72555 bytes, `languages/.pot` only — local es_ES/fr_FR `.po` kept out, they are TP-upload sources). Re-attached on WPC-111.
+- **Note (TranslationsPress, WPC-97):** TP project `wpconnect-wpdatatables-airtable` returns HTTP 403 — inert until published.

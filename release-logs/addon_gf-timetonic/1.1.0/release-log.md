@@ -76,3 +76,13 @@ No /stories run for this version. Story-quality validation performed inline duri
 ## Next step
 
 Human QA tests the LATEST ZIP on TIM-97. On approval, finalize with `/tested GF TimeTonic 1.1.0`.
+
+---
+
+## Correction pass — 2026-08-17
+
+- **Fixed links** (`fix:` commit `5ca2c20`, pushed to `release/1.1.0`):
+  - Documentation link on settings page (`class-gf-addon.php`): → `https://wpconnect.co/documentation/gf-to-timetonic/user-guide/`
+  - License-notice pricing URL (`class-api-licensing.php`): → `https://wpconnect.co/timetonic-integration-wordpress/#pricing`
+- **Rebuilt ZIP with correct folder.** The previous `dist/` ZIP unpacked to `addon_gf-timetonic/` (repo slug) because it was packaged with a bare `wp dist-archive ./` instead of `npm run archive`. That mismatch (folder ≠ install slug `wpconnect-gf-timetonic`) made a manual install over 1.0.x appear as a *new* plugin instead of an in-place update. Rebuilt via `--plugin-dirname=wpconnect-gf-timetonic` → top folder now `wpconnect-gf-timetonic/` (35999 bytes). Re-attached as LATEST on TIM-97.
+- **Note (TranslationsPress, TIM-92):** still inert until the TP project `wpconnect-gf-timetonic` exists — `packages.json` currently returns HTTP 403.
