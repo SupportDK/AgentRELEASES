@@ -17,10 +17,16 @@ Linear Project:
 wpDataTables Airtable Add-On v1.1.0
 
 Status:
-For Test
+Done (released) — finalized via /tested on 2026-08-18
+
+Tag:
+1.1.0 (bare, first tag in repo — matches wpconnect house style; the /release note's "v1.1.0" was a template default, superseded for consistency) → 47fa79c925ad50bce09f6f9ee3b043e89f18682d
+
+GitHub Release:
+wpDataTables Airtable Add-On 1.1.0 — https://github.com/wpconnect-co/addon_wpdatatables-airtable/releases/tag/1.1.0 (ZIP attached; first GitHub Release for this repo)
 
 ZIP:
-wpconnect-wpdatatables-airtable.1.1.0.zip (attached to WPC-111; local: dist/wpconnect-wpdatatables-airtable.1.1.0.zip)
+wpconnect-wpdatatables-airtable.1.1.0.zip (attached to WPC-111 and to the GitHub Release; local: dist/wpconnect-wpdatatables-airtable.1.1.0.zip)
 
 Plugin dirname inside ZIP: wpconnect-wpdatatables-airtable
 
@@ -67,10 +73,20 @@ No /stories run for this version. PO review (Phase 4): APPROVED — all four iss
 | WPC-97 | In Progress → For Test | 2026-08-14T10:31:13Z |
 | WPC-111 (QA) | created → For Test | 2026-08-14T10:31:30Z |
 | WPC-71 (Readme) | Todo → For Test | 2026-08-14T10:31:58Z |
+| WPC-84 | For Test → Done | 2026-08-17T22:01:52Z |
+| WPC-83 | For Test → Done | 2026-08-17T22:01:55Z |
+| WPC-82 | For Test → Done | 2026-08-17T22:20:47Z |
+| WPC-97 | For Test → Done | 2026-08-18T07:10:36Z |
+| WPC-111 (QA) | For Test → Done | 2026-08-18T07:10:35Z |
+| WPC-71 (Readme) | For Test → Done | 2026-08-17T22:20:50Z |
 
-## Next step
+## Finalization (/tested — 2026-08-18)
 
-After human QA approval: `/tested wpDataTables Airtable Add-On 1.1.0` (tags v1.1.0, moves issues to terminal state, updates this log). `/release` did NOT tag, release, or close anything.
+- Terminal state detected for team **WP connect**: **Done** (type `completed`).
+- All six issues were already in Done at finalization time (moved For Test → Done on 2026-08-17/2026-08-18, before this /tested run) — no re-transition needed.
+- Tag `1.1.0` (bare — first tag in the repo) pushed to origin at 47fa79c; GitHub Release **wpDataTables Airtable Add-On 1.1.0** created with the QA ZIP attached (first GitHub Release for this repo).
+- Not done (out of /tested scope): no PR merge, no wp.org/production deploy.
+- ⚠️ Known non-blocker (WPC-97): the TranslationsPress project `wpconnect-wpdatatables-airtable` still returns HTTP 403 — translations are inert (no fatal) until the project is published on the TP dashboard.
 
 ---
 

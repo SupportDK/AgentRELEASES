@@ -10,7 +10,7 @@ Type: Compatibility · https://linear.app/wp-connect/issue/TIM-61/compa-wordpres
 |---|---|
 | Backlog → In Progress | 2026-08-14T10:44:31Z |
 | In Progress → For Test | 2026-08-14T10:57:01Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-18T07:13:48Z |
 
 ## TIM-21 — PHP 8.2 compatibility
 Type: Fix (labeled Improvement) · https://linear.app/wp-connect/issue/TIM-21/php-82-compatibility
@@ -20,7 +20,7 @@ Type: Fix (labeled Improvement) · https://linear.app/wp-connect/issue/TIM-21/ph
 |---|---|
 | Backlog → In Progress | 2026-08-14T10:44:32Z |
 | In Progress → For Test | 2026-08-14T10:57:03Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-18T07:13:48Z |
 
 ## TIM-111 — Update TimeTonic WP Sync 1.0.3 (QA issue)
 Type: QA · https://linear.app/wp-connect/issue/TIM-111/update-timetonic-wp-sync-103
@@ -29,7 +29,7 @@ Type: QA · https://linear.app/wp-connect/issue/TIM-111/update-timetonic-wp-sync
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-14T10:57:15Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-18T07:13:48Z |
 
 ## TIM-110 — Readme (README issue)
 Type: Readme · https://linear.app/wp-connect/issue/TIM-110/readme
@@ -38,4 +38,4 @@ Type: Readme · https://linear.app/wp-connect/issue/TIM-110/readme
 | Transition | Timestamp (UTC) |
 |---|---|
 | Backlog → For Test | 2026-08-14T10:57:42Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-18T07:13:48Z |

@@ -10,7 +10,7 @@ Type: Compatibility · https://linear.app/wp-connect/issue/WPC-84/compa-wordpres
 |---|---|
 | Todo → In Progress | 2026-08-14T10:15:42Z |
 | In Progress → For Test | 2026-08-14T10:31:07Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-17T22:01:52Z |
 
 ## WPC-83 — Verify - Plugin disables the automatic update of all plugins
 Type: Fix (Bug) · https://linear.app/wp-connect/issue/WPC-83/verify-plugin-disables-the-automatic-update-of-all-plugins
@@ -20,7 +20,7 @@ Type: Fix (Bug) · https://linear.app/wp-connect/issue/WPC-83/verify-plugin-disa
 |---|---|
 | Todo → In Progress | 2026-08-14T10:15:45Z |
 | In Progress → For Test | 2026-08-14T10:31:09Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-17T22:01:55Z |
 
 ## WPC-82 — Messages Licenses Update / Expired / Disabled
 Type: Improvement (Urgent) · https://linear.app/wp-connect/issue/WPC-82/messages-licenses-update-expired-disabled
@@ -30,7 +30,7 @@ Type: Improvement (Urgent) · https://linear.app/wp-connect/issue/WPC-82/message
 |---|---|
 | Todo → In Progress | 2026-08-14T10:15:47Z |
 | In Progress → For Test | 2026-08-14T10:31:11Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-17T22:20:47Z |
 
 ## WPC-97 — TranslationPress functions
 Type: Improvement · https://linear.app/wp-connect/issue/WPC-97/translationpress-functions
@@ -40,7 +40,7 @@ Type: Improvement · https://linear.app/wp-connect/issue/WPC-97/translationpress
 |---|---|
 | Todo → In Progress | 2026-08-14T10:15:49Z |
 | In Progress → For Test | 2026-08-14T10:31:13Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-18T07:10:36Z |
 
 ## WPC-111 — Update wpDataTables Airtable Add-On 1.1.0 (QA issue)
 Type: QA · https://linear.app/wp-connect/issue/WPC-111/update-wpdatatables-airtable-add-on-110
@@ -49,7 +49,7 @@ Type: QA · https://linear.app/wp-connect/issue/WPC-111/update-wpdatatables-airt
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-14T10:31:30Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-18T07:10:35Z |
 
 ## WPC-71 — Readme (README issue)
 Type: Readme · https://linear.app/wp-connect/issue/WPC-71/readme
@@ -58,4 +58,4 @@ Type: Readme · https://linear.app/wp-connect/issue/WPC-71/readme
 | Transition | Timestamp (UTC) |
 |---|---|
 | Todo → For Test | 2026-08-14T10:31:58Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Done | 2026-08-17T22:20:50Z |

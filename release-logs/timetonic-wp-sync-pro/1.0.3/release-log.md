@@ -17,10 +17,16 @@ Linear Project:
 TimeTonic WP Sync v1.0.3
 
 Status:
-For Test
+Done (released) — finalized via /tested on 2026-08-18
+
+Tag:
+1.0.3 (bare, matching repo convention 1.0.0/1.0.1/1.0.2) → 09d117fc6d18dc19a466a0f72df439c370e07bc6
+
+GitHub Release:
+TimeTonic WP Sync 1.0.3 — https://github.com/wpconnect-co/timetonic-wp-sync-pro/releases/tag/1.0.3 (ZIP attached)
 
 ZIP:
-timetonic-wp-sync.1.0.3.zip (attached to TIM-111; local: dist/timetonic-wp-sync.1.0.3.zip)
+timetonic-wp-sync.1.0.3.zip (attached to TIM-111 and to the GitHub Release; local: dist/timetonic-wp-sync.1.0.3.zip)
 
 Plugin dirname inside ZIP: timetonic-wp-sync
 
@@ -53,10 +59,17 @@ No /stories run for this version. PO review (Phase 4): APPROVED. Independent pro
 | TIM-21 | In Progress → For Test | 2026-08-14T10:57:03Z |
 | TIM-111 (QA) | created → For Test | 2026-08-14T10:57:15Z |
 | TIM-110 (Readme) | Backlog → For Test | 2026-08-14T10:57:42Z |
+| TIM-61 | For Test → Done | 2026-08-18T07:13:48Z |
+| TIM-21 | For Test → Done | 2026-08-18T07:13:49Z |
+| TIM-111 (QA) | For Test → Done | 2026-08-18T07:13:48Z |
+| TIM-110 (Readme) | For Test → Done | 2026-08-18T07:13:48Z |
 
-## Next step
+## Finalization (/tested — 2026-08-18)
 
-After human QA approval: `/tested TimeTonic WP Sync 1.0.3` (tags v1.0.3, moves issues to terminal state, updates this log). `/release` did NOT tag, release, or close anything.
+- Terminal state detected for team **TimeTonic**: **Done** (type `completed`; team also has a "Closed" completed-state — "Done" chosen, matching how the issues were already closed).
+- All four issues were already in Done at finalization time (moved For Test → Done at ~2026-08-18T07:13:48Z, before this /tested run) — no re-transition needed.
+- Tag `1.0.3` (bare) pushed to origin at 09d117f; GitHub Release **TimeTonic WP Sync 1.0.3** created with the QA ZIP attached.
+- Not done (out of /tested scope): no PR merge, no wp.org/production deploy.
 
 ---
 

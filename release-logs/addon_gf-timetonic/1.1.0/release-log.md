@@ -19,10 +19,16 @@ Linear Project:
 GF TimeTonic v1.1.0  (770001f0-b704-47e0-bb96-e75daf328d94)
 
 Status:
-For Test
+Done (released) — finalized via /tested on 2026-08-18
+
+Tag:
+1.1.0 (bare, matching repo convention 1.0.1) → 5ca2c205340bcf3ca66fe3499a67d2226b080e50
+
+GitHub Release:
+Gravity Forms TimeTonic Add-On 1.1.0 — https://github.com/wpconnect-co/addon_gf-timetonic/releases/tag/1.1.0 (ZIP attached)
 
 ZIP:
-wpconnect-gf-timetonic.1.1.0.zip  (dist/wpconnect-gf-timetonic.1.1.0.zip, 34497 bytes — LATEST attachment on TIM-97; rebuilt without languages/. Earlier 38765- and 36857-byte builds superseded)
+wpconnect-gf-timetonic.1.1.0.zip  (dist/wpconnect-gf-timetonic.1.1.0.zip, 35999 bytes — top folder wpconnect-gf-timetonic/, no languages/; attached to TIM-97 and to the GitHub Release. Earlier 38765/36857/34497-byte builds superseded)
 
 ## Scope
 
@@ -73,9 +79,14 @@ No /stories run for this version. Story-quality validation performed inline duri
 | TIM-92 | In Progress → For Test | 2026-08-13T22:06:54Z |
 | TIM-9 | In Progress → For Test | 2026-08-13T22:06:55Z |
 
-## Next step
+## Finalization (/tested — 2026-08-18)
 
-Human QA tests the LATEST ZIP on TIM-97. On approval, finalize with `/tested GF TimeTonic 1.1.0`.
+- Terminal state detected for team **TimeTonic**: **Done** (type `completed`; team also has a "Closed" completed-state — "Done" chosen per the prefer-Done/Complete rule and for consistency with the sibling TimeTonic WP Sync release).
+- Unlike the other releases in this batch, GF TimeTonic's issues were **still For Test** at finalization; `/tested` moved all 16 scope issues + the QA issue **TIM-97** For Test → **Done** (2026-08-18T07:18–07:19Z; TIM-9/TIM-58/TIM-64/TIM-42 had already been closed on 2026-08-17/earlier). Per-issue timestamps in `linear-issues.md`.
+- Tag `1.1.0` (bare) pushed to origin at 5ca2c20; GitHub Release **Gravity Forms TimeTonic Add-On 1.1.0** created with the QA ZIP attached.
+- No separate README-doc issue for this premium plugin — TIM-30 (readme.txt) is part of scope.
+- Not done (out of /tested scope): no PR merge, no deploy.
+- ⚠️ Known non-blocker (TIM-92/TIM-9): the TranslationsPress project `wpconnect-gf-timetonic` still returns HTTP 403 — translations are inert (no fatal) until the project is published and the fr_FR `.po` (attached to TIM-9) is uploaded on the TP dashboard.
 
 ---
 
