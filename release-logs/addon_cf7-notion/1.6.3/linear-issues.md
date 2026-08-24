@@ -12,6 +12,7 @@ Label: Bug · Commit: c5c3349 · Source: wp.org support ticket (created 2026-08-
 | created (Backlog) | 2026-08-24 11:21:28 |
 | Backlog → In Progress | 2026-08-24 11:22:54 |
 | In Progress → For Test | 2026-08-24 11:27:00 |
+| For Test → Done | 2026-08-24 11:47:40 |
 
 ## CF7NO-83 — New Strings to translate
 
@@ -23,6 +24,7 @@ Answered by comment (2026-08-24 11:27:31): NO — code-only hotfix.
 | Transition | Timestamp (UTC) |
 |---|---|
 | Backlog → For Test | 2026-08-24 11:27:38 |
+| For Test → Done | 2026-08-24 11:47:43 |
 
 ## CF7NO-82 — Readme
 
@@ -34,6 +36,7 @@ Description set to the 1.6.3 plaintext changelog block. (CF7NO-81 duplicate left
 | Transition | Timestamp (UTC) |
 |---|---|
 | Backlog → For Test | 2026-08-24 11:27:30 |
+| For Test → Done | 2026-08-24 11:47:42 |
 
 ## CF7NO-86 — Update CF7 Notion 1.6.3 (QA issue)
 
@@ -45,3 +48,4 @@ Project: CF7 Notion v1.6.3 · ZIP attached (verified).
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 11:27:10 |
+| For Test → Done | 2026-08-24 11:47:41 |

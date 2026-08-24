@@ -17,10 +17,19 @@ Linear Project:
 CF7 Notion v1.6.3
 
 Status:
-For Test
+Done (released)
 
 ZIP:
-add-on-cf7-for-notion.1.6.3.zip (attached to CF7NO-86; local copy in dist/)
+add-on-cf7-for-notion.1.6.3.zip (attached to CF7NO-86; also on the GitHub Release)
+
+Tag:
+1.6.3 (created by the pipeline on merge of PR #13)
+
+GitHub Release:
+https://github.com/wpconnect-co/addon_cf7-notion/releases/tag/1.6.3
+
+wp.org:
+deployed — trunk Stable tag 1.6.3, Tested up to 7.1 (pipeline run 32723558755)
 
 ## Scope (hotfix)
 
@@ -47,8 +56,11 @@ No /stories run — hotfix with minimal brief (PO agent validated the bug and pr
 | CF7NO-86 (QA) | created → For Test | 2026-08-24 11:27:10 |
 | CF7NO-82 (Readme) | Backlog → For Test | 2026-08-24 11:27:30 |
 | CF7NO-83 (Strings) | Backlog → For Test | 2026-08-24 11:27:44 |
+| CF7NO-85 | For Test → Done | 2026-08-24 11:47:40 |
+| CF7NO-86 (QA) | For Test → Done | 2026-08-24 11:47:41 |
+| CF7NO-82 (Readme) | For Test → Done | 2026-08-24 11:47:42 |
+| CF7NO-83 (Strings) | For Test → Done | 2026-08-24 11:47:43 |
 
-## Next step
+## Finalized
 
-Human QA on the attached ZIP, then `/tested CF7 Notion 1.6.3`.
-Note: this repo has the auto tag-and-deploy pipeline (`tag-and-deploy.yml`) — /tested must merge the release PR, NOT tag manually.
+2026-08-24 via /tested: QA confirmed. PR #13 merged; pipeline tagged 1.6.3, created the GitHub Release and deployed to wp.org (verified: trunk Stable tag 1.6.3 / Tested up to 7.1). Issues Done. CF7NO-81 (duplicate Readme) linked as duplicate of CF7NO-82 (already archived).
