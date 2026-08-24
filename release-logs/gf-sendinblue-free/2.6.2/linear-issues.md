@@ -11,6 +11,7 @@ Label: Improvement · Commit: e7c3240
 |---|---|
 | Backlog → In Progress | 2026-08-24 10:22:19 |
 | In Progress → For Test | 2026-08-24 10:27:55 |
+| For Test → Done | 2026-08-24 11:16:18 |
 
 ## GFSIB-296 — Feed settings: show Brevo API errors instead of silently hiding the "Add to list" section
 
@@ -24,6 +25,7 @@ Label: Bug · Commit: e9f3f4e · Created 2026-08-24 during investigation of the 
 | created (Backlog) | 2026-08-24 10:19:25 |
 | Backlog → In Progress | 2026-08-24 10:22:20 |
 | In Progress → For Test | 2026-08-24 10:27:56 |
+| For Test → Done | 2026-08-24 11:16:19 |
 
 ## GFSIB-290 — New Strings to translate
 
@@ -36,6 +38,7 @@ Answered by comment (2026-08-24 10:28:05): YES — 3 new strings in includes/cla
 |---|---|
 | Backlog → In Progress | 2026-08-24 10:22:22 |
 | In Progress → For Test | 2026-08-24 10:27:58 |
+| For Test → Done | 2026-08-24 11:16:22 |
 
 ## GFSIB-289 — Readme
 
@@ -47,6 +50,7 @@ Description set to the 2.6.2 plaintext changelog block.
 | Transition | Timestamp (UTC) |
 |---|---|
 | Backlog → For Test | 2026-08-24 10:28:42 |
+| For Test → Done | 2026-08-24 11:16:23 |
 
 ## GFSIB-297 — Update GF Brevo Free 2.6.2 (QA issue)
 
@@ -58,6 +62,7 @@ Project: GF Brevo Free v2.6.2 · ZIP attached (verified).
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 10:28:15 |
+| For Test → Done | 2026-08-24 11:16:25 |
 
 ## GFSIB-298 — Free version allows mapping Pro-only attributes (dropdown not disabled, no server-side filtering)
 
@@ -70,3 +75,4 @@ Label: Bug · Commit: 9b1fcf1 · Created 2026-08-24 during QA of 2.6.2.
 |---|---|
 | created (In Progress) | 2026-08-24 11:01:56 |
 | In Progress → For Test | 2026-08-24 11:03:21 |
+| For Test → Done | 2026-08-24 11:16:20 |

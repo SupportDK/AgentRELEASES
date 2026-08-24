@@ -17,10 +17,19 @@ Linear Project:
 GF Brevo Free v2.6.2
 
 Status:
-For Test
+Done (released)
 
 ZIP:
-addon-gravityforms-sendinblue-free.2.6.2.zip (attached to GFSIB-297; local copy in dist/)
+addon-gravityforms-sendinblue-free.2.6.2.zip (attached to GFSIB-297; also on the GitHub Release)
+
+Tag:
+2.6.2 (created by the auto tag-and-deploy pipeline on merge of PR #12)
+
+GitHub Release:
+https://github.com/wpconnect-co/gf-sendinblue-free/releases/tag/2.6.2
+
+wp.org:
+deployed — trunk Stable tag 2.6.2, Tested up to 7.1 (pipeline run 32720780713)
 
 ## Scope
 
@@ -53,8 +62,14 @@ No /stories run for this version (both issues carried complete acceptance criter
 | GFSIB-290 | In Progress → For Test | 2026-08-24 10:27:58 |
 | GFSIB-297 (QA) | created → For Test | 2026-08-24 10:28:15 |
 | GFSIB-289 (Readme) | Backlog → For Test | 2026-08-24 10:28:42 |
+| GFSIB-298 | created (In Progress) → For Test | 2026-08-24 11:03:21 |
+| GFSIB-295 | For Test → Done | 2026-08-24 11:16:18 |
+| GFSIB-296 | For Test → Done | 2026-08-24 11:16:19 |
+| GFSIB-298 | For Test → Done | 2026-08-24 11:16:20 |
+| GFSIB-290 | For Test → Done | 2026-08-24 11:16:22 |
+| GFSIB-289 | For Test → Done | 2026-08-24 11:16:23 |
+| GFSIB-297 (QA) | For Test → Done | 2026-08-24 11:16:25 |
 
-## Next step
+## Finalized
 
-Human QA on the attached ZIP, then `/tested GF Brevo Free 2.6.2`.
-Note: this repo has the auto tag-and-deploy pipeline (`tag-and-deploy.yml`) — /tested must merge the release PR, NOT tag manually.
+2026-08-24 via /tested: QA confirmed by human (build 9b1fcf1). PR #12 release/2.6.2 → main merged; pipeline auto-tagged 2.6.2, created the GitHub Release and deployed to wp.org (verified: trunk Stable tag 2.6.2 / Tested up to 7.1). All issues Done.
