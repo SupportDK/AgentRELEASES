@@ -68,14 +68,16 @@ On the release's Linear project (`mcp__linear__save_project` by **ID**):
 
 ## Phase 4.6 — Create the next-version project (main session)
 
-Ensure the next release always has a fresh project, using the `/project` templates (`.claude/commands/project.md`):
+Ensure the next release always has a fresh, properly-styled project.
+
+**Styling source — always the `/project` template table** (`.claude/commands/project.md`): icon, color, priority, lead, team come from that table and ONLY from it. Never copy the styling from any existing project — in particular not from the just-completed one, which Phase 4.5 already turned gray.
 
 1. Compute `N+1` = released version with patch +1 (2.0.0 → 2.0.1).
 2. Check if `<Name pattern>N+1` exists (`list_projects`, `includeArchived: true`):
    - **Doesn't exist** → create it per the `/project` flow (template styling + standard Readme/Strings issues).
-   - **Exists as the gray auto-created shell** (`#bec2c8`, no icon, empty) → ADOPT it: apply template styling + seed issues. Done.
-   - **Exists as a real project** (styled and/or already holds planned issues — e.g. the user created it manually) → leave it untouched and walk upward (`N+2`, `N+3`…) until a version with no project, and create THAT one per the `/project` flow. Example: released 2.0.0, user already created 2.0.1 → create 2.0.2.
-3. Carry-over check: move any non-completed issues left in the just-released project into the next active project (ask if ambiguous).
+   - **Exists as the automation's empty shell** → ADOPT it (style it from the template + seed the standard issues); do NOT create a second project. How to recognize the shell: the repos' `sync-linear-template.yml` workflow auto-creates the next-version project minutes after the release PR merges, always bare — gray `#bec2c8`, no icon, no lead, no issues (seen 2026-08-24 with "GF Brevo Free v2.6.3" and "CF7 Notion v1.6.4").
+   - **Exists as a real project** (template-styled and/or holding planned issues — i.e. a human created or is already using it) → leave it untouched and walk upward (`N+2`, `N+3`…) to the first version with no project, and create THAT one per the `/project` flow. Example: released 2.0.0, user had already created 2.0.1 → create 2.0.2.
+3. **Carry-overs**: list the issues of the just-released project that are NOT in a completed/canceled state (work that was planned but did not ship in this release). Completed projects go gray and dormant, so these issues would be stranded — move them to the next active project (example 2026-08-24: CF7NO-84 stayed behind in the completed CF7 Notion v1.6.3 and was moved to v1.6.4). Ask the user if it is unclear whether an issue should move or be canceled.
 
 ## Phase 5 — Update release log (main session)
 
