@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/gf-sendinblue-free
 Branch: release/2.6.2
-Commit: a053896 (HEAD; history: e7c3240 GFSIB-295, e9f3f4e GFSIB-296, 1d7444e WP 7.1, a053896 API error details)
+Commit: ac6a6d8 (HEAD; history: e7c3240 GFSIB-295, e9f3f4e GFSIB-296, 1d7444e WP 7.1, a053896 API error details, ac6a6d8 404 endpoint fix)
 Date: 2026-08-24
 
 ## QA Tracking
@@ -29,7 +29,8 @@ addon-gravityforms-sendinblue-free.2.6.2.zip (attached to GFSIB-297; local copy 
 - GFSIB-290 — New Strings to translate (answered: 3 new strings, comment on the issue)
 - GFSIB-289 — Readme (changelog block set, For Test)
 - Compatibility with WordPress 7.1 (`Tested up to: 7.1`, commit 1d7444e — added post-review on user request)
-- Improvement: API errors now surface Brevo response details — message + code — for all error codes, not only missing_parameter/invalid_parameter (commit a053896, api-sendinblue.php request(); prompted by an uninformative generic 404 during QA). ZIP and QA attachment regenerated (final build a053896).
+- Improvement: API errors now surface Brevo response details — message + code — for all error codes, not only missing_parameter/invalid_parameter (commit a053896, api-sendinblue.php request(); prompted by an uninformative generic 404 during QA).
+- Fix: ROOT CAUSE of the missing list selector found during QA — Brevo now 404s the trailing-slash route `contacts/lists/`; aligned with Pro (`contacts/lists`), commit ac6a6d8. ZIP and QA attachment regenerated (final build ac6a6d8).
 
 ## Context
 
