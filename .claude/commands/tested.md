@@ -49,15 +49,33 @@ Create a GitHub Release on the **plugin repository** (`wpconnect-co/<repository>
 
 ## Phase 4 — Close Linear issues (main session)
 
-**Detect the team's terminal state — do not hardcode it.** Run `mcp__linear__list_issue_statuses(team)` and pick the state of type `completed` (its name may be "Complete", "Done", "Closed"… depending on the team's workflow). If several completed-type states exist, prefer the one named like Complete/Done and tell the user which one was used.
+**Detect the team's terminal state — do not hardcode it.** Run `mcp__linear__list_issue_statuses(team)` and pick the completed-type state named **"Closed"** (house rule 2026-08-24 — released issues end in Closed, not Done/Complete). Only if no "Closed" state exists, fall back to another completed-type state and tell the user which one was used.
 
-Move to that terminal state via `mcp__linear__save_issue` (`id` + `state`):
+For **every issue of the release** (originals, QA issue `Update <Plugin Name> <Version>`, README issue if applicable), via `mcp__linear__save_issue`:
 
-1. Every original issue of this release
-2. The QA issue `Update <Plugin Name> <Version>`
-3. The README issue, if applicable
+- `state: "Closed"`
+- `assignee: "support@wpconnect.co"` (Cristian)
+- Fill `priority`/`estimate` if missing (bugs: Urgent/S · QA issues: Medium/XS + label `Update` · Readme/Strings: Low/XS) — never override values already set.
 
 Record each transition with timestamp.
+
+## Phase 4.5 — Project housekeeping (main session)
+
+On the release's Linear project (`mcp__linear__save_project` by **ID**):
+
+1. `state: "Completed"` and `targetDate: <release date>`.
+2. **Color → light gray `#bec2c8`** (keep the icon). House convention: colored icon = active/upcoming project, gray = released. This is why old completed projects are gray.
+
+## Phase 4.6 — Create the next-version project (main session)
+
+Ensure the next release always has a fresh project, using the `/project` templates (`.claude/commands/project.md`):
+
+1. Compute `N+1` = released version with patch +1 (2.0.0 → 2.0.1).
+2. Check if `<Name pattern>N+1` exists (`list_projects`, `includeArchived: true`):
+   - **Doesn't exist** → create it per the `/project` flow (template styling + standard Readme/Strings issues).
+   - **Exists as the gray auto-created shell** (`#bec2c8`, no icon, empty) → ADOPT it: apply template styling + seed issues. Done.
+   - **Exists as a real project** (styled and/or already holds planned issues — e.g. the user created it manually) → leave it untouched and walk upward (`N+2`, `N+3`…) until a version with no project, and create THAT one per the `/project` flow. Example: released 2.0.0, user already created 2.0.1 → create 2.0.2.
+3. Carry-over check: move any non-completed issues left in the just-released project into the next active project (ask if ambiguous).
 
 ## Phase 5 — Update release log (main session)
 
@@ -86,7 +104,7 @@ GitHub Release:
 <URL or "not created (not part of this plugin's workflow)">
 
 Terminal state used:
-<Complete | Done | Closed — as detected in the team's workflow>
+Closed  (assigned to support@wpconnect.co, priority/estimate filled)
 
 Issues closed:
 <list of issue keys>
@@ -96,6 +114,12 @@ Update <Plugin Name> <Version>
 
 README issue closed:
 <issue key or n/a>
+
+Project:
+<name> → Completed, target date <date>, color → gray #bec2c8
+
+Next project:
+<name of the created/adopted next-version project + seeded issue IDs — or "vN+1 existed (user-created), created vN+2 instead">
 
 Release log updated:
 release-logs/<plugin-slug>/<version>/release-log.md
