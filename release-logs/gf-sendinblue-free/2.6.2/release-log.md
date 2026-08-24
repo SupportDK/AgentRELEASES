@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/gf-sendinblue-free
 Branch: release/2.6.2
-Commit: e9f3f4ef27ba72429c4b0a0fb778eb3290895e2d
+Commit: 1d7444e9130ef49522108870e0b282a8218397aa
 Date: 2026-08-24
 
 ## QA Tracking
@@ -28,6 +28,7 @@ addon-gravityforms-sendinblue-free.2.6.2.zip (attached to GFSIB-297; local copy 
 - GFSIB-296 — Feed settings: show Brevo API errors instead of silently hiding the "Add to list" section (Fix)
 - GFSIB-290 — New Strings to translate (answered: 3 new strings, comment on the issue)
 - GFSIB-289 — Readme (changelog block set, For Test)
+- Compatibility with WordPress 7.1 (`Tested up to: 7.1`, commit 1d7444e — added post-review on user request; ZIP and QA issue attachment regenerated)
 
 ## Context
 
