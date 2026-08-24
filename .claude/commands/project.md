@@ -48,7 +48,7 @@ Every version project carries these two issues. **Check the project's issues fir
 
 ## Plugin Project Templates
 
-Captured 2026-08-24 from each plugin's latest actively-styled version project (colored icon, not the gray `#bec2c8` auto-created ones). Colors follow the service family; icons: `Present` = free/wp.org, `Chip` = premium (where established).
+Captured 2026-08-24 from each plugin's latest actively-styled version project (colored icon, not the gray `#bec2c8` auto-created ones). Colors follow the service family; icons: `Present` = free/wp.org, `Chip` = premium (where established), `Database` = plugins without a historical icon (user's pick), `Cart` = Air Woo Sync.
 
 | Display Name | Team (key) | Name pattern | Icon | Color | Priority | Lead |
 |---|---|---|---|---|---|---|
@@ -63,17 +63,17 @@ Captured 2026-08-24 from each plugin's latest actively-styled version project (c
 | CF7 Airtable | CF7 Airtable (CF7AT) | `CF7 Airtable v` | Present | #f2c94c | Low | support@wpconnect.co |
 | CF7 Notion | CF7 Notion (CF7NO) | `CF7 Notion v` | Present | #f7c8c1 | Low | support@wpconnect.co |
 | GF Brevo Free | GF Brevo (GFSIB) | `GF Brevo Free v` | Present | #4cb782 | Low | support@wpconnect.co |
-| GF Brevo | GF Brevo (GFSIB) | `GF Brevo v` | Chip *(inferred)* | #4cb782 | Low | support@wpconnect.co |
-| GF Odoo | Odoo (ODO) | `GF Odoo v` | Chip *(inferred)* | #714B67 | Low | support@wpconnect.co |
+| GF Brevo | GF Brevo (GFSIB) | `GF Brevo v` | Database | #4cb782 | Low | support@wpconnect.co |
+| GF Odoo | Odoo (ODO) | `GF Odoo v` | Database | #714B67 | Low | support@wpconnect.co |
 | GF Notion | GF Notion (GFNO) | `GF Notion v` | Present | #f7c8c1 | Low | support@wpconnect.co |
-| GF SendGrid | GF SendGrid (GFSG) | `GF SendGrid v` | Chip *(inferred)* | #26b5ce | Low | support@wpconnect.co |
-| GF Airtable | GF Airtable (GFAT) | `GF Airtable v` | Chip *(inferred)* | #f2c94c | Low | support@wpconnect.co |
-| GF TimeTonic | TimeTonic (TIM) | `GF TimeTonic v` | Chip *(inferred)* | #eb5757 | Low | support@wpconnect.co |
-| WPForms Airtable | WPForms Airtable (WPFAT) | `WPForms Airtable v` | Chip *(inferred)* | #f2994a | Low | support@wpconnect.co |
+| GF SendGrid | GF SendGrid (GFSG) | `GF SendGrid v` | Database | #26b5ce | Low | support@wpconnect.co |
+| GF Airtable | GF Airtable (GFAT) | `GF Airtable v` | Database | #f2c94c | Low | support@wpconnect.co |
+| GF TimeTonic | TimeTonic (TIM) | `GF TimeTonic v` | Database | #eb5757 | Low | support@wpconnect.co |
+| WPForms Airtable | WPForms Airtable (WPFAT) | `WPForms Airtable v` | Database | #f2994a | Low | support@wpconnect.co |
 | WPForms Notion | WPForms Notion (WPFNO) | `WPForms Notion v` | Present | #f2994a | Low | support@wpconnect.co |
-| wpDataTables Airtable | WP connect (WPC) | `wpDataTables Airtable Add-On v` | Chip *(inferred)* | #5e6ad2 | Low | support@wpconnect.co |
+| wpDataTables Airtable | WP connect (WPC) | `wpDataTables Airtable Add-On v` | Database | #5e6ad2 | Low | support@wpconnect.co |
 
-*(inferred)* = that plugin's historical projects never had an icon; the icon follows the free=Present / premium=Chip convention. Confirm with the user the first time one of these is used, then remove the marker here.
+Plugins whose historical projects had no icon use **Database** (user-chosen 2026-08-24, "like a database"): GF Brevo, GF Odoo, GF Airtable, GF SendGrid, GF TimeTonic, WPForms Airtable, wpDataTables Airtable.
 
 Notes:
 - Shared teams: AWPS (Free+Pro+), NOWPS (free "WP Sync for Notion" + Pro+), GFSIB (Free+Pro), TIM (TimeTonic WP Sync + GF TimeTonic + TimeTonic WP Sync for WooCommerce), ODO (Sync Woo Orders + GF Odoo), WPC (Orders Sync + wpDataTables).
