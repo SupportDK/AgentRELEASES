@@ -12,6 +12,7 @@ Label: Bug · Commit: 33a9592 · Sibling of CF7NO-85 and GFNO-103.
 | created (Backlog) | 2026-08-24 11:37:42 |
 | Backlog → In Progress | 2026-08-24 11:39:04 |
 | In Progress → For Test | 2026-08-24 11:42:11 |
+| For Test → Done | 2026-08-24 11:51:46 |
 
 ## WPFNO-38 — Update WPForms Notion 1.4.2 (QA issue)
 
@@ -23,6 +24,7 @@ Project: WPForms Notion v1.4.2 · ZIP attached (verified).
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 11:42:17 |
+| For Test → Done | 2026-08-24 11:51:47 |
 
 ## WPFNO-39 — Readme
 
@@ -34,3 +36,4 @@ Created during the hotfix (no pre-existing Readme issue); description = 1.4.2 pl
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 11:42:37 |
+| For Test → Done | 2026-08-24 11:51:49 |

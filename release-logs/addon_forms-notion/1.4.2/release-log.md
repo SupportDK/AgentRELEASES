@@ -17,10 +17,19 @@ Linear Project:
 WPForms Notion v1.4.2
 
 Status:
-For Test
+Done (released)
 
 ZIP:
-wpconnect-wpf-notion.1.4.2.zip (attached to WPFNO-38; local copy in dist/)
+wpconnect-wpf-notion.1.4.2.zip (attached to WPFNO-38; also on the GitHub Release)
+
+Tag:
+1.4.2 (created by the pipeline on merge of PR #8)
+
+GitHub Release:
+https://github.com/wpconnect-co/addon_forms-notion/releases/tag/1.4.2
+
+Deploy:
+wpconnect.co deploy success (pipeline run 32723921217, all jobs success)
 
 ## Scope (hotfix)
 
@@ -45,8 +54,10 @@ No /stories run — hotfix with minimal brief (PO validated bug; review APPROVED
 | WPFNO-37 | In Progress → For Test | 2026-08-24 11:42:11 |
 | WPFNO-38 (QA) | created → For Test | 2026-08-24 11:42:17 |
 | WPFNO-39 (Readme) | created → For Test | 2026-08-24 11:42:37 |
+| WPFNO-37 | For Test → Done | 2026-08-24 11:51:46 |
+| WPFNO-38 (QA) | For Test → Done | 2026-08-24 11:51:47 |
+| WPFNO-39 (Readme) | For Test → Done | 2026-08-24 11:51:49 |
 
-## Next step
+## Finalized
 
-Human QA on the attached ZIP, then `/tested WPForms Notion 1.4.2`.
-Note: repo has tag-and-deploy.yml — /tested must merge the release PR, NOT tag manually.
+2026-08-24 via /tested: QA confirmed. PR #8 merged; pipeline tagged 1.4.2, created the GitHub Release and deployed (all jobs success). Issues Done, project Completed. Notion Bearer sibling sweep CLOSED: CF7 Notion 1.6.3 + GF Notion 2.0.2 + WPForms Notion 1.4.2 all released 2026-08-24.
