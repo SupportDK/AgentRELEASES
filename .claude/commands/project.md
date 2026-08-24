@@ -48,7 +48,7 @@ Every version project carries these two issues. **Check the project's issues fir
 
 ## Plugin Project Templates
 
-Captured 2026-08-24 from each plugin's latest actively-styled version project (colored icon, not the gray `#bec2c8` auto-created ones). Colors follow the service family; icons: `Present` = free/wp.org, `Chip` = premium (where established), `Database` = plugins without a historical icon (user's pick), `Cart` = Air Woo Sync.
+Captured 2026-08-24 from each plugin's latest actively-styled version project (colored icon, not the gray `#bec2c8` auto-created ones). Colors follow the service family; icons: `Present` = free/wp.org, `Chip` = premium (where established), `Database` = plugins without a historical icon (user's pick), `Cart` = WooCommerce plugins (Air Woo Sync, Sync Woo Orders to Odoo).
 
 | Display Name | Team (key) | Name pattern | Icon | Color | Priority | Lead |
 |---|---|---|---|---|---|---|
@@ -59,7 +59,7 @@ Captured 2026-08-24 from each plugin's latest actively-styled version project (c
 | Notion WP Sync Pro+ | Notion WP Sync (NOWPS) | `Notion WP Sync Pro+ v` | Chip | #f7c8c1 | Low | support@wpconnect.co |
 | TimeTonic WP Sync | TimeTonic (TIM) | `TimeTonic WP Sync v` | Chip | #eb5757 | Low | support@wpconnect.co |
 | Orders Sync to Airtable for Woo | WP connect (WPC) | `Orders Sync to Airtable for Woo v` | Present | #5e6ad2 | Low | support@wpconnect.co |
-| Sync Woo Orders to Odoo | Odoo (ODO) | `Sync Woo Orders to Odoo v` | Chip | #714B67 | Low | support@wpconnect.co |
+| Sync Woo Orders to Odoo | Odoo (ODO) | `Sync Woo Orders to Odoo v` | Cart | #714B67 | Low | support@wpconnect.co |
 | CF7 Airtable | CF7 Airtable (CF7AT) | `CF7 Airtable v` | Present | #f2c94c | Low | support@wpconnect.co |
 | CF7 Notion | CF7 Notion (CF7NO) | `CF7 Notion v` | Present | #f7c8c1 | Low | support@wpconnect.co |
 | GF Brevo Free | GF Brevo (GFSIB) | `GF Brevo Free v` | Present | #4cb782 | Low | support@wpconnect.co |
