@@ -12,6 +12,7 @@ Label: Bug · Commit: 132390d · Sibling of CF7NO-85.
 | created (Backlog) | 2026-08-24 11:31:02 |
 | Backlog → In Progress | 2026-08-24 11:32:23 |
 | In Progress → For Test | 2026-08-24 11:35:25 |
+| For Test → Done | 2026-08-24 11:49:46 |
 
 ## GFNO-104 — Update GF Notion 2.0.2 (QA issue)
 
@@ -23,6 +24,7 @@ Project: GF Notion v2.0.2 · ZIP attached (verified).
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 11:35:32 |
+| For Test → Done | 2026-08-24 11:49:48 |
 
 ## GFNO-105 — Readme
 
@@ -34,3 +36,4 @@ Created during the hotfix (no pre-existing Readme issue); description = 2.0.2 pl
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 11:35:57 |
+| For Test → Done | 2026-08-24 11:49:49 |

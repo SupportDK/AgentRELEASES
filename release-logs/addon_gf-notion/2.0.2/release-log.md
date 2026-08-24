@@ -17,10 +17,19 @@ Linear Project:
 GF Notion v2.0.2
 
 Status:
-For Test
+Done (released)
 
 ZIP:
-wpconnect-gf-notion.2.0.2.zip (attached to GFNO-104; local copy in dist/)
+wpconnect-gf-notion.2.0.2.zip (attached to GFNO-104; also on the GitHub Release)
+
+Tag:
+2.0.2 (created by the pipeline on merge of PR #19)
+
+GitHub Release:
+https://github.com/wpconnect-co/addon_gf-notion/releases/tag/2.0.2
+
+Deploy:
+wpconnect.co deploy success (pipeline run 32723761020) + InstaWP staging refresh success (run 32723760461)
 
 ## Scope (hotfix)
 
@@ -45,8 +54,10 @@ No /stories run — hotfix with minimal brief (PO agent validated bug + brief, r
 | GFNO-103 | In Progress → For Test | 2026-08-24 11:35:25 |
 | GFNO-104 (QA) | created → For Test | 2026-08-24 11:35:32 |
 | GFNO-105 (Readme) | created → For Test | 2026-08-24 11:35:57 |
+| GFNO-103 | For Test → Done | 2026-08-24 11:49:46 |
+| GFNO-104 (QA) | For Test → Done | 2026-08-24 11:49:48 |
+| GFNO-105 (Readme) | For Test → Done | 2026-08-24 11:49:49 |
 
-## Next step
+## Finalized
 
-Human QA on the attached ZIP, then `/tested GF Notion 2.0.2`.
-Note: repo has tag-and-deploy.yml (premium → deploys to wpconnect.co) — /tested must merge the release PR, NOT tag manually. Also has deploy-instawp.yml (staging refresh on push to main).
+2026-08-24 via /tested: QA confirmed. PR #19 merged; pipeline tagged 2.0.2, created the GitHub Release and deployed to wpconnect.co (Slack success notification); InstaWP staging refreshed. Issues Done, project Completed.
