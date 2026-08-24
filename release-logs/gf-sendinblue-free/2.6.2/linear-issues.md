@@ -58,3 +58,15 @@ Project: GF Brevo Free v2.6.2 · ZIP attached (verified).
 | Transition | Timestamp (UTC) |
 |---|---|
 | created → For Test | 2026-08-24 10:28:15 |
+
+## GFSIB-298 — Free version allows mapping Pro-only attributes (dropdown not disabled, no server-side filtering)
+
+https://linear.app/wp-connect/issue/GFSIB-298/free-version-allows-mapping-pro-only-attributes-dropdown-options-not
+Label: Bug · Commit: 9b1fcf1 · Created 2026-08-24 during QA of 2.6.2.
+
+## Workflow Status History
+
+| Transition | Timestamp (UTC) |
+|---|---|
+| created (In Progress) | 2026-08-24 11:01:56 |
+| In Progress → For Test | 2026-08-24 11:03:21 |
