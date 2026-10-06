@@ -201,6 +201,7 @@ For WordPress plugin features, create a ZIP package suitable for manual installa
 Requirements:
 
 - Package only the files required for plugin installation
+- **If the plugin has a runtime composer dependency** (a `composer.json` with a non-dev `require`, or the main file `require_once`s something under `vendor/` such as `vendor/autoload.php` or `vendor/woocommerce/action-scheduler/action-scheduler.php`), run `composer install --no-dev --optimize-autoloader` in the plugin dir **before** zipping — a fresh clone has no `vendor/` (gitignored, not excluded by `.distignore`), so omitting it produces a ZIP that fatals on activation. Then confirm `vendor/autoload.php` and each required package file are actually inside the ZIP.
 - Place the artifact in `dist/<plugin-slug>.zip`
 - Return the ZIP path and packaged file structure
 - Provide short manual testing instructions

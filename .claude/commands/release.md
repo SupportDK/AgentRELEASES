@@ -81,6 +81,8 @@ Delegate to the **product-owner** agent with the Implementation Summary and the 
 
 Only after APPROVED. Inside `repos/<repository>/`:
 
+0. **Vendor runtime composer dependencies first (mandatory for plugins that need it).** If the repo has a `composer.json` with a non-dev `require`, or the main file `require_once`s anything under `vendor/` (e.g. `air-wp-sync-pro`, `notion-wp-sync`, `notion-wp-sync-pro` require `vendor/woocommerce/action-scheduler/action-scheduler.php`), run `composer install --no-dev --optimize-autoloader` **before** packaging. A fresh clone ships **no** `vendor/` (gitignored) and `.distignore` does not exclude it, so skipping this produces a ZIP that fatals on activation (`require_once(.../vendor/autoload.php): Failed to open stream`). It does not overwrite a committed `vendor_prefixed/` tree.
+
 1. **Preferred:** use WP-CLI dist-archive:
    ```bash
    wp dist-archive ./ --plugin-dirname=<plugin-dirname>
@@ -93,7 +95,7 @@ Only after APPROVED. Inside `repos/<repository>/`:
    ```
    Example: main file `wpconnect-wpf-notion.php`, version `1.4.1` → `wpconnect-wpf-notion.1.4.1.zip`
 
-3. Move the ZIP to the workspace `dist/` directory and verify its contents (`unzip -l`).
+3. Move the ZIP to the workspace `dist/` directory and verify its contents (`unzip -l`). **For plugins with a runtime `vendor/` dependency (step 0), confirm `vendor/autoload.php` and each required package file are actually inside the ZIP** — not just the top folder.
 
 ## Phase 6 — Commit + push
 

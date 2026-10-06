@@ -13,7 +13,15 @@ Build a distributable ZIP for the plugin at **$1** (optional version label: $2).
 
 2. Read the plugin slug/dirname and the version from the plugin header. If `$2` is provided and differs from the header version, warn the user (do not modify the header — version bumps belong to `/release`).
 
-3. Build the archive — **preferred**: WP-CLI dist-archive (respects `.distignore`):
+3. **Vendor runtime composer dependencies first (or the ZIP fatals on activation).** If the plugin has a `composer.json` with a non-dev `require`, or the main file `require_once`s anything under `vendor/` (grep for `vendor/autoload.php` or `vendor/…` requires — e.g. `air-wp-sync-pro`, `notion-wp-sync`, `notion-wp-sync-pro` require `vendor/woocommerce/action-scheduler/action-scheduler.php`), then `vendor/` **must** physically exist before packaging. A fresh clone does **not** ship `vendor/` (it is gitignored), and `.distignore` does **not** exclude `vendor/`, so run:
+
+   ```bash
+   cd "$1" && composer install --no-dev --optimize-autoloader
+   ```
+
+   Notes: this is idempotent and does **not** overwrite a committed `vendor_prefixed/` tree (scoped deps), so a hand-applied patch there survives — but re-apply any patch you may have reverted before packaging. Skip only if the plugin has no runtime composer dependency.
+
+4. Build the archive — **preferred**: WP-CLI dist-archive (respects `.distignore`):
 
    ```bash
    cd "$1" && wp dist-archive ./ --plugin-dirname=<plugin-dirname>
@@ -26,7 +34,7 @@ Build a distributable ZIP for the plugin at **$1** (optional version label: $2).
      -x "*/node_modules/*" "*/tests/*" "*/.git*" "*/.*" "*.zip"
    ```
 
-4. **Name the ZIP with the release convention** — main plugin file without `.php`, then the version:
+5. **Name the ZIP with the release convention** — main plugin file without `.php`, then the version:
 
    ```text
    <main-plugin-file-without-.php>.<version>.zip
@@ -34,7 +42,7 @@ Build a distributable ZIP for the plugin at **$1** (optional version label: $2).
 
    Example: main file `wpconnect-wpf-notion.php`, version `1.4.1` → `wpconnect-wpf-notion.1.4.1.zip`
 
-5. Place the ZIP in the workspace `dist/` directory and verify it: list contents (`unzip -l`) and confirm the main plugin file is at `<plugin-dirname>/<main-file>.php`.
+6. Place the ZIP in the workspace `dist/` directory and verify it: list contents (`unzip -l`) and confirm the main plugin file is at `<plugin-dirname>/<main-file>.php`. **If the plugin has a runtime `vendor/` dependency (step 3), also confirm `vendor/autoload.php` and each required package file (e.g. `vendor/woocommerce/action-scheduler/action-scheduler.php`) are present in the ZIP** — a top-folder/file-count check does not catch a missing `vendor/`, which only surfaces as a fatal on activation.
 
 ## Report
 
