@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/air-wp-sync-pro
 Branch: release/2.9.5
-Commit: b25ef387b7637d70f5e96acd9bbeecffd9f76302
+Commit: 572e3f71d0242416cf3ae2f75986a79dd72f6811
 Date: 2026-11-06
 
 ## QA Tracking
@@ -79,6 +79,13 @@ No /stories run for this version.
 - AWPS-604 was missed in the initial implementation brief and caught during Phase 8; implemented (commit b25ef38), PO-reviewed, re-packaged and re-pushed before the QA gate. The QA ZIP attached to AWPS-616 contains the fix in the shipped bundle `assets/js/metabox-mapping/main.js`.
 - Runtime `vendor/` (action-scheduler + autoload) vendored via `composer install --no-dev --optimize-autoloader` before packaging and verified inside the ZIP.
 - ZIP built via the /package fallback (wp dist-archive not registered); single top folder `air-wp-sync-pro-plus/`, no dev cruft.
+
+## Staging runtime verification
+
+- A preproduction CLI bootstrap revealed the missing `WP_Cli\\CLI` import in `includes/class-air-wp-sync-bootstrap.php`; Claude implemented the minimal import in isolated worktree and Orion reviewed it.
+- Corrected release candidate: commit `572e3f71d0242416cf3ae2f75986a79dd72f6811` on `release/2.9.5`; ZIP SHA-256 `33dbda9ac5be104fb177798b71cf9150cd8abfd82ed7bd27811c8fdf55b2d54e`.
+- Exact ZIP structure re-audited: 373 files, single root, bundled `vendor/autoload.php`, Action Scheduler, and prefixed `WP_Cli/CLI.php`; no development artefacts.
+- On dedicated preproduction: ZIP install, active-plugin bootstrap, `air-wp-sync` command registration, and public HTTP health check all passed. Admin-browser smoke test remains pending because this automation host has no Chromium binary.
 
 ## Next step
 
