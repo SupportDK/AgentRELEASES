@@ -12,6 +12,7 @@ https://linear.app/wp-connect/issue/AWS-144
 |---|---|
 | Todo → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:17Z |
 
 ## AWS-141 — Update WordPress to 7.1 compatibility
 https://linear.app/wp-connect/issue/AWS-141
@@ -21,6 +22,7 @@ https://linear.app/wp-connect/issue/AWS-141
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:17Z |
 
 ## AWS-137 — Mapping should clean up options => name
 https://linear.app/wp-connect/issue/AWS-137
@@ -31,6 +33,7 @@ Note: verified already fixed (source + built asset); no code change this release
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:18Z |
 
 ## AWS-136 — method reset_errors should also reset 'last_error' meta
 https://linear.app/wp-connect/issue/AWS-136
@@ -40,6 +43,7 @@ https://linear.app/wp-connect/issue/AWS-136
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:19Z |
 
 ## AWS-135 — explode_fields to be checked
 https://linear.app/wp-connect/issue/AWS-135
@@ -49,6 +53,7 @@ https://linear.app/wp-connect/issue/AWS-135
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:21Z |
 
 ## AWS-134 — Check delete_removed_contents (bis)
 https://linear.app/wp-connect/issue/AWS-134
@@ -58,6 +63,7 @@ https://linear.app/wp-connect/issue/AWS-134
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:21Z |
 
 ## AWS-131 — Recurring sync should cancel previous sync if it's running
 https://linear.app/wp-connect/issue/AWS-131
@@ -68,6 +74,7 @@ Note: verified already implemented (cron guard via get_run_id()); no code change
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:21Z |
 
 ## AWS-130 — Admin::TOP_MENU_SLUG != x-wp-sync-core-text-domain
 https://linear.app/wp-connect/issue/AWS-130
@@ -78,6 +85,7 @@ Note: verified no-op for this plugin (literal absent from shipped code); no code
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:28:13Z |
 | In Progress → For Test | 2026-11-05T20:38:08Z |
+| For Test → Closed | 2026-11-10T08:00:22Z |
 
 ## AWS-140 — Readme (Readme label)
 https://linear.app/wp-connect/issue/AWS-140
@@ -87,6 +95,7 @@ Phase 8: description set to the 2.0.2 plaintext changelog block.
 | Transition | Timestamp |
 |---|---|
 | Backlog → For Test | 2026-11-05T20:40:00Z |
+| For Test → Closed | 2026-11-10T08:00:18Z |
 
 ## AWS-147 — Update Air Woo Sync 2.0.2 (QA issue)
 https://linear.app/wp-connect/issue/AWS-147
@@ -96,6 +105,7 @@ Created in project Air Woo Sync v2.0.2; ZIP air-wp-sync.2.0.2.zip attached.
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-11-05T20:38:30Z |
+| For Test → Closed | 2026-11-10T08:00:16Z |
 
 ---
-/tested will append the terminal transitions (For Test → Closed) after human QA approval.
+Terminal transitions (For Test → Closed) recorded 2026-11-10 by /tested.

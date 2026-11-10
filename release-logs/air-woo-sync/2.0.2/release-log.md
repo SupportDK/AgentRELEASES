@@ -17,7 +17,7 @@ Linear Project:
 Air Woo Sync v2.0.2  (verified — QA issue created directly in the same project as the source issues)
 
 Status:
-For Test
+Closed (human QA approved 2026-11-10; tag/release deferred to merge pipeline)
 
 ZIP:
 air-wp-sync.2.0.2.zip  (attached to AWS-147; local: dist/air-wp-sync.2.0.2.zip; 1,865,787 bytes)
@@ -79,3 +79,20 @@ No /stories run for this version. PO flagged AWS-137/AWS-135/AWS-134 as having g
 | AWS-130 | In Progress → For Test | 2026-11-05T20:38:08Z |
 | AWS-147 (QA) | created → For Test | 2026-11-05T20:38:30Z |
 | AWS-140 (Readme) | Backlog → For Test | 2026-11-05T20:40:00Z |
+| AWS-144 | For Test → Closed | 2026-11-10T08:00:17Z |
+| AWS-141 | For Test → Closed | 2026-11-10T08:00:17Z |
+| AWS-140 (Readme) | For Test → Closed | 2026-11-10T08:00:18Z |
+| AWS-137 | For Test → Closed | 2026-11-10T08:00:18Z |
+| AWS-136 | For Test → Closed | 2026-11-10T08:00:19Z |
+| AWS-135 | For Test → Closed | 2026-11-10T08:00:21Z |
+| AWS-134 | For Test → Closed | 2026-11-10T08:00:21Z |
+| AWS-131 | For Test → Closed | 2026-11-10T08:00:21Z |
+| AWS-130 | For Test → Closed | 2026-11-10T08:00:22Z |
+| AWS-147 (QA) | For Test → Closed | 2026-11-10T08:00:16Z |
+
+## Finalization (/tested, 2026-11-10)
+
+- Human QA approval confirmed by Cris for ZIP `air-wp-sync.2.0.2.zip` (sha256 `207b9d91111f42f6298f72d0eec03e49610f9f4854319d18c4ed3108376e2cae`, verified against `dist/`).
+- Tag / GitHub Release: **not created here** — repo has `tag-and-deploy.yml`; the pipeline tags and releases when the `release/2.0.2` PR is merged to `main`. No merge or deploy was performed.
+- Project `Air Woo Sync v2.0.2` → Completed, target date 2026-11-10, color `#bec2c8`.
+- Next project: `Air Woo Sync v2.0.3` already existed with planned backlog issues, so `Air Woo Sync v2.0.4` was created (AWS-148 Readme, AWS-149 New Strings to translate). No carry-overs.
