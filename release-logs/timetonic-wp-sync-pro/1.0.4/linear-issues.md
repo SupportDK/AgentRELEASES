@@ -14,7 +14,7 @@ Label: Improvement
 |---|---|
 | Backlog → In Progress | 2026-11-05T21:01:55Z |
 | In Progress → For Test | 2026-11-05T21:04:39Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Closed | 2026-11-10T07:59:07Z |
 
 ## TIM-125 — Update TimeTonic WP Sync 1.0.4 (QA issue)
 
@@ -25,7 +25,7 @@ Link: https://linear.app/wp-connect/issue/TIM-125/update-timetonic-wp-sync-104
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-11-05T21:04:39Z |
-| For Test → (terminal) | pending /tested |
+| For Test → Closed | 2026-11-10T07:59:07Z |
 
 ## TIM-112 — Readme (Readme label)
 
@@ -37,3 +37,4 @@ Excluded from implementation scope; description set to the updated readme.txt in
 | Transition | Timestamp |
 |---|---|
 | Backlog → For Test | 2026-11-05T21:05:33Z |
+| For Test → Closed | 2026-11-10T07:59:07Z |
