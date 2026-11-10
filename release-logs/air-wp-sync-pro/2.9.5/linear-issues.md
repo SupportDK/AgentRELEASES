@@ -11,6 +11,7 @@ https://linear.app/wp-connect/issue/AWPS-615
 |---|---|
 | Todo → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:22Z |
 
 ## AWPS-611 — [Air WP Sync Pro+] Licensing: send full home_url() (www / non-www bug)
 https://linear.app/wp-connect/issue/AWPS-611
@@ -20,6 +21,7 @@ https://linear.app/wp-connect/issue/AWPS-611
 |---|---|
 | Todo → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:38Z |
 
 ## AWPS-610 — Merge patch/2.9.4
 https://linear.app/wp-connect/issue/AWPS-610
@@ -29,6 +31,7 @@ https://linear.app/wp-connect/issue/AWPS-610
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:38Z |
 
 ## AWPS-608 — Update WordPress to 7.1 compatibility
 https://linear.app/wp-connect/issue/AWPS-608
@@ -38,6 +41,7 @@ https://linear.app/wp-connect/issue/AWPS-608
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:38Z |
 
 ## AWPS-604 — Mapping should clean up options => name
 https://linear.app/wp-connect/issue/AWPS-604
@@ -47,6 +51,7 @@ https://linear.app/wp-connect/issue/AWPS-604
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:38Z |
 
 ## AWPS-601 — explode_fields to be checked
 https://linear.app/wp-connect/issue/AWPS-601
@@ -56,6 +61,7 @@ https://linear.app/wp-connect/issue/AWPS-601
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:39Z |
 
 ## AWPS-595 — Check delete_removed_contents (bis)
 https://linear.app/wp-connect/issue/AWPS-595
@@ -65,6 +71,7 @@ https://linear.app/wp-connect/issue/AWPS-595
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:39Z |
 
 ## AWPS-591 — Admin::TOP_MENU_SLUG != x-wp-sync-core-text-domain
 https://linear.app/wp-connect/issue/AWPS-591
@@ -74,6 +81,7 @@ https://linear.app/wp-connect/issue/AWPS-591
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:39Z |
 
 ## AWPS-606 — method reset_errors should also reset 'last_error' meta
 https://linear.app/wp-connect/issue/AWPS-606
@@ -83,6 +91,7 @@ https://linear.app/wp-connect/issue/AWPS-606
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:40Z |
 
 ## AWPS-600 — Recurring sync should cancel previous sync if it's running
 https://linear.app/wp-connect/issue/AWPS-600
@@ -92,6 +101,7 @@ https://linear.app/wp-connect/issue/AWPS-600
 |---|---|
 | Backlog → In Progress | 2026-11-06T12:10:27Z |
 | In Progress → For Test | 2026-11-06T12:19:34Z |
+| For Test → Closed | 2026-11-10T08:03:40Z |
 
 ## AWPS-616 — Update Air WP Sync Pro+ 2.9.5  (QA issue)
 https://linear.app/wp-connect/issue/AWPS-616/update-air-wp-sync-pro-295
@@ -100,6 +110,7 @@ https://linear.app/wp-connect/issue/AWPS-616/update-air-wp-sync-pro-295
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-11-06T12:19:40Z |
+| For Test → Closed | 2026-11-10T08:03:37Z |
 
 ## AWPS-587 — Readme
 https://linear.app/wp-connect/issue/AWPS-587
@@ -108,7 +119,9 @@ https://linear.app/wp-connect/issue/AWPS-587
 | Transition | Timestamp |
 |---|---|
 | Backlog → For Test | 2026-11-06T12:24:00Z |
+| For Test → Closed | 2026-11-10T08:03:40Z |
+
 
 ---
 
-Terminal transitions (→ completed state) are appended by `/tested` after human QA approval.
+Terminal transitions (For Test → Closed) appended by `/tested` on 2026-11-10 after human QA approval. AWPS-607 stays Canceled (excluded from release).

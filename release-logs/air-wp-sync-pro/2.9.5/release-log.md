@@ -17,7 +17,7 @@ Linear Project:
 Air WP Sync Pro+ v2.9.5 (724be5c8-1a96-4115-8b67-381b936698b7)
 
 Status:
-For Test
+Closed (2026-11-10)
 
 ZIP:
 air-wp-sync.2.9.5.zip  (dist/air-wp-sync.2.9.5.zip — attached to AWPS-616)
@@ -73,6 +73,20 @@ No /stories run for this version.
 | AWPS-600 | In Progress → For Test | 2026-11-06T12:19:34Z |
 | AWPS-616 (QA) | created → For Test | 2026-11-06T12:19:40Z |
 | AWPS-587 (Readme) | Backlog → For Test | 2026-11-06T12:24:00Z |
+
+## Finalization (/tested, 2026-11-10)
+
+Human QA approval confirmed by Cris for ZIP air-wp-sync.2.9.5.zip (sha256 33dbda9ac5be104fb177798b71cf9150cd8abfd82ed7bd27811c8fdf55b2d54e), commit 572e3f71.
+
+- Tag `v2.9.5`: NOT created manually. Repo has `tag-and-deploy.yml`; tag + GitHub Release + deploy are produced by the pipeline when the `release/2.9.5` PR is merged to `main`. No merge/deploy authorized here — pending human merge.
+- GitHub Release: not created (pipeline-owned).
+- All 12 issues (AWPS-615, 611, 610, 608, 604, 601, 595, 591, 606, 600 + QA AWPS-616 + Readme AWPS-587): For Test → Closed, assigned support@wpconnect.co; AWPS-610 estimate XS and AWPS-616 priority Medium/XS + label Update filled.
+- Project "Air WP Sync Pro+ v2.9.5": Completed, target 2026-11-10, color #bec2c8.
+- Next project: "Air WP Sync Pro+ v2.9.6" (Chip, #f2c94c, Low, lead support@wpconnect.co) created with AWPS-617 (Readme) and AWPS-618 (New Strings to translate). No carry-overs (AWPS-607 Canceled).
+
+## Workflow Status History (terminal)
+
+All issues above: For Test → Closed at 2026-11-10T08:03Z (per-issue timestamps in linear-issues.md).
 
 ## Notes
 
