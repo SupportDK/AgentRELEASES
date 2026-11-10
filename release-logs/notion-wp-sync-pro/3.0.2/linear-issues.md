@@ -13,6 +13,7 @@ https://linear.app/wp-connect/issue/NOWPS-400
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-395 — Licensing: send full home_url() (www / non-www bug)
 https://linear.app/wp-connect/issue/NOWPS-395
@@ -22,6 +23,7 @@ https://linear.app/wp-connect/issue/NOWPS-395
 |---|---|
 | Todo → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-392 — Update WordPress to 7.1 compatibility
 https://linear.app/wp-connect/issue/NOWPS-392
@@ -31,6 +33,7 @@ https://linear.app/wp-connect/issue/NOWPS-392
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-390 — Mapping should clean up options => name
 https://linear.app/wp-connect/issue/NOWPS-390
@@ -40,6 +43,7 @@ https://linear.app/wp-connect/issue/NOWPS-390
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-389 — method reset_errors should also reset 'last_error' meta
 https://linear.app/wp-connect/issue/NOWPS-389
@@ -49,6 +53,7 @@ https://linear.app/wp-connect/issue/NOWPS-389
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-387 — explode_fields to be checked
 https://linear.app/wp-connect/issue/NOWPS-387
@@ -59,6 +64,7 @@ Note: investigated — the iterate-while-rebuilding `array_slice` index-drift pa
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-381 — Check delete_removed_contents (bis)
 https://linear.app/wp-connect/issue/NOWPS-381
@@ -68,6 +74,7 @@ https://linear.app/wp-connect/issue/NOWPS-381
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-378 — Admin::TOP_MENU_SLUG != x-wp-sync-core-text-domain
 https://linear.app/wp-connect/issue/NOWPS-378
@@ -77,6 +84,7 @@ https://linear.app/wp-connect/issue/NOWPS-378
 |---|---|
 | Backlog → In Progress | 2026-11-05T20:43Z |
 | In Progress → For Test | 2026-11-05T20:56Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-370 — Readme (per-version Readme issue)
 https://linear.app/wp-connect/issue/NOWPS-370
@@ -86,6 +94,7 @@ Description set to the plaintext 3.0.2 changelog block in Phase 8.
 | Transition | Timestamp |
 |---|---|
 | Backlog → For Test | 2026-11-05T20:59Z |
+| For Test → Closed | 2026-11-10T08:02Z |
 
 ## NOWPS-401 — Update Notion WP Sync Pro+ 3.0.2 (QA issue)
 https://linear.app/wp-connect/issue/NOWPS-401
@@ -95,3 +104,4 @@ ZIP `notion-wp-sync.3.0.2.zip` attached.
 | Transition | Timestamp |
 |---|---|
 | created → For Test | 2026-11-05T20:57Z |
+| For Test → Closed | 2026-11-10T08:02Z |

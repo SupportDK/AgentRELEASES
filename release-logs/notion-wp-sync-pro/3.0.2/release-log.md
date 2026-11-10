@@ -17,7 +17,7 @@ Linear Project:
 Notion WP Sync Pro+ v3.0.2 (7e846d7a-b224-4424-ad6c-9eac1ff4c5e4)
 
 Status:
-For Test
+Closed (terminal state; human QA approved 2026-11-10)
 
 ZIP:
 notion-wp-sync.3.0.2.zip  (dist/notion-wp-sync.3.0.2.zip, 999671 bytes — attached to NOWPS-401)
@@ -82,8 +82,24 @@ No /stories run for this version.
 | NOWPS-378 | In Progress → For Test | 2026-11-05T20:56Z |
 | NOWPS-401 (QA issue) | created → For Test | 2026-11-05T20:57Z |
 | NOWPS-370 (Readme) | Backlog → For Test | 2026-11-05T20:59Z |
+| NOWPS-400 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-395 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-392 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-390 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-389 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-387 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-381 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-378 | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-401 (QA issue) | For Test → Closed | 2026-11-10T08:02Z |
+| NOWPS-370 (Readme) | For Test → Closed | 2026-11-10T08:02Z |
+
+Tag / GitHub Release:
+NOT created manually. Repo uses tag-and-deploy.yml (auto tag, release and deploy on merge of release/3.0.2 PR to main; tags are bare `3.0.2`). Merge was not authorized in /tested; tag arrives with the human-approved merge.
+
+## Project
+
+Notion WP Sync Pro+ v3.0.2 → Completed, target 2026-11-10, color #bec2c8. Next project: Notion WP Sync Pro+ v3.0.3 (NOWPS-402 Readme, NOWPS-403 New Strings).
 
 ## Next step
 
-After human QA approval: `/tested Notion WP Sync Pro+ 3.0.2`
-(tags, terminal Linear state, release-log finalization — NEVER run by /release).
+Merge release/3.0.2 PR to main (human) → pipeline tags 3.0.2, releases, deploys.
