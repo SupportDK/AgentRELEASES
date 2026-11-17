@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/wpconnect-woocommerce-odoo
 Branch: release/1.0.2 (from main @ d4cbd93, no port/* branch)
-Commit: 32e8f917b441d999f66cd151f4b99ea24fa6c6e5
+Commit: 8be6902989c4a246f980fae2d60174ae9db57709
 Date: 2026-11-17T09:21:00Z
 
 ## QA Tracking
@@ -20,7 +20,7 @@ Status:
 For Test
 
 ZIP:
-wpconnect-woocommerce-odoo.1.0.2.zip (dist/, 1032380 bytes, sha256 ca7ced7cc0e8d53665c6fb957834baa026d11bdc8041664d2f4f81819d8d1895) — corrected artifact attached to ODO-62 (attachment 1be85107-2d1d-4a25-af07-52577f1bcde4; use this SHA-256, not earlier attachments)
+wpconnect-woocommerce-odoo.1.0.2.zip (dist/, 1032607 bytes, sha256 d53466849e98bca124649f748c49934dca9677b2891af866bae92ac1a87e0208) — corrected artifact attached to ODO-62 (attachment f3d1b18c-662c-434c-97b7-bc58b8a8dfed; use this SHA-256, not earlier attachments)
 
 ## PO Stories
 
@@ -35,7 +35,7 @@ No /stories run for this version.
 | ODO-61 | readme.txt Changelog must be link-only + backfill changelog.txt | changelog.txt gains 1.0.0 (date from tag 1.0.0 = 2025-10-21); readme Changelog = link to https://wpconnect.co/documentation/sync-woocommerce-orders-to-odoo/changelog/ (verified 200; short /changelog/changelog-sync-woocommerce-orders-odoo/ redirects to the product page) |
 | ODO-45 | Readme | 1.0.2 changelog entry; plaintext changelog block set on the issue |
 
-Commits: 8d75013 fix (licensing), ee81548 compatibility (WP 7.1), c20ca06 improvement (changelog move), f6075a9 version bump 1.0.2, 735165b guard missing/malformed Odoo credentials, 5a90f11 PHPDoc clarification, 901d891 guard unavailable WooCommerce tax/currency APIs, 1cdc1e2 dependency enforcement, 32e8f91 Settings Help links.
+Commits: 8d75013 fix (licensing), ee81548 compatibility (WP 7.1), c20ca06 improvement (changelog move), f6075a9 version bump 1.0.2, 735165b guard missing/malformed Odoo credentials, 5a90f11 PHPDoc clarification, 901d891 guard unavailable WooCommerce tax/currency APIs, 1cdc1e2 dependency enforcement, 32e8f91 Settings Help links, 8be6902 Settings UI cache busting.
 
 ## QA correction — 2026-11-17
 
