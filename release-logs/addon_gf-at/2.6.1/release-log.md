@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/addon_gf-at
 Branch: release/2.6.1
-Commit: fd528240036720aae896008e6e73854fb25bed33
+Commit: 1a36bfbd44038d0ef9fadc73cf1228426faef0c0 (QA-approved head; original QA build fd52824)
 Date: 2026-11-17
 
 ## QA Tracking
@@ -17,10 +17,16 @@ Linear Project:
 GF Airtable v2.6.1
 
 Status:
-For Test
+Closed  (finalized by /tested 2026-11-17 after explicit human QA approval by Cris)
 
 ZIP:
-wpconnect-gf-airtable.2.6.1.zip  (dist/wpconnect-gf-airtable.2.6.1.zip — attached to GFAT-156, 120858 bytes)
+wpconnect-gf-airtable.2.6.1.zip  (dist/wpconnect-gf-airtable.2.6.1.zip — revised build from release/2.6.1 @ 1a36bfb, 122199 bytes, SHA-256 e01f1d2598901385b251b9665ff8eaa0cadb534f33b262d33d50b0dd452f25b3, attached to GFAT-156; this is the ZIP approved in QA)
+
+Tag:
+none created by /tested (operator instruction; repo has tag-and-deploy.yml — tag 2.6.1 + GitHub Release + deploy are produced by the pipeline when release/2.6.1 is merged to main, which was NOT done here)
+
+GitHub Release:
+not created
 
 ## Scope — issues in this version
 
@@ -67,3 +73,20 @@ No /stories run for this version. Issues carried explicit acceptance criteria; v
 | GFAT-148 | In Progress → For Test | 2026-11-17T09:16:26Z |
 | GFAT-156 (QA) | created → For Test | 2026-11-17T09:16:35Z |
 | GFAT-142 | In Progress → For Test | 2026-11-17T09:16:56Z |
+| GFAT-152 | For Test → Closed | 2026-11-17T10:59:54Z |
+| GFAT-149 | For Test → Closed | 2026-11-17T10:59:56Z |
+| GFAT-148 | For Test → Closed | 2026-11-17T10:59:57Z |
+| GFAT-156 (QA) | For Test → Closed | 2026-11-17T10:59:53Z |
+| GFAT-142 | For Test → Closed | 2026-11-17T10:59:58Z |
+
+## Finalization (/tested, 2026-11-17)
+
+- Human QA approval: explicit, by Cris, for the revised ZIP above (SHA-256 verified locally before finalizing).
+- Verified: origin/release/2.6.1 = 1a36bfbd44038d0ef9fadc73cf1228426faef0c0; all 5 issues were in For Test.
+- Commit added after the original QA build: 1a36bfb improvement: Help section with Documentation and Support links on the global settings page (included in the approved ZIP).
+- Not done, per operator instruction: no merge of release/2.6.1 into main, no tag, no GitHub Release, no production deploy.
+- Issues: Closed, assigned to support@wpconnect.co; GFAT-156 filled with Medium / XS + label Update.
+- Project GF Airtable v2.6.1 (P-GFAT-257): Completed, target date 2026-11-17, color #bec2c8.
+- Next project: GF Airtable v2.6.2 (P-GFAT-319) already exists holding planned issues (GFAT-141, GFAT-144, …), so it was left untouched; created GF Airtable v2.6.3 (P-GFAT-334, Database / #f2c94c / Low / lead support@wpconnect.co) seeded with GFAT-157 Readme and GFAT-158 New Strings to translate.
+- Carry-overs: none (no open issues left in v2.6.1).
+- Follow-up: GFAT-144 (support and documentation links on the settings page, in v2.6.2) looks implemented by commit 1a36bfb shipped in 2.6.1; needs a human decision (close as shipped in 2.6.1 or keep).
