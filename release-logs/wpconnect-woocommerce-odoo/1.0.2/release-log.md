@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/wpconnect-woocommerce-odoo
 Branch: release/1.0.2 (from main @ d4cbd93, no port/* branch)
-Commit: 5a90f11352e25c8ddac84d5164844bc8b8ea3cb3
+Commit: 901d891b8d5792a778984425ae10ea1356d7c52a
 Date: 2026-11-17T09:21:00Z
 
 ## QA Tracking
@@ -20,7 +20,7 @@ Status:
 For Test
 
 ZIP:
-wpconnect-woocommerce-odoo.1.0.2.zip (dist/, 1000296 bytes, sha256 d17ae96074fe18dbbc279ab6ef671e5454bd9cdea80198c39ea29f219f4d6b3d) — corrected artifact attached to ODO-62 (attachment d06e3447-1a9f-4520-a6f2-9ecd07544c4e; use this SHA-256, not the earlier attachment)
+wpconnect-woocommerce-odoo.1.0.2.zip (dist/, 1000407 bytes, sha256 ca31ff03ae66ab72fc7f1b85c30c5ac52f55006f0abd14662ad5e2cb2812f2ba) — corrected artifact attached to ODO-62 (attachment 7becb30b-fc99-4145-836c-d7fd2f57ced5; use this SHA-256, not earlier attachments)
 
 ## PO Stories
 
@@ -35,7 +35,7 @@ No /stories run for this version.
 | ODO-61 | readme.txt Changelog must be link-only + backfill changelog.txt | changelog.txt gains 1.0.0 (date from tag 1.0.0 = 2025-10-21); readme Changelog = link to https://wpconnect.co/documentation/sync-woocommerce-orders-to-odoo/changelog/ (verified 200; short /changelog/changelog-sync-woocommerce-orders-odoo/ redirects to the product page) |
 | ODO-45 | Readme | 1.0.2 changelog entry; plaintext changelog block set on the issue |
 
-Commits: 8d75013 fix (licensing), ee81548 compatibility (WP 7.1), c20ca06 improvement (changelog move), f6075a9 version bump 1.0.2, 735165b guard missing/malformed Odoo credentials, 5a90f11 PHPDoc clarification.
+Commits: 8d75013 fix (licensing), ee81548 compatibility (WP 7.1), c20ca06 improvement (changelog move), f6075a9 version bump 1.0.2, 735165b guard missing/malformed Odoo credentials, 5a90f11 PHPDoc clarification, 901d891 guard unavailable WooCommerce tax/currency APIs.
 
 ## QA correction — 2026-11-17
 
