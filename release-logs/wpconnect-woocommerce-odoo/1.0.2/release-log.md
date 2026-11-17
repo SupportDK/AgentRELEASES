@@ -2,7 +2,7 @@
 
 Repository: wpconnect-co/wpconnect-woocommerce-odoo
 Branch: release/1.0.2 (from main @ d4cbd93, no port/* branch)
-Commit: f6075a9aad63ec8193755649b5d12d333257201c
+Commit: 5a90f11352e25c8ddac84d5164844bc8b8ea3cb3
 Date: 2026-11-17T09:21:00Z
 
 ## QA Tracking
@@ -20,7 +20,7 @@ Status:
 For Test
 
 ZIP:
-wpconnect-woocommerce-odoo.1.0.2.zip (dist/, 1000198 bytes, sha256 63ff63c07a3d656d3279d19e721cabe2a65584fe9197bc97105cec33ddae9c13) — attached to ODO-62
+wpconnect-woocommerce-odoo.1.0.2.zip (dist/, 1000296 bytes, sha256 d17ae96074fe18dbbc279ab6ef671e5454bd9cdea80198c39ea29f219f4d6b3d) — corrected artifact attached to ODO-62 (attachment d06e3447-1a9f-4520-a6f2-9ecd07544c4e; use this SHA-256, not the earlier attachment)
 
 ## PO Stories
 
@@ -35,7 +35,11 @@ No /stories run for this version.
 | ODO-61 | readme.txt Changelog must be link-only + backfill changelog.txt | changelog.txt gains 1.0.0 (date from tag 1.0.0 = 2025-10-21); readme Changelog = link to https://wpconnect.co/documentation/sync-woocommerce-orders-to-odoo/changelog/ (verified 200; short /changelog/changelog-sync-woocommerce-orders-odoo/ redirects to the product page) |
 | ODO-45 | Readme | 1.0.2 changelog entry; plaintext changelog block set on the issue |
 
-Commits: 8d75013 fix (licensing), ee81548 compatibility (WP 7.1), c20ca06 improvement (changelog move), f6075a9 version bump 1.0.2.
+Commits: 8d75013 fix (licensing), ee81548 compatibility (WP 7.1), c20ca06 improvement (changelog move), f6075a9 version bump 1.0.2, 735165b guard missing/malformed Odoo credentials, 5a90f11 PHPDoc clarification.
+
+## QA correction — 2026-11-17
+
+Staging activation initially exposed a pre-existing `Odoo_API_Credentials::from_array()` warning for absent credentials; its unsafe array access dates to the 2025 initial code and is not introduced by the 1.0.2 feature scope. `735165b` normalizes non-array credentials and supplies safe defaults while preserving valid credential values. The corrected ZIP was re-packaged, attached to ODO-62, and smoke-tested on `wp.preprod-dk.com`: plugin active, normal WordPress bootstrap clean, host HTTP 200.
 
 ## Packaging
 
